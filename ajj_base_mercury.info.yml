@@ -15,6 +15,6 @@ dependencies:
   - "cva:cva"
 
 # Information added by Drupal.org packaging script on 2026-06-02
-version: '1.0.5'
-project: 'mercury'
+version: "1.0.5"
+project: "mercury"
 datestamp: 1780368499
