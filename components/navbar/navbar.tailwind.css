@@ -38,6 +38,8 @@
 .navbar--modal-logo {
   .branding {
     @apply h-8 md:h-10;
+    height: 150px;
+    
     svg,
     img[src$=".svg"] {
       @apply h-auto! max-h-full;
