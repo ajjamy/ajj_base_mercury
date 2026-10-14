@@ -1,3 +1,5 @@
 @layer components {
-    h1 { font-family: "Outfit" }
+    h1 { 
+        font-family: "Outfit" 
+    }
 }

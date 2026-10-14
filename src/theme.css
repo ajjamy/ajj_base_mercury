@@ -25,10 +25,12 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.872 0.009 258.338);
   --input: oklch(0.872 0.009 258.338);
-  --font-sans: "Noto Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+
+  --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
-  --font-body: "Noto Sans", Arial, Helvetica, sans-serif;
+  --font-body: "DM Sans", Arial, Helvetica, sans-serif;
+
   --radius: 0.5rem;
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -45,6 +47,7 @@
   --shadow-xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 12px 14px -3px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 16px 18px -3px hsl(0 0% 0% / 0.1);
   --tracking-normal: 0em;
+
   --spacing: 0.25rem;
 
   /* Set navbar height for hero billboard overlay */
@@ -72,7 +75,7 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.373 0.031 259.733);
   --input: oklch(0.373 0.031 259.733);
-  --font-sans: "Noto Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
   --radius: 0.5rem;

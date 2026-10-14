@@ -8,22 +8,22 @@
 #}
 {% if elements.ajj_base_mercury_site_branding or elements.ajj_base_mercury_main_menu or elements.ajj_base_mercury_user_menu %}
 	<div {{ attributes.addClass('region', 'region-header') }}>
-		<div class="container mx-auto px-4">
-			<div class="flex min-h-16 flex-wrap content-between items-center justify-between gap-4">
+		<div class="header-outer">
+			<div class="header-inner">
 				{% if elements.ajj_base_mercury_site_branding %}
-					<div class="header-branding shrink-0">
+					<div class="header-branding">
 						{{ elements.ajj_base_mercury_site_branding }}
 					</div>
 				{% endif %}
 
 				{% if elements.ajj_base_mercury_main_menu %}
-					<div class="header-navigation min-w-0 flex-1">
+					<div class="header-navigation">
 						{{ elements.ajj_base_mercury_main_menu }}
 					</div>
 				{% endif %}
 
 				{% if elements.ajj_base_mercury_user_menu %}
-					<div class="header-account shrink-0">
+					<div class="header-account">
 						{{ elements.ajj_base_mercury_user_menu }}
 					</div>
 				{% endif %}
