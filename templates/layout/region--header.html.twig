@@ -7,27 +7,25 @@
  */
 #}
 {% if elements.ajj_base_mercury_site_branding or elements.ajj_base_mercury_main_menu or elements.ajj_base_mercury_user_menu %}
-	<div {{ attributes.addClass('region', 'region-header') }}>
-		<div class="header-outer">
-			<div class="header-inner">
-				{% if elements.ajj_base_mercury_site_branding %}
-					<div class="header-branding">
-						{{ elements.ajj_base_mercury_site_branding }}
-					</div>
-				{% endif %}
+  <div {{ attributes.addClass('region', 'region-header') }}>
+    {% embed 'ajj_base_mercury:navbar' with { menu_align: 'right' } %}
+      {% block logo %}
+        {% if elements.ajj_base_mercury_site_branding %}
+          {{ elements.ajj_base_mercury_site_branding }}
+        {% endif %}
+      {% endblock %}
 
-				{% if elements.ajj_base_mercury_main_menu %}
-					<div class="header-navigation">
-						{{ elements.ajj_base_mercury_main_menu }}
-					</div>
-				{% endif %}
+      {% block navigation %}
+        {% if elements.ajj_base_mercury_main_menu %}
+          {{ elements.ajj_base_mercury_main_menu }}
+        {% endif %}
+      {% endblock %}
 
-				{% if elements.ajj_base_mercury_user_menu %}
-					<div class="header-account">
-						{{ elements.ajj_base_mercury_user_menu }}
-					</div>
-				{% endif %}
-			</div>
-		</div>
-	</div>
+      {% block links %}
+        {% if elements.ajj_base_mercury_user_menu %}
+          {{ elements.ajj_base_mercury_user_menu }}
+        {% endif %}
+      {% endblock %}
+    {% endembed %}
+  </div>
 {% endif %}

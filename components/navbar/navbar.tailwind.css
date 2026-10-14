@@ -38,6 +38,45 @@
     }
 }
 
+.navbar {
+    @apply relative z-[500] container mx-auto flex justify-between p-2 px-4 md:py-4;
+
+    .navbar--logo {
+        @apply self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+    }
+
+    .navbar--menu {
+        @apply fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 md:static md:flex md:h-auto md:flex-row md:items-center md:bg-transparent md:pb-0;
+    }
+
+    .navbar--modal-top {
+        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 md:hidden;
+    }
+
+    .navbar--modal-logo {
+        @apply flex min-h-[44px] flex-1 flex-col items-start justify-center md:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+    }
+
+    button.navbar--hide-menu {
+        @apply  flex h-[44px] w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden;
+    }
+
+}
+
+.navbar--logo,
+.navbar--modal-logo {
+  .branding {
+    @apply h-8 md:h-10;
+    height: 150px;
+
+    svg,
+    img[src$=".svg"] {
+      @apply h-auto! max-h-full;
+    }
+  }
+}
+
+
 
 
 .navbar--dropdown-menu-wrapper {
@@ -59,12 +98,27 @@
 }
 
 /* Child component styling that can't be moved to Twig */
-.navbar--links .button.button {
-  @apply mx-8 w-[calc(100%-var(--spacing)*16)] md:m-auto md:w-auto;
+.navbar--links {
+
+    @apply col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 md:w-auto md:flex-row;
+
+    .button.button {
+      @apply mx-8 w-[calc(100%-var(--spacing)*16)] md:m-auto md:w-auto;
+    }
 }
 
-.navbar--dropdown-menu .dropdown-menu {
-  @apply w-full md:w-auto;
+
+.navbar--dropdown-menu {
+    @apply flex flex-col items-stretch justify-start gap-2 md:flex-row max-h-full overflow-auto md:overflow-visible;
+
+    .dropdown-menu {
+      @apply w-full md:w-auto;
+    }
+}
+
+
+.navbar--hamburger-container {
+    @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center md:hidden;
 }
 
 .navbar--dropdown-menu-wrapper > :last-child {
@@ -79,14 +133,8 @@
 }
 
 
-.navbar--logo,
-.navbar--modal-logo {
-  .branding {
-    @apply h-8 md:h-10;
-    height: 150px;
-    svg,
-    img[src$=".svg"] {
-      @apply h-auto! max-h-full;
-    }
-  }
+
+nav.main-menu {
+    background-color: pink !important;
+
 }

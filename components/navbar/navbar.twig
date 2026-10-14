@@ -1,6 +1,6 @@
 {% set dropdown_menu =
   html_cva(
-    base: ['navbar--dropdown-menu', 'flex flex-col items-stretch justify-start gap-2 md:flex-row', 'max-h-full', 'overflow-auto md:overflow-visible'],
+    base: ['navbar--dropdown-menu'],
     variants: {
       menuAlign: {
         left: 'md:justify-start',
@@ -17,29 +17,20 @@
   })
 %}
 
-<div class="navbar relative z-[500] container mx-auto flex justify-between p-2 px-4 md:py-4">
-  <div class="navbar--logo self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center">
+<div class="navbar">
+  <div class="navbar--logo">
     {% block logo %}
       {{ include('@ajj_base_mercury/templates/block/block--system-branding-block.html.twig') }}
     {% endblock %}
   </div>
 
-  <div
-    class="navbar--menu fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 md:static md:flex md:h-auto md:flex-row md:items-center md:bg-transparent md:pb-0"
-  >
-    <div
-      class="navbar--modal-top relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 md:hidden"
-    >
-      <div
-        class="navbar--modal-logo flex min-h-[44px] flex-1 flex-col items-start justify-center md:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center"
-      >
+  <div class="navbar--menu">
+    <div class="navbar--modal-top" >
+      <div class="navbar--modal-logo">
         {{ block('logo') }}
       </div>
 
-      <button
-        class="navbar--hide-menu flex h-[44px] w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden"
-        aria-label="{{ 'Hide menu'|t }}"
-      >
+      <button class="navbar--hide-menu" aria-label="{{ 'Hide menu'|t }}">
         {{
           include(
             '@ajj_base_mercury/components/icon/icon.twig',
@@ -52,9 +43,7 @@
       </button>
     </div>
 
-    <div
-      class="navbar--dropdown-menu-wrapper"
-    >
+    <div class="navbar--dropdown-menu-wrapper">
       <div class="{{ dropdown_menu_classes }}">
         {% block navigation %}
 
@@ -62,9 +51,7 @@
       </div>
     </div>
 
-    <div
-      class="navbar--links col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 md:w-auto md:flex-row"
-    >
+    <div class="navbar--links">
       {% block links %}
         {{
           include(
@@ -95,7 +82,7 @@
     </div>
   </div>
 
-  <div class="navbar--hamburger-container flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center md:hidden">
+  <div class="navbar--hamburger-container">
     <button class="navbar--hamburger flex items-center justify-center" aria-label="{{ 'Show menu'|t }}">
       {{
         include(
