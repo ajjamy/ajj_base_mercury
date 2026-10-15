@@ -116,7 +116,6 @@
     }
 }
 
-
 .navbar--hamburger-container {
     @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center md:hidden;
 }

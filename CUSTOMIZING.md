@@ -31,6 +31,9 @@ If you want to customize the Tailwind-generated CSS, install the development too
 
 If you modify CSS files or classes in a Twig template, run `npm run build` to rebuild the CSS. For development, you can use `npm run dev` to watch for changes and automatically rebuild the CSS.
 
+From theme root: 
+`npm run s:tailwindcss -- --watch`
+
 ## Code Formatting
 
 Mercury uses [Prettier](https://prettier.io) to automatically format code for consistency. The project is configured with plugins for Tailwind CSS and Twig templates.

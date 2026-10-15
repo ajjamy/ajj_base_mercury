@@ -35,8 +35,8 @@
       {% set item_classes =
         [
           item.in_active_trail ? 'bg-muted/50' : '',
-          'flex flex-wrap justify-between md:flex-nowrap',
-          'md:w-auto md:relative md:max-w-[375px]',
+          'group relative flex flex-wrap justify-between md:flex-nowrap',
+          'md:w-auto md:max-w-[375px]',
           'text-base rounded-md'
         ]|filter(c => c is not empty)
       %}
@@ -56,7 +56,30 @@
             data-level="1"
           >
             {{ title }}
+            {% if item.below %}
+              <span aria-hidden="true" class="ms-1 inline-block size-2 rotate-45 border-r border-b border-current"></span>
+            {% endif %}
           </a>
+        {% endif %}
+
+        {% if item.below %}
+          <ul
+            class="flex w-full flex-col gap-1 ps-4 md:absolute md:top-full md:left-0 md:hidden md:min-w-48 md:rounded-md md:bg-background md:p-2 md:shadow-lg md:group-focus-within:flex md:group-hover:flex"
+          >
+            {% for child in item.below %}
+              <li>
+                {{
+                  link(
+                    child.title,
+                    child.url,
+                    {
+                      class: 'flex min-h-[40px] items-center rounded-md p-2 hover:bg-muted focus:bg-muted'
+                    }
+                  )
+                }}
+              </li>
+            {% endfor %}
+          </ul>
         {% endif %}
       </li>
     {% endfor %}
