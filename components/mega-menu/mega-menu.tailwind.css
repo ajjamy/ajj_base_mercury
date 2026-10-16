@@ -1,0 +1,71 @@
+@layer components {
+  .mega-menu {
+    @apply m-0 flex list-none flex-col gap-1 p-0 md:flex-row md:items-center md:gap-4;
+  }
+
+  .mega-menu-item {
+    @apply relative min-w-0;
+  }
+
+  .mega-menu-item__heading {
+    @apply flex min-h-11 items-center justify-between gap-2;
+  }
+
+  .mega-menu-item__link {
+    @apply flex min-h-11 flex-1 items-center rounded-md px-3 py-2 font-medium text-foreground no-underline hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .mega-menu-item__toggle {
+    @apply flex size-11 shrink-0 items-center justify-center rounded-md hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .mega-menu-item__icon {
+    @apply size-2 rotate-45 border-r border-b border-current transition-transform;
+  }
+
+  .mega-menu-item__toggle[aria-expanded="true"] .mega-menu-item__icon {
+    @apply -rotate-[135deg];
+  }
+
+  .mega-menu-item__dropdown {
+    @apply mt-1 block w-full rounded-md border border-border bg-background p-4 text-foreground;
+  }
+
+  .mega-menu.is-enhanced .mega-menu-item__dropdown {
+    @apply absolute top-full left-0 z-50 hidden w-[min(90vw,72rem)] max-w-[calc(100vw-2rem)] shadow-lg;
+  }
+
+  .mega-menu.is-enhanced .mega-menu-item__dropdown.is-open {
+    @apply block;
+  }
+
+  .mega-menu-content {
+    @apply grid gap-6;
+  }
+
+  .mega-menu-content__columns {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .mega-menu-content__column {
+    @apply min-w-0;
+  }
+
+  .mega-menu-content__heading {
+    @apply mb-3 text-sm font-semibold text-foreground;
+  }
+
+  .mega-menu-content__links {
+    @apply m-0 flex list-none flex-col gap-1 p-0;
+  }
+
+  .mega-menu-content__link {
+    @apply flex min-h-10 items-center rounded px-2 py-1 text-sm text-muted-foreground no-underline hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  @media (max-width: 47.999rem) {
+    .mega-menu.is-enhanced .mega-menu-item__dropdown {
+      @apply static mt-1 w-full max-w-none shadow-none;
+    }
+  }
+}

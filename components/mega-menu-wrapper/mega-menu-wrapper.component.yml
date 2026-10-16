@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Mega menu wrapper
+description: Responsive navigation wrapper with a collapsible mobile pane.
+group: Navigation
+props:
+  type: object
+  required:
+    - id
+    - label
+  properties:
+    id:
+      type: string
+      title: Unique menu ID
+      pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+      examples:
+        - primary-navigation
+    label:
+      type: string
+      title: Navigation label
+      examples:
+        - Main navigation
+    toggle_label:
+      type: string
+      title: Mobile toggle label
+      default: Menu
+      examples:
+        - Menu
+slots:
+  navigation:
+    title: Mega menu
+
+libraryOverrides:
+  js:
+    mega-menu-wrapper.js:
+      attributes:
+        type: module

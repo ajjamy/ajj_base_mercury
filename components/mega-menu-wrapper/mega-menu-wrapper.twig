@@ -1,0 +1,12 @@
+<nav class="mega-menu-wrapper" aria-label="{{ label }}" data-mega-menu-wrapper>
+  <button class="mega-menu-wrapper__toggle" type="button" aria-controls="{{ id }}-pane" aria-expanded="true" data-mega-menu-toggle>
+    <span>{{ toggle_label|default('Menu'|t) }}</span>
+    <span class="mega-menu-wrapper__toggle-icon" aria-hidden="true"></span>
+  </button>
+
+  <div id="{{ id }}-pane" class="mega-menu-wrapper__pane" data-mega-menu-pane>
+    {% block navigation %}
+
+    {% endblock %}
+  </div>
+</nav>

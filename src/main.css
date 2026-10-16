@@ -3,6 +3,8 @@
 @import "../components/hero-blog/hero-blog.tailwind.css";
 @import "../components/navbar/navbar.tailwind.css";
 @import "../components/anchor/anchor.tailwind.css";
+@import "../components/mega-menu-wrapper/mega-menu-wrapper.tailwind.css";
+@import "../components/mega-menu/mega-menu.tailwind.css";
 
 @theme inline {
   --color-background: var(--background);

@@ -19,67 +19,75 @@
  */
 #}
 
-{% set classes = 'main-menu-container' %}
-{% set attributes = attributes ? attributes.addClass(classes) : ' class="' ~ classes ~ '"' %}
+{% set mega_items = [] %}
+{% for item in items %}
+  {% set item_title = item.title is not empty ? item.title : item.text %}
+  {% set item_href %}
+    {{- item.url -}}
+  {% endset %}
+  {% set columns = [] %}
 
-<nav {{ attributes }} aria-label="{{ menu_label }}">
-  <ul class="menu-top" data-level="1">
-    {% for item in items %}
-      {% set title = item.title is not empty ? item.title : item.text %}
-      {# Capture the rendered URL before testing it for emptiness, since it's a Drupal object under the hood.
-      The - prefix and suffix prevent errant whitespace in the resulting `url` variable. #}
-      {% set url %}
-        {{- item.url -}}
+  {% for child in item.below %}
+    {% set child_href %}
+      {{- child.url -}}
+    {% endset %}
+    {% set column_links = [
+      {
+        label: child.title,
+        href: child_href|trim
+      }
+    ] %}
+
+    {% for grandchild in child.below %}
+      {% set grandchild_href %}
+        {{- grandchild.url -}}
       {% endset %}
-
-      {% set item_classes =
-        [
-          item.in_active_trail ? 'bg-muted/50' : '',
-          'group'
-        ]|filter(c => c is not empty)
+      {% set column_links =
+        column_links|merge(
+          [
+            {
+              label: grandchild.title,
+              href: grandchild_href|trim
+            }
+          ]
+        )
       %}
-
-      {% if item.attributes %}
-        {% do item.attributes.addClass(item_classes) %}
-        {% do item.attributes.setAttribute('data-level', 1) %}
-      {% else %}
-        {% set item_attributes_string = 'class="' ~ (item_classes|join(' ')) ~ '" data-level="1"' %}
-      {% endif %}
-
-      <li {{ item.attributes ? : item_attributes_string }}>
-        {% if url is not empty %}
-          <a
-            href="{{ url }}"
-            class="menu-link"
-            data-level="1"
-          >
-            {{ title }}
-            {% if item.below %}
-              <span aria-hidden="true" class="ms-1 inline-block size-2 rotate-45 border-r border-b border-current"></span>
-            {% endif %}
-          </a>
-        {% endif %}
-
-        {% if item.below %}
-          <ul
-            class="menu-level-2"
-          >
-            {% for child in item.below %}
-              <li>
-                {{
-                  link(
-                    child.title,
-                    child.url,
-                    {
-                      class: 'sub-menu-link'
-                    }
-                  )
-                }}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </li>
     {% endfor %}
-  </ul>
+
+    {% set columns =
+      columns|merge(
+        [
+          {
+            heading: child.title,
+            links: column_links
+          }
+        ]
+      )
+    %}
+  {% endfor %}
+
+  {% set mega_items =
+    mega_items|merge(
+      [
+        {
+          id: 'main-menu-item-' ~ loop.index,
+          label: item_title,
+          href: item_href|trim,
+          columns: columns
+        }
+      ]
+    )
+  %}
+{% endfor %}
+
+{% set attributes = attributes.addClass('main-menu-container') %}
+<nav {{ attributes }} aria-label="{{ menu_label }}">
+  {{
+    include(
+      'ajj_base_mercury:mega-menu',
+      {
+        items: mega_items
+      }
+    )
+  }}
 </nav>

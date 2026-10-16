@@ -1,0 +1,29 @@
+<div class="mega-menu-content" id="{{ id }}">
+  <div class="mega-menu-content__columns">
+    {% for column in columns %}
+      <section class="mega-menu-content__column">
+        {% if column.heading %}
+          <h2 class="mega-menu-content__heading">{{ column.heading }}</h2>
+        {% endif %}
+        {% if column.links %}
+          <ul class="mega-menu-content__links" role="list">
+            {% for link_item in column.links %}
+              <li><a class="mega-menu-content__link" href="{{ link_item.href }}">{{ link_item.label }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </section>
+    {% endfor %}
+  </div>
+
+  {% set featured_content %}
+    {% block featured %}
+
+    {% endblock %}
+  {% endset %}
+  {% if featured_content|trim %}
+    <aside>
+      {{ featured_content }}
+    </aside>
+  {% endif %}
+</div>

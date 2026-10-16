@@ -1,0 +1,29 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Mega menu item
+description: Top-level navigation link and its optional dropdown panel.
+group: Navigation
+props:
+  type: object
+  required:
+    - id
+    - label
+  properties:
+    id:
+      type: string
+      title: Unique item ID
+      pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+    label:
+      type: string
+      title: Link label
+    href:
+      type: string
+      title: Link URL
+      format: uri-reference
+    has_dropdown:
+      type: boolean
+      title: Has dropdown content
+      default: false
+
+slots:
+  dropdown:
+    title: Dropdown content

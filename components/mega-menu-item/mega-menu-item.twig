@@ -1,0 +1,32 @@
+<li class="mega-menu-item" data-mega-menu-item>
+  <div class="mega-menu-item__heading">
+    {% if href %}
+      <a class="mega-menu-item__link" href="{{ href }}">{{ label }}</a>
+    {% else %}
+      <span class="mega-menu-item__link">{{ label }}</span>
+    {% endif %}
+
+    {% if has_dropdown %}
+      <button
+        class="mega-menu-item__toggle"
+        type="button"
+        aria-label="{{ 'Toggle submenu for @label'|t({
+          '@label': label
+        }) }}"
+        aria-controls="{{ id }}-dropdown"
+        aria-expanded="false"
+        data-mega-menu-item-toggle
+      >
+        <span class="mega-menu-item__icon" aria-hidden="true"></span>
+      </button>
+    {% endif %}
+  </div>
+
+  {% if has_dropdown %}
+    <div id="{{ id }}-dropdown" class="mega-menu-item__dropdown" data-mega-menu-dropdown>
+      {% block dropdown %}
+
+      {% endblock %}
+    </div>
+  {% endif %}
+</li>

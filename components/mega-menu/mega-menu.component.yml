@@ -1,0 +1,62 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Mega menu
+description: Level 1 navigation list with optional multi-column dropdown content.
+group: Navigation
+props:
+  type: object
+  required:
+    - items
+  properties:
+    items:
+      type: array
+      title: Top-level menu items
+      items:
+        type: object
+        required:
+          - label
+        properties:
+          id:
+            type: string
+            title: Unique item ID
+          label:
+            type: string
+            title: Link label
+          href:
+            type: string
+            title: Link URL
+            format: uri-reference
+          columns:
+            type: array
+            title: Dropdown columns
+            items:
+              type: object
+              properties:
+                heading:
+                  type: string
+                  title: Column heading
+                links:
+                  type: array
+                  title: Column links
+                  items:
+                    type: object
+                    required:
+                      - label
+                      - href
+                    properties:
+                      label:
+                        type: string
+                        title: Link label
+                      href:
+                        type: string
+                        title: Link URL
+                        format: uri-reference
+
+slots:
+  menu_content:
+    title: Additional menu content
+
+libraryOverrides:
+  js:
+    mega-menu.js:
+      attributes:
+        type: module
