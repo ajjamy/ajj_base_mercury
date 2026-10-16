@@ -13,7 +13,7 @@
   --foreground: oklch(0.13 0.043 265.132);
   --card: oklch(0.967 0.003 264.542);
   --card-foreground: oklch(0.21 0.032 264.665);
-  --primary: oklch(0.547 0.246 262.866);
+  --primary: #023654;
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.9219 0 0);
   --secondary-foreground: oklch(0.28 0.041 260.329);
@@ -27,7 +27,7 @@
   --input: oklch(0.872 0.009 258.338);
 
   --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "DM Serif Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
   --font-body: "DM Sans", Arial, Helvetica, sans-serif;
 

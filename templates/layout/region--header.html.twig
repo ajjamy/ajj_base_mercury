@@ -8,19 +8,21 @@
 #}
 {% if elements.ajj_base_mercury_site_branding or elements.ajj_base_mercury_main_menu or elements.ajj_base_mercury_user_menu %}
   <div {{ attributes.addClass('region', 'region-header') }}>
-    {% embed 'ajj_base_mercury:navbar' with { menu_align: 'right' } %}
+    {% embed 'ajj_base_mercury:navbar'
+      with {
+        menu_align: 'right'
+      }
+    %}
       {% block logo %}
         {% if elements.ajj_base_mercury_site_branding %}
           {{ elements.ajj_base_mercury_site_branding }}
         {% endif %}
       {% endblock %}
-
       {% block navigation %}
         {% if elements.ajj_base_mercury_main_menu %}
           {{ elements.ajj_base_mercury_main_menu }}
         {% endif %}
       {% endblock %}
-
       {% block links %}
         {% if elements.ajj_base_mercury_user_menu %}
           {{ elements.ajj_base_mercury_user_menu }}

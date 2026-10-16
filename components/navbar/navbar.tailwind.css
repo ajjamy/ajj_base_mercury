@@ -7,6 +7,21 @@
 
 }
 
+/* Modal state - prevents body scroll when mobile menu is open */
+:root.navbar-modal-open {
+  &,
+  body {
+    overflow: hidden;
+  }
+}
+
+/* External region styling */
+.region-header {
+  .navbar--modal-top {
+    @apply px-4;
+  }
+}
+
 .region-header {
     .header-outer {
         @apply container mx-auto p-4;
@@ -25,7 +40,6 @@
         img[src$=".svg"] {
           max-height: 100px;
         }
-        
     }
 
     .header-navigation {
@@ -87,13 +101,7 @@
 }
 
 
-/* Modal state - prevents body scroll when mobile menu is open */
-:root.navbar-modal-open {
-  &,
-  body {
-    overflow: hidden;
-  }
-}
+
 
 /* Menu visibility toggle (controlled by JS) */
 .navbar--menu:not(.navbar--menu--open) {
@@ -127,12 +135,7 @@
   @apply pb-24 md:pb-0;
 }
 
-/* External region styling */
-.region-header {
-  .navbar--modal-top {
-    @apply px-4;
-  }
-}
+
 
 
 /* Main menu styles */
@@ -143,7 +146,7 @@ nav.main-menu-container {
     justify-content: flex-end;
 
     ul.menu-top {
-        @apply relative flex flex-col gap-1 p-0 font-body md:w-auto md:flex-row; 
+        @apply relative flex flex-col gap-1 p-0 font-sans md:w-auto md:flex-row; 
     }
 
     li {
@@ -156,7 +159,7 @@ nav.main-menu-container {
     }
     
     ul.menu-level-2 {
-        @apply flex w-full flex-col gap-1 ps-4 md:absolute md:top-full md:left-0 md:hidden md:min-w-48 md:rounded-md md:bg-background md:p-2 md:shadow-lg md:group-focus-within:flex md:group-hover:flex;
+        @apply flex w-full flex-col gap-1 ps-4 md:absolute md:top-full md:left-0 md:hidden md:min-w-48 md:bg-background md:p-2 md:shadow-lg md:group-focus-within:flex md:group-hover:flex;
         
         li {}
         
