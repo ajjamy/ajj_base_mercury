@@ -4,12 +4,11 @@ description: Level 1 navigation list with optional multi-column dropdown content
 group: Navigation
 props:
   type: object
-  required:
-    - items
   properties:
     items:
       type: array
       title: Top-level menu items
+      default: []
       items:
         type: object
         required:
