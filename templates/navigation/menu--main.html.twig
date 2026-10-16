@@ -81,13 +81,14 @@
 {% endfor %}
 
 {% set attributes = attributes.addClass('main-menu-container') %}
+{% set mega_menu_component = {
+  '#type': 'component',
+  '#component': 'ajj_base_mercury:mega-menu',
+  '#props': {
+    items: mega_items
+  }
+} %}
+
 <nav {{ attributes }} aria-label="{{ menu_label }}">
-  {{
-    include(
-      'ajj_base_mercury:mega-menu',
-      {
-        items: mega_items
-      }
-    )
-  }}
+  {{ mega_menu_component }}
 </nav>
