@@ -57,6 +57,11 @@
 
     .navbar--logo {
         @apply self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+        /* display: none;
+
+        @media screen and (min-width:768px) {
+            display: block;
+        } */
     }
 
     .navbar--menu {
@@ -64,7 +69,9 @@
     }
 
     .navbar--modal-top {
-        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 md:hidden;
+        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 px-4  md:hidden;
+
+
     }
 
     .navbar--modal-logo {
@@ -72,7 +79,8 @@
     }
 
     button.navbar--hide-menu {
-        @apply  flex h-[44px] w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden;
+        @apply  flex w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden;
+        height: 100%;
     }
 
 }
@@ -81,7 +89,11 @@
 .navbar--modal-logo {
   .branding {
     @apply h-8 md:h-10;
-    height: 150px;
+    height: 80px;
+
+    @media screen and (min0width: 768px) {
+        height: 150px;
+    }
 
     svg,
     img[src$=".svg"] {

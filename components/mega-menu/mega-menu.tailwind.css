@@ -9,6 +9,10 @@
 
   .mega-menu-item__heading {
     @apply flex min-h-11 items-center justify-between gap-2;
+
+    width:100%;
+    
+    @media screen and (min-widht: 768px) { width: fit-content; }
   }
 
   .mega-menu-item__link {
@@ -23,8 +27,8 @@
     @apply inline-block size-5 text-center text-xl leading-none text-current transition-transform;
 
     svg {
-        height: 30px;
-        width: 30px;
+      height: 30px;
+      width: 30px;
     }
   }
 
@@ -70,7 +74,7 @@
 
   @media (max-width: 47.999rem) {
     .mega-menu.is-enhanced .mega-menu-item__dropdown {
-      @apply static mt-1 w-full max-w-none shadow-none;
+      @apply static mt-1 block w-full max-w-none shadow-none;
     }
   }
 }

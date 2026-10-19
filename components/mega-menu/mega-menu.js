@@ -8,13 +8,18 @@ class MegaMenu extends ComponentInstance {
       const toggle = event.target.closest("[data-mega-menu-item-toggle]");
       if (!toggle || !this.el.contains(toggle)) return;
 
+      if (!this.desktop.matches) {
+        this.setItemOpen(toggle, true);
+        return;
+      }
+
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
       this.closeItems(toggle);
       this.setItemOpen(toggle, !isOpen);
     };
 
     this.onKeydown = (event) => {
-      if (event.key !== "Escape") return;
+      if (event.key !== "Escape" || !this.desktop.matches) return;
 
       const openToggle = this.el.querySelector('[data-mega-menu-item-toggle][aria-expanded="true"]');
       if (openToggle) {
@@ -24,7 +29,7 @@ class MegaMenu extends ComponentInstance {
     };
 
     this.onDocumentClick = (event) => {
-      if (!this.el.contains(event.target)) this.closeItems();
+      if (this.desktop.matches && !this.el.contains(event.target)) this.closeItems();
     };
     this.onPointerEnter = (event) => {
       if (!this.desktop.matches || event.pointerType === "touch") return;
@@ -63,17 +68,24 @@ class MegaMenu extends ComponentInstance {
         this.setItemOpen(toggle, false);
       }
     };
+    this.onBreakpointChange = (event) => {
+      this.el.querySelectorAll("[data-mega-menu-item-toggle]").forEach((toggle) => {
+        this.setItemOpen(toggle, !event.matches);
+      });
+    };
 
     this.el.addEventListener("click", this.onClick);
     this.el.addEventListener("keydown", this.onKeydown);
     document.addEventListener("click", this.onDocumentClick);
     this.el.addEventListener("focusin", this.onFocusIn);
     this.el.addEventListener("focusout", this.onFocusOut);
+    this.desktop.addEventListener("change", this.onBreakpointChange);
     this.menuItems.forEach((item) => {
       item.addEventListener("pointerenter", this.onPointerEnter);
       item.addEventListener("pointerleave", this.onPointerLeave);
     });
     this.el.classList.add("is-enhanced");
+    this.onBreakpointChange(this.desktop);
   }
 
   setItemOpen(toggle, isOpen) {
@@ -96,6 +108,7 @@ class MegaMenu extends ComponentInstance {
     document.removeEventListener("click", this.onDocumentClick);
     this.el.removeEventListener("focusin", this.onFocusIn);
     this.el.removeEventListener("focusout", this.onFocusOut);
+    this.desktop.removeEventListener("change", this.onBreakpointChange);
     this.menuItems.forEach((item) => {
       item.removeEventListener("pointerenter", this.onPointerEnter);
       item.removeEventListener("pointerleave", this.onPointerLeave);
