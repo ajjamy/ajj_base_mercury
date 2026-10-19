@@ -1,22 +1,42 @@
-@layer components {
+/* @layer components { */
   .mega-menu {
-    @apply m-0 flex list-none flex-col gap-1 p-0 md:flex-row md:items-center md:gap-4;
+    @apply m-0 flex list-none flex-col gap-1 p-0 
+    md:flex-row md:items-center md:gap-4;
   }
 
   .mega-menu-item {
-    @apply relative min-w-0;
+    @apply 
+    relative 
+    min-w-0;
   }
 
+  /* top level links */
   .mega-menu-item__heading {
-    @apply flex min-h-11 items-center justify-between gap-2;
-
-    width:100%;
+    @apply 
+    flex 
+    min-h-11
+    px-3 py-2
+    font-normal 
+    items-center 
+    justify-between 
+    gap-2;
+    width: 100%;
+    background-color: pink;
     
-    @media screen and (min-widht: 768px) { width: fit-content; }
+    
+    @media screen and (min-width: 768px) { width: fit-content; }
+    
+    .mega-menu-item__link { 
+        /* padding-left: 0.5rem !important; */
+        border-bottom: 1px solid;
+        @apply font-bold px-3 py-2; 
+    
+    }
   }
 
   .mega-menu-item__link {
     @apply flex min-h-11 flex-1 items-center rounded-md px-3 py-2 font-medium text-foreground no-underline hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+
   }
 
   .mega-menu-item__toggle {
@@ -60,8 +80,11 @@
     @apply min-w-0;
   }
 
-  .mega-menu-content__heading {
-    @apply mb-3 text-sm font-semibold text-foreground;
+  h2.mega-menu-content__heading {
+    @apply mb-3 font-semibold text-foreground;
+
+    padding-left: 1rem;
+    
   }
 
   .mega-menu-content__links {
@@ -69,7 +92,10 @@
   }
 
   .mega-menu-content__link {
-    @apply flex min-h-10 items-center rounded px-2 py-1 text-sm text-muted-foreground no-underline hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    @apply flex min-h-10 items-center rounded px-2 py-1 text-muted-foreground no-underline hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    font-size: var(--text-lg);
+
+    &[href=""] {display: none; }
   }
 
   @media (max-width: 47.999rem) {
@@ -77,4 +103,5 @@
       @apply static mt-1 block w-full max-w-none shadow-none;
     }
   }
-}
+  
+/* } */
