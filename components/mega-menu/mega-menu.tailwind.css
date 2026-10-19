@@ -21,6 +21,11 @@
 
   .mega-menu-item__icon {
     @apply inline-block size-5 text-center text-xl leading-none text-current transition-transform;
+
+    svg {
+        height: 30px;
+        width: 30px;
+    }
   }
 
   .mega-menu-item__toggle[aria-expanded="true"] .mega-menu-item__icon {

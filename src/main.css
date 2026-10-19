@@ -318,6 +318,8 @@
 @layer utilities {
   /* For custom utility classes with highest precedence. */
 
+  #block-ajj-base-mercury-primary-local-tasks ul { display: inline-block}
+
   /* Set the container query context for full-width elements. */
   .layout-content {
     container-type: inline-size;
