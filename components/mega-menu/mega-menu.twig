@@ -7,7 +7,7 @@
       with {
         id: item_id,
         label: item.label,
-        href: item.href|default(''),
+        href: item.url|default(item.href|default('')),
         has_dropdown: has_dropdown,
         item_data: item
       } only

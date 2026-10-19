@@ -2,6 +2,8 @@ import { ComponentType, ComponentInstance } from "../../lib/component.js";
 
 class MegaMenu extends ComponentInstance {
   init() {
+    this.desktop = window.matchMedia("(min-width: 48rem)");
+    this.menuItems = Array.from(this.el.querySelectorAll("[data-mega-menu-item]"));
     this.onClick = (event) => {
       const toggle = event.target.closest("[data-mega-menu-item-toggle]");
       if (!toggle || !this.el.contains(toggle)) return;
@@ -24,10 +26,53 @@ class MegaMenu extends ComponentInstance {
     this.onDocumentClick = (event) => {
       if (!this.el.contains(event.target)) this.closeItems();
     };
+    this.onPointerEnter = (event) => {
+      if (!this.desktop.matches || event.pointerType === "touch") return;
+
+      const toggle = event.currentTarget.querySelector("[data-mega-menu-item-toggle]");
+      if (!toggle) {
+        this.closeItems();
+        return;
+      }
+
+      this.closeItems(toggle);
+      this.setItemOpen(toggle, true);
+    };
+    this.onPointerLeave = (event) => {
+      const toggle = event.currentTarget.querySelector("[data-mega-menu-item-toggle]");
+      if (toggle && !event.currentTarget.contains(document.activeElement)) {
+        this.setItemOpen(toggle, false);
+      }
+    };
+    this.onFocusIn = (event) => {
+      if (!this.desktop.matches) return;
+
+      const item = event.target.closest("[data-mega-menu-item]");
+      const toggle = item?.querySelector("[data-mega-menu-item-toggle]");
+      if (toggle) {
+        this.closeItems(toggle);
+        this.setItemOpen(toggle, true);
+      }
+    };
+    this.onFocusOut = (event) => {
+      if (!this.desktop.matches) return;
+
+      const item = event.target.closest("[data-mega-menu-item]");
+      const toggle = item?.querySelector("[data-mega-menu-item-toggle]");
+      if (toggle && !item.contains(event.relatedTarget)) {
+        this.setItemOpen(toggle, false);
+      }
+    };
 
     this.el.addEventListener("click", this.onClick);
     this.el.addEventListener("keydown", this.onKeydown);
     document.addEventListener("click", this.onDocumentClick);
+    this.el.addEventListener("focusin", this.onFocusIn);
+    this.el.addEventListener("focusout", this.onFocusOut);
+    this.menuItems.forEach((item) => {
+      item.addEventListener("pointerenter", this.onPointerEnter);
+      item.addEventListener("pointerleave", this.onPointerLeave);
+    });
     this.el.classList.add("is-enhanced");
   }
 
@@ -49,6 +94,12 @@ class MegaMenu extends ComponentInstance {
     this.el.removeEventListener("click", this.onClick);
     this.el.removeEventListener("keydown", this.onKeydown);
     document.removeEventListener("click", this.onDocumentClick);
+    this.el.removeEventListener("focusin", this.onFocusIn);
+    this.el.removeEventListener("focusout", this.onFocusOut);
+    this.menuItems.forEach((item) => {
+      item.removeEventListener("pointerenter", this.onPointerEnter);
+      item.removeEventListener("pointerleave", this.onPointerLeave);
+    });
   }
 }
 
