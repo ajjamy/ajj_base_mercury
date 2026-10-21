@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@import "../components/heading/heading.tailwind.css";
 @import "../components/hero-blog/hero-blog.tailwind.css";
 @import "../components/navbar/navbar.tailwind.css";
 @import "../components/anchor/anchor.tailwind.css";

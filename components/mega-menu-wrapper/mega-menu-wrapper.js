@@ -7,12 +7,6 @@ class MegaMenuWrapper extends ComponentInstance {
     this.desktop = window.matchMedia("(min-width: 48rem)");
 
     this.onToggle = () => this.setPaneOpen(!this.pane.classList.contains("is-open"));
-    this.onClick = (event) => {
-      const itemToggle = event.target.closest("[data-mega-menu-item-toggle]");
-      if (itemToggle && this.el.contains(itemToggle)) {
-        this.toggleItem(itemToggle);
-      }
-    };
     this.onKeydown = (event) => {
       if (event.key !== "Escape") return;
 
@@ -34,7 +28,6 @@ class MegaMenuWrapper extends ComponentInstance {
     };
 
     this.toggle.addEventListener("click", this.onToggle);
-    this.el.addEventListener("click", this.onClick);
     this.el.addEventListener("keydown", this.onKeydown);
     document.addEventListener("click", this.onDocumentClick);
     this.desktop.addEventListener("change", this.onBreakpointChange);
@@ -47,17 +40,6 @@ class MegaMenuWrapper extends ComponentInstance {
     this.pane.classList.toggle("is-collapsed", !isOpen && !this.desktop.matches);
     this.toggle.setAttribute("aria-expanded", String(isOpen));
     if (!isOpen) this.closeItems();
-  }
-
-  toggleItem(toggle) {
-    const shouldOpen = toggle.getAttribute("aria-expanded") !== "true";
-    const currentItem = toggle.closest("[data-mega-menu-item]");
-    this.el.querySelectorAll('[data-mega-menu-item-toggle][aria-expanded="true"]').forEach((otherToggle) => {
-      if (otherToggle !== toggle && !currentItem.contains(otherToggle)) {
-        this.setItemOpen(otherToggle, false);
-      }
-    });
-    this.setItemOpen(toggle, shouldOpen);
   }
 
   setItemOpen(toggle, isOpen) {
@@ -76,7 +58,6 @@ class MegaMenuWrapper extends ComponentInstance {
 
   remove() {
     this.toggle.removeEventListener("click", this.onToggle);
-    this.el.removeEventListener("click", this.onClick);
     this.el.removeEventListener("keydown", this.onKeydown);
     document.removeEventListener("click", this.onDocumentClick);
     this.desktop.removeEventListener("change", this.onBreakpointChange);

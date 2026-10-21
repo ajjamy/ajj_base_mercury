@@ -33,47 +33,74 @@
     {{- item.url -}}
   {% endset %}
   {% set columns = [] %}
+  {% set is_mega = item.entity and item.entity.view_mode.value == 'mega_menu' %}
 
-  {% for child in item.below %}
-    {% set child_href %}
-      {{- child.url -}}
-    {% endset %}
-    {% set column_links = [
-      {
-        label: child.title,
-        href: child_href|trim
-      }
-    ] %}
-
-    {% for grandchild in child.below %}
-      {% set grandchild_href %}
-        {{- grandchild.url -}}
+  {# Default items list their children as plain links in a single column. #}
+  {% set default_links = [] %}
+  {% if not is_mega %}
+    {% for child in item.below %}
+      {% set child_href %}
+        {{- child.url -}}
       {% endset %}
-      {% set column_links =
-        column_links|merge(
+      {% set default_links =
+        default_links|merge(
           [
             {
-              label: grandchild.title,
-              href: grandchild_href|trim
+              label: child.title,
+              href: child_href|trim
             }
           ]
         )
       %}
     {% endfor %}
+    {% if default_links is not empty %}
+      {% set columns = [
+        {
+          links: default_links
+        }
+      ] %}
+    {% endif %}
+  {% else %}
+    {% for child in item.below %}
+      {% set child_href %}
+        {{- child.url -}}
+      {% endset %}
+      {% set column_links = [
+        {
+          label: child.title,
+          href: child_href|trim
+        }
+      ] %}
 
-    {% set columns =
-      columns|merge(
-        [
-          {
-            heading: child.title,
-            links: column_links
-          }
-        ]
-      )
-    %}
-  {% endfor %}
+      {% for grandchild in child.below %}
+        {% set grandchild_href %}
+          {{- grandchild.url -}}
+        {% endset %}
+        {% set column_links =
+          column_links|merge(
+            [
+              {
+                label: grandchild.title,
+                href: grandchild_href|trim
+              }
+            ]
+          )
+        %}
+      {% endfor %}
 
-  {% set is_mega = item.entity and item.entity.view_mode.value == 'mega_menu' %}
+      {% set columns =
+        columns|merge(
+          [
+            {
+              heading: child.title,
+              links: column_links
+            }
+          ]
+        )
+      %}
+    {% endfor %}
+  {% endif %}
+
   {% set has_featured = is_mega and (not item.entity.field_mega_media.isEmpty() or not item.entity.field_mega_featured.isEmpty()) %}
 
   {% set mega_items =
@@ -84,7 +111,8 @@
           label: item_title,
           href: item_href|trim,
           columns: columns,
-          featured: has_featured ? item.content : null
+          featured: has_featured ? item.content : null,
+          variant: is_mega ? 'mega' : 'simple'
         }
       ]
     )

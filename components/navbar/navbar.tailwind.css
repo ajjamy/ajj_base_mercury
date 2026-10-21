@@ -1,5 +1,3 @@
-@layer components;
-
 @layer base {
   .layout-container > header[role="banner"] {
     box-shadow: var(--shadow-lg);
@@ -20,36 +18,6 @@
   .navbar--modal-top {
     @apply px-4;
   }
-}
-
-.region-header {
-    .header-outer {
-        @apply container mx-auto p-4;
-    }
-
-    .header-inner {
-        @apply flex min-h-16 flex-wrap content-between items-center justify-between gap-4;
-    }
-
-    .header-branding {
-        @apply shrink-0;
-    
-        .branding img { max-height: 100px; }
-    
-        svg,
-        img[src$=".svg"] {
-          max-height: 100px;
-        }
-    }
-
-    .header-navigation {
-        @apply min-w-0 flex-1;
-    }
-
-    .header-account{ 
-        @apply shrink-0;
-
-    }
 }
 
 .navbar {
@@ -90,10 +58,6 @@
   .branding {
     @apply h-8 md:h-10;
     height: 80px;
-
-    @media screen and (min0width: 768px) {
-        height: 150px;
-    }
 
     svg,
     img[src$=".svg"] {
@@ -156,30 +120,4 @@
 
     width: 100%;
     justify-content: flex-end;
-
-    ul.menu-top {
-        @apply relative flex flex-col gap-1 p-0 font-sans md:w-auto md:flex-row; 
-    }
-
-    li {
-        @apply static flex flex-wrap justify-between md:flex-nowrap md:w-auto md:max-w-[375px] text-lg;
-
-    }
-
-    a.menu-link[data-level='1'] {
-        @apply flex min-h-[44px] shrink-1 grow-1 basis-0 items-center gap-1 p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3;
-    }
-    
-    ul.menu-level-2 {
-        @apply flex w-full flex-col gap-1 ps-4 md:absolute md:top-full md:left-0 md:hidden md:min-w-48 md:bg-background md:p-2 md:shadow-lg md:group-focus-within:flex md:group-hover:flex;
-        
-        li {}
-        
-        a.sub-menu-link {
-            @apply flex min-h-[40px] items-center p-2 hover:bg-muted focus:bg-muted;
-        }
-    }
-
-
-
 }

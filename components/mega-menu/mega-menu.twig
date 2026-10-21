@@ -9,6 +9,7 @@
         label: item.label,
         href: item.url|default(item.href|default('')),
         has_dropdown: has_dropdown,
+        variant: item.variant|default('mega'),
         item_data: item
       } only
     %}

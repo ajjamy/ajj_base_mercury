@@ -23,6 +23,13 @@ props:
       type: boolean
       title: Has dropdown content
       default: false
+    variant:
+      type: string
+      title: Dropdown variant
+      enum:
+        - mega
+        - simple
+      default: mega
 
 slots:
   dropdown:

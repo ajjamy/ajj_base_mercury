@@ -24,6 +24,13 @@ props:
             type: string
             title: Link URL
             format: uri-reference
+          variant:
+            type: string
+            title: Dropdown variant
+            enum:
+              - mega
+              - simple
+            default: mega
           columns:
             type: array
             title: Dropdown columns

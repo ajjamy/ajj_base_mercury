@@ -1,4 +1,35 @@
-<li class="mega-menu-item" data-mega-menu-item>
+{% set item_variants =
+  html_cva(
+    base: 'mega-menu-item',
+    variants: {
+      variant: {
+        mega: '',
+        simple: 'mega-menu-item--simple'
+      }
+    }
+  )
+%}
+
+{% set dropdown_variants =
+  html_cva(
+    base: 'mega-menu-item__dropdown',
+    variants: {
+      variant: {
+        mega: '',
+        simple: 'mega-menu-item__dropdown--simple'
+      }
+    }
+  )
+%}
+
+<li
+  class="{{
+  item_variants.apply({
+    variant: variant|default('mega')
+  })
+  }}"
+  data-mega-menu-item
+>
   <div class="mega-menu-item__heading">
     {% if href %}
       <a class="mega-menu-item__link" href="{{ href }}">{{ label }}</a>
@@ -18,14 +49,24 @@
         data-mega-menu-item-toggle
       >
         <span class="mega-menu-item__icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 24 24"><path fill="none" stroke="#003866" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8.5 7 7 7-7"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 24 24">
+            <path fill="none" stroke="#003866" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8.5 7 7 7-7" />
+          </svg>
         </span>
       </button>
     {% endif %}
   </div>
 
   {% if has_dropdown %}
-    <div id="{{ id }}-dropdown" class="mega-menu-item__dropdown" data-mega-menu-dropdown>
+    <div
+      id="{{ id }}-dropdown"
+      class="{{
+      dropdown_variants.apply({
+        variant: variant|default('mega')
+      })
+      }}"
+      data-mega-menu-dropdown
+    >
       {% block dropdown %}
 
       {% endblock %}

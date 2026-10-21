@@ -8,13 +8,8 @@ class MegaMenu extends ComponentInstance {
       const toggle = event.target.closest("[data-mega-menu-item-toggle]");
       if (!toggle || !this.el.contains(toggle)) return;
 
-      if (!this.desktop.matches) {
-        this.setItemOpen(toggle, true);
-        return;
-      }
-
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      this.closeItems(toggle);
+      if (this.desktop.matches) this.closeItems(toggle);
       this.setItemOpen(toggle, !isOpen);
     };
 
@@ -68,11 +63,7 @@ class MegaMenu extends ComponentInstance {
         this.setItemOpen(toggle, false);
       }
     };
-    this.onBreakpointChange = (event) => {
-      this.el.querySelectorAll("[data-mega-menu-item-toggle]").forEach((toggle) => {
-        this.setItemOpen(toggle, !event.matches);
-      });
-    };
+    this.onBreakpointChange = () => this.closeItems();
 
     this.el.addEventListener("click", this.onClick);
     this.el.addEventListener("keydown", this.onKeydown);
