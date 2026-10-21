@@ -23,13 +23,12 @@
 .navbar {
     @apply relative z-[500] container mx-auto flex justify-between p-2 px-4 md:py-4;
 
+    @media screen and (min-width: 48rem) {
+        padding: 0;
+    }
+
     .navbar--logo {
         @apply self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
-        /* display: none;
-
-        @media screen and (min-width:768px) {
-            display: block;
-        } */
     }
 
     .navbar--menu {
@@ -57,7 +56,12 @@
 .navbar--modal-logo {
   .branding {
     @apply h-8 md:h-10;
-    height: 80px;
+    height: 50px;
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: 1rem;
+
+    }
 
     svg,
     img[src$=".svg"] {
@@ -77,8 +81,6 @@
 }
 
 
-
-
 /* Menu visibility toggle (controlled by JS) */
 .navbar--menu:not(.navbar--menu--open) {
   @apply hidden md:flex;
@@ -93,7 +95,6 @@
       @apply mx-8 w-[calc(100%-var(--spacing)*16)] md:m-auto md:w-auto;
     }
 }
-
 
 .navbar--dropdown-menu {
     @apply not-first:flex flex-col items-stretch justify-start gap-2 md:flex-row max-h-full overflow-auto md:overflow-visible;
@@ -110,8 +111,6 @@
 .navbar--dropdown-menu-wrapper > :last-child {
   @apply pb-24 md:pb-0;
 }
-
-
 
 
 /* Main menu styles */
