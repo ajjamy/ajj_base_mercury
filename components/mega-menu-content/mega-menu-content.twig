@@ -16,13 +16,14 @@
     {% endfor %}
   </div>
 
+  {# Slot default prints the variable so it also works via include(). #}
   {% set featured_content %}
     {% block featured %}
-
+      {{ featured }}
     {% endblock %}
   {% endset %}
   {% if featured_content|trim %}
-    <aside>
+    <aside class="mega-menu-content__featured">
       {{ featured_content }}
     </aside>
   {% endif %}

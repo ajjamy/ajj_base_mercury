@@ -1,7 +1,7 @@
 <ul class="mega-menu" role="list" data-mega-menu>
   {% for item in items %}
     {% set item_id = item.id|default('mega-menu-item-' ~ loop.index) %}
-    {% set has_dropdown = item.columns is not empty %}
+    {% set has_dropdown = item.columns is not empty or item.featured is not empty %}
 
     {% embed 'ajj_base_mercury:mega-menu-item'
       with {
@@ -13,12 +13,13 @@
       } only
     %}
       {% block dropdown %}
-        {% if item_data.columns is not empty %}
+        {% if has_dropdown %}
           {{
             include(
               'ajj_base_mercury:mega-menu-content',
               {
-                columns: item_data.columns,
+                columns: item_data.columns|default([]),
+                featured: item_data.featured,
                 id: id ~ '-content'
               },
               with_context: false

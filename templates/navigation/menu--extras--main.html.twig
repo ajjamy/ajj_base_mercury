@@ -16,6 +16,13 @@
  *   - is_collapsed: TRUE if the link has children within the current menu tree
  *     that are not currently visible.
  *   - in_active_trail: TRUE if the link is in the active trail.
+ *   - entity: The menu_link_content entity (added by menu_item_extras).
+ *   - content: The entity rendered in its view mode (added by
+ *     menu_item_extras).
+ *
+ * Top-level items using the "Mega menu" view mode pass their rendered content
+ * to the mega-menu-content "featured" slot. See
+ * menu-link-content--main--menu-level-0--mega-menu.html.twig.
  */
 #}
 
@@ -66,6 +73,9 @@
     %}
   {% endfor %}
 
+  {% set is_mega = item.entity and item.entity.view_mode.value == 'mega_menu' %}
+  {% set has_featured = is_mega and (not item.entity.field_mega_media.isEmpty() or not item.entity.field_mega_featured.isEmpty()) %}
+
   {% set mega_items =
     mega_items|merge(
       [
@@ -73,7 +83,8 @@
           id: 'main-menu-item-' ~ loop.index,
           label: item_title,
           href: item_href|trim,
-          columns: columns
+          columns: columns,
+          featured: has_featured ? item.content : null
         }
       ]
     )
@@ -89,6 +100,7 @@
   }
 } %}
 
-<nav {{ attributes }} aria-label="{{ menu_label }}">
+{# The menu block template already provides the labelled <nav> landmark. #}
+<div {{ attributes }}>
   {{ mega_menu_component }}
-</nav>
+</div>

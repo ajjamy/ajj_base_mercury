@@ -151,7 +151,7 @@
 
 
 /* Main menu styles */
-nav.main-menu-container {
+.main-menu-container {
     @apply  flex;
 
     width: 100%;

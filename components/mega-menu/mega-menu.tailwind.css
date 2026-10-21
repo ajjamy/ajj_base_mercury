@@ -76,6 +76,18 @@
     @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4;
   }
 
+  .mega-menu-content:has(> .mega-menu-content__featured) {
+    @apply lg:grid-cols-[3fr_1fr];
+
+    .mega-menu-content__columns {
+      @apply lg:grid-cols-3;
+    }
+  }
+
+  .mega-menu-featured {
+    @apply grid gap-4;
+  }
+
   .mega-menu-content__column {
     @apply min-w-0;
   }
