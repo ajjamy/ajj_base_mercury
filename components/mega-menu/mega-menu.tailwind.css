@@ -14,12 +14,7 @@
     .mega-menu-item {
         @apply static text-lg **:min-w-0;
 
-        @media screen and (max-width: 47.999rem) {
-            &:hover {
-                background-color: var(--border);
-            }      
-        }
-        
+        &:hover { background-color: var(--border); }      
     }
 
     .mega-menu-item--simple {
@@ -59,24 +54,18 @@
 
     .mega-menu-item__link {
         @apply flex min-h-11 flex-1 items-center font-medium text-foreground no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
-
     }
 
     .mega-menu-item__toggle {
         @apply flex size-11 shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
 
-        @media screen and (min-width: 48rem) {
-            width: 25px;
-        }
+        @media screen and (min-width: 48rem) { width: 25px; }
     }
 
     .mega-menu-item__icon {
         @apply inline-block size-5 text-center text-xl leading-none text-current transition-transform;
 
-        @media screen and (min-width: 48rem) { 
-            width: 25px;
-
-        }
+        @media screen and (min-width: 48rem) { width: 25px; }
 
         svg {
             height: 25px;
@@ -138,7 +127,7 @@
     }
 
     .mega-menu-content__column {
-    @apply min-w-0;
+        @apply min-w-0;
     }
 
     h2.mega-menu-content__heading {
@@ -148,14 +137,10 @@
     .mega-menu-content__links {
         @apply m-0 flex list-none flex-col gap-1 p-0;
 
-        li { 
-            border-bottom: 1px solid var(--border);
-        }
+        li { border-bottom: 1px solid var(--border); }
 
         /* no border under the last link of the final column */
-        .mega-menu-content__column:last-child & > li:last-child {
-            border-bottom: 0;
-        }
+        .mega-menu-content__column:last-child & > li:last-child { border-bottom: 0; }
 
         .mega-menu-content__link {
             @apply flex min-h-10 items-center px-3 py-2 text-muted-foreground no-underline  hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
@@ -163,15 +148,12 @@
         
             &[href=""] {display: none; }
 
-            
-                &:hover {
-                    background-color: var(--border);
-                    text-decoration: underline;
-                }
-            
+            &:hover {
+                background-color: var(--border);
+                text-decoration: underline;
+            }
         }
     } 
-
 
     @media (max-width: 47.999rem) {
         .mega-menu.is-enhanced .mega-menu-item__dropdown {
@@ -179,5 +161,4 @@
             padding-bottom: 0;
         }
     }
-
 }
