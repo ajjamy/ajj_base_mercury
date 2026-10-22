@@ -7,6 +7,7 @@
 @import "../components/mega-menu-wrapper/mega-menu-wrapper.tailwind.css";
 @import "../components/mega-menu/mega-menu.tailwind.css";
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -46,6 +47,9 @@
 }
 
 @theme {
+  /* Header / main nav switches from mobile to inline layout at 992px */
+  --breakpoint-nav: 62rem;
+
   --text-9xl: 7.5rem; /* 120px */
   --text-9xl--line-height: 1; /* 120px */
 

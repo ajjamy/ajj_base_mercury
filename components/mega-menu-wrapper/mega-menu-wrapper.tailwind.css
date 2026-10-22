@@ -4,7 +4,7 @@
   }
 
   .mega-menu-wrapper__toggle {
-    @apply flex min-h-11 w-full items-center justify-between gap-3 px-3 py-2 font-medium md:hidden;
+    @apply flex min-h-11 w-full items-center justify-between gap-3 px-3 py-2 font-medium nav:hidden;
   }
 
   .mega-menu-wrapper__toggle-icon {
@@ -23,7 +23,7 @@
     @apply hidden;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 62rem) {
     .mega-menu-wrapper__pane,
     .mega-menu-wrapper__pane.is-open,
     .mega-menu-wrapper__pane.is-collapsed {

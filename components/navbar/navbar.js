@@ -24,7 +24,7 @@ class Navbar extends ComponentInstance {
 
     // Keep up with scroll amount for mobile menu positioning.
     const scrollHandler = this.measureScrollTop.bind(this);
-    const desktopMQ = window.matchMedia("(min-width: 48rem)");
+    const desktopMQ = window.matchMedia("(min-width: 62rem)");
 
     // Attach on page load only if less than desktop width AND navbar is visible.
     if (!desktopMQ.matches && this.el.getBoundingClientRect().bottom > 0) {

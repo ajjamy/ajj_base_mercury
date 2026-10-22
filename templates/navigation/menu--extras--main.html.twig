@@ -65,12 +65,16 @@
       {% set child_href %}
         {{- child.url -}}
       {% endset %}
-      {% set column_links = [
-        {
-          label: child.title,
-          href: child_href|trim
-        }
-      ] %}
+      {# The child is the column heading; only repeat it as a link if it has a URL. #}
+      {% set column_links = [] %}
+      {% if child_href|trim is not empty %}
+        {% set column_links = [
+          {
+            label: child.title,
+            href: child_href|trim
+          }
+        ] %}
+      {% endif %}
 
       {% for grandchild in child.below %}
         {% set grandchild_href %}

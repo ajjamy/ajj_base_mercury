@@ -4,7 +4,7 @@ class MegaMenuWrapper extends ComponentInstance {
   init() {
     this.toggle = this.el.querySelector("[data-mega-menu-toggle]");
     this.pane = this.el.querySelector("[data-mega-menu-pane]");
-    this.desktop = window.matchMedia("(min-width: 48rem)");
+    this.desktop = window.matchMedia("(min-width: 62rem)");
 
     this.onToggle = () => this.setPaneOpen(!this.pane.classList.contains("is-open"));
     this.onKeydown = (event) => {

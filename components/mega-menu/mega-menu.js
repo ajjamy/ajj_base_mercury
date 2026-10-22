@@ -2,7 +2,7 @@ import { ComponentType, ComponentInstance } from "../../lib/component.js";
 
 class MegaMenu extends ComponentInstance {
   init() {
-    this.desktop = window.matchMedia("(min-width: 48rem)");
+    this.desktop = window.matchMedia("(min-width: 62rem)");
     this.menuItems = Array.from(this.el.querySelectorAll("[data-mega-menu-item]"));
     this.onClick = (event) => {
       const toggle = event.target.closest("[data-mega-menu-item-toggle]");
