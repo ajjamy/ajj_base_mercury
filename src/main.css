@@ -6,6 +6,7 @@
 @import "../components/anchor/anchor.tailwind.css";
 @import "../components/mega-menu-wrapper/mega-menu-wrapper.tailwind.css";
 @import "../components/mega-menu/mega-menu.tailwind.css";
+@import "./layout.tailwind.css";
 
 
 @theme inline {

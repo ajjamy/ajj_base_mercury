@@ -164,4 +164,34 @@ final class ThemeHooks {
     }
   }
 
+  /**
+   * Implements template_preprocess_region().
+   *
+   * Provides the site logo to the footer, matching the header branding.
+   */
+  #[Hook('preprocess_region')]
+  public function preprocessRegion(array &$variables): void {
+    if ($variables['region'] !== 'footer') {
+      return;
+    }
+    $variables['site_logo'] = theme_get_setting('logo.url', 'ajj_base_mercury');
+    $variables['site_name'] = \Drupal::config('system.site')->get('name');
+  }
+
+  /**
+   * Implements hook_theme_suggestions_page_alter().
+   *
+   * Adds page--node--BUNDLE suggestions, e.g. page--node--landing-page.
+   */
+  #[Hook('theme_suggestions_page_alter')]
+  public function themeSuggestionsPageAlter(array &$suggestions, array $variables): void {
+    if ($this->routeMatch->getRouteName() !== 'entity.node.canonical') {
+      return;
+    }
+    $node = $this->routeMatch->getParameter('node');
+    if ($node instanceof NodeInterface) {
+      $suggestions[] = 'page__node__' . $node->bundle();
+    }
+  }
+
 }
