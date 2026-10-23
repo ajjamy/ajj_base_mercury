@@ -125,7 +125,10 @@
           alt: background_media.alt,
           class: 'object-cover w-full h-full',
           width: background_media.width,
-          height: background_media.height
+          height: background_media.height,
+          attributes: create_attribute({
+            style: 'object-position: ' ~ (background_position|default('50% 50%')) ~ ';'
+          })
         } only %}
       </div>
     {% endblock %}
