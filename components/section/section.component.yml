@@ -18,9 +18,9 @@ props:
         - "80%"
         - "75%"
         - "50%"
-      default: "100%"
+      default: "80%"
       examples:
-        - "100%"
+        - "80%"
     columns:
       type: string
       title: Grid layout
