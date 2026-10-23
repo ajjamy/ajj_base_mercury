@@ -5,7 +5,7 @@
 
 {% set section =
   html_cva(
-    base: ['@container relative mx-auto flex flex-col items-stretch'],
+    base: ['@container mx-auto'],
     variants: {
       width: {
         '100%': 'lg:max-w-full',
@@ -13,38 +13,6 @@
         '80%': 'lg:max-w-8/10',
         '75%': 'lg:max-w-3/4',
         '50%': 'lg:max-w-1/2'
-      },
-      marginBlockStart: {
-        '0': 'mt-0',
-        '8': 'mt-2',
-        '20': 'mt-5',
-        '32': 'mt-6 md:mt-7 xl:mt-8',
-        '48': 'mt-8 md:mt-10 xl:mt-12',
-        '64': 'mt-10 md:mt-13 xl:mt-16',
-        '96': 'mt-16 md:mt-20 xl:mt-24',
-        '128': 'mt-20 md:mt-24 xl:mt-32'
-      },
-      marginBlockEnd: {
-        '0': 'mb-0',
-        '8': 'mb-2',
-        '20': 'mb-5',
-        '32': 'mb-6 md:mb-7 xl:mb-8',
-        '48': 'mb-8 md:mb-10 xl:mb-12',
-        '64': 'mb-10 md:mb-13 xl:mb-16',
-        '96': 'mb-16 md:mb-20 xl:mb-24',
-        '128': 'mb-20 md:mb-24 xl:mb-32'
-      },
-      paddingBlockStart: {
-        '0': 'pt-0',
-        '16': 'pt-4',
-        '32': 'pt-6 md:pt-7 xl:pt-8',
-        '64': 'pt-10 md:pt-13 xl:pt-16'
-      },
-      paddingBlockEnd: {
-        '0': 'pb-0',
-        '16': 'pb-4',
-        '32': 'pb-6 md:pb-7 xl:pb-8',
-        '64': 'pb-10 md:pb-13 xl:pb-16'
       },
       backgroundColor: {
         primary: 'text-primary-foreground',
@@ -59,10 +27,6 @@
 
 {% set section_classes =
   section.apply({
-    marginBlockStart: margin_block_start,
-    marginBlockEnd: margin_block_end,
-    paddingBlockStart: padding_block_start,
-    paddingBlockEnd: padding_block_end,
     backgroundColor: background_color|default('noColor')
   })
 %}
@@ -151,7 +115,7 @@
   })
 %}
 
-<section class="{{ section_classes }} cq-full">
+<section class="section {{ section_classes }} cq-full">
   {# if there is background media #}
   {% if background_media is not empty and background_media.src is not empty %}
     {% block background_media_block %}
