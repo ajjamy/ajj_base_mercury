@@ -1,0 +1,138 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ *   - entity: The menu_link_content entity (added by menu_item_extras).
+ *   - content: The entity rendered in its view mode (added by
+ *     menu_item_extras).
+ *
+ * Top-level items using the "Mega menu" view mode pass their rendered content
+ * to the mega-menu-content "featured" slot. See
+ * menu-link-content--main--menu-level-0--mega-menu.html.twig.
+ */
+#}
+
+{% set mega_items = [] %}
+{% for item in items %}
+  {% set item_title = item.title is not empty ? item.title : item.text %}
+  {% set item_href %}
+    {{- item.url -}}
+  {% endset %}
+  {% set columns = [] %}
+  {% set is_mega = item.entity and item.entity.view_mode.value == 'mega_menu' %}
+
+  {# Default items list their children as plain links in a single column. #}
+  {% set default_links = [] %}
+  {% if not is_mega %}
+    {% for child in item.below %}
+      {% set child_href %}
+        {{- child.url -}}
+      {% endset %}
+      {% set default_links =
+        default_links|merge(
+          [
+            {
+              label: child.title,
+              href: child_href|trim
+            }
+          ]
+        )
+      %}
+    {% endfor %}
+    {% if default_links is not empty %}
+      {% set columns = [
+        {
+          links: default_links
+        }
+      ] %}
+    {% endif %}
+  {% else %}
+    {% for child in item.below %}
+      {% set child_href %}
+        {{- child.url -}}
+      {% endset %}
+      {# The child is the column heading; only repeat it as a link if it has a URL. #}
+      {% set column_links = [] %}
+      {% if child_href|trim is not empty %}
+        {% set column_links = [
+          {
+            label: child.title,
+            href: child_href|trim
+          }
+        ] %}
+      {% endif %}
+
+      {% for grandchild in child.below %}
+        {% set grandchild_href %}
+          {{- grandchild.url -}}
+        {% endset %}
+        {% set column_links =
+          column_links|merge(
+            [
+              {
+                label: grandchild.title,
+                href: grandchild_href|trim
+              }
+            ]
+          )
+        %}
+      {% endfor %}
+
+      {% set columns =
+        columns|merge(
+          [
+            {
+              heading: child.title,
+              links: column_links
+            }
+          ]
+        )
+      %}
+    {% endfor %}
+  {% endif %}
+
+  {% set has_featured = is_mega and (not item.entity.field_mega_media.isEmpty() or not item.entity.field_mega_featured.isEmpty()) %}
+
+  {% set mega_items =
+    mega_items|merge(
+      [
+        {
+          id: 'main-menu-item-' ~ loop.index,
+          label: item_title,
+          href: item_href|trim,
+          columns: columns,
+          featured: has_featured ? item.content : null,
+          variant: is_mega ? 'mega' : 'simple'
+        }
+      ]
+    )
+  %}
+{% endfor %}
+
+{% set attributes = attributes.addClass('main-menu-container') %}
+{% set mega_menu_component = {
+  '#type': 'component',
+  '#component': 'ajj_base_mercury:mega-menu',
+  '#props': {
+    items: mega_items
+  }
+} %}
+
+{# The menu block template already provides the labelled <nav> landmark. #}
+<div {{ attributes }}>
+  {{ mega_menu_component }}
+</div>

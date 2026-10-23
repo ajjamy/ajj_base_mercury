@@ -1,5 +1,3 @@
-@layer components;
-
 @layer base {
   .layout-container > header[role="banner"] {
     box-shadow: var(--shadow-lg);
@@ -22,57 +20,37 @@
   }
 }
 
-.region-header {
-    .header-outer {
-        @apply container mx-auto p-4;
-    }
-
-    .header-inner {
-        @apply flex min-h-16 flex-wrap content-between items-center justify-between gap-4;
-    }
-
-    .header-branding {
-        @apply shrink-0;
-    
-        .branding img { max-height: 100px; }
-    
-        svg,
-        img[src$=".svg"] {
-          max-height: 100px;
-        }
-    }
-
-    .header-navigation {
-        @apply min-w-0 flex-1;
-    }
-
-    .header-account{ 
-        @apply shrink-0;
-
-    }
-}
-
 .navbar {
-    @apply relative z-[500] container mx-auto flex justify-between p-2 px-4 md:py-4;
+    @apply relative z-[500] mx-auto flex justify-between p-2 px-4 nav:flex-col nav:py-4 lg:flex-row;
+
+    @media screen and (min-width: 62rem) {
+        padding: 0;
+    }
 
     .navbar--logo {
-        @apply self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+        @apply self-center nav:self-start lg:self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+        width: 4rem;
+
+        @media screen and (min-width: 62rem) { margin-top: 1rem; }
     }
 
     .navbar--menu {
-        @apply fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 md:static md:flex md:h-auto md:flex-row md:items-center md:bg-transparent md:pb-0;
+        @apply fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 nav:static nav:flex nav:h-auto nav:w-full lg:w-auto nav:flex-row nav:items-center nav:bg-transparent nav:pb-0;
     }
 
     .navbar--modal-top {
-        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 md:hidden;
+        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 px-4  nav:hidden;
+
+
     }
 
     .navbar--modal-logo {
-        @apply flex min-h-[44px] flex-1 flex-col items-start justify-center md:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
+        @apply flex min-h-[44px] flex-1 flex-col items-start justify-center nav:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
     }
 
     button.navbar--hide-menu {
-        @apply  flex h-[44px] w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden;
+        @apply  flex w-[44px] flex-0 cursor-pointer items-center justify-center p-2 nav:hidden;
+        height: 100%;
     }
 
 }
@@ -80,8 +58,13 @@
 .navbar--logo,
 .navbar--modal-logo {
   .branding {
-    @apply h-8 md:h-10;
-    height: 150px;
+    @apply h-8 nav:h-10;
+    height: 50px;
+
+    @media screen and (min-width: 62rem) {
+        padding-bottom: 1rem;
+
+    }
 
     svg,
     img[src$=".svg"] {
@@ -91,83 +74,67 @@
 }
 
 .navbar--dropdown-menu-wrapper {
-    @apply relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] md:p-0 md:after:content-none;
+    @apply relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] nav:p-0 nav:after:content-none;
+    max-width: unset;
+
+    @media screen and (min-width: 62rem) {
+        height: 100%;
+    }
     
     .navbar--dropdown-menu {
         width: 100%;
         justify-content: flex-end;
 
+        @media screen and (min-width: 62rem) {
+            height: 100%;
+
+            nav { height: 100%; }
+        }
+
     }
+
 }
-
-
 
 
 /* Menu visibility toggle (controlled by JS) */
 .navbar--menu:not(.navbar--menu--open) {
-  @apply hidden md:flex;
+  @apply hidden nav:flex;
 }
 
 /* Child component styling that can't be moved to Twig */
 .navbar--links {
 
-    @apply col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 md:w-auto md:flex-row;
+    @apply col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 nav:w-auto nav:flex-row;
 
     .button.button {
-      @apply mx-8 w-[calc(100%-var(--spacing)*16)] md:m-auto md:w-auto;
+      @apply mx-8 w-[calc(100%-var(--spacing)*16)] nav:m-auto nav:w-auto;
     }
 }
 
-
 .navbar--dropdown-menu {
-    @apply not-first:flex flex-col items-stretch justify-start gap-2 md:flex-row max-h-full overflow-auto md:overflow-visible;
+    @apply not-first:flex flex-col items-stretch justify-start gap-2 nav:flex-row max-h-full overflow-auto nav:overflow-visible;
 
     .dropdown-menu {
-      @apply w-full md:w-auto;
+      @apply w-full nav:w-auto;
     }
 }
 
 .navbar--hamburger-container {
-    @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center md:hidden;
+    @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center nav:hidden;
 }
 
 .navbar--dropdown-menu-wrapper > :last-child {
-  @apply pb-24 md:pb-0;
+  @apply pb-24 nav:pb-0;
 }
 
 
-
-
 /* Main menu styles */
-nav.main-menu-container {
+.main-menu-container {
     @apply  flex;
-
     width: 100%;
     justify-content: flex-end;
 
-    ul.menu-top {
-        @apply relative flex flex-col gap-1 p-0 font-sans md:w-auto md:flex-row; 
+    @media screen and (min-width: 62rem) {
+        height: 100%;
     }
-
-    li {
-        @apply static flex flex-wrap justify-between md:flex-nowrap md:w-auto md:max-w-[375px] text-base;
-
-    }
-
-    a.menu-link[data-level='1'] {
-        @apply flex min-h-[44px] shrink-1 grow-1 basis-0 items-center gap-1 p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3;
-    }
-    
-    ul.menu-level-2 {
-        @apply flex w-full flex-col gap-1 ps-4 md:absolute md:top-full md:left-0 md:hidden md:min-w-48 md:bg-background md:p-2 md:shadow-lg md:group-focus-within:flex md:group-hover:flex;
-        
-        li {}
-        
-        a.sub-menu-link {
-            @apply flex min-h-[40px] items-center p-2 hover:bg-muted focus:bg-muted;
-        }
-    }
-
-
-
 }

@@ -1,0 +1,33 @@
+<ul class="mega-menu" role="list" data-mega-menu>
+  {% for item in items %}
+    {% set item_id = item.id|default('mega-menu-item-' ~ loop.index) %}
+    {% set has_dropdown = item.columns is not empty or item.featured is not empty %}
+
+    {% embed 'ajj_base_mercury:mega-menu-item'
+      with {
+        id: item_id,
+        label: item.label,
+        href: item.url|default(item.href|default('')),
+        has_dropdown: has_dropdown,
+        variant: item.variant|default('mega'),
+        item_data: item
+      } only
+    %}
+      {% block dropdown %}
+        {% if has_dropdown %}
+          {{
+            include(
+              'ajj_base_mercury:mega-menu-content',
+              {
+                columns: item_data.columns|default([]),
+                featured: item_data.featured,
+                id: id ~ '-content'
+              },
+              with_context: false
+            )
+          }}
+        {% endif %}
+      {% endblock %}
+    {% endembed %}
+  {% endfor %}
+</ul>

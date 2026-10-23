@@ -82,3 +82,39 @@ props:
       type: string
       title: Link
       format: uri-reference
+    icon:
+      type: string
+      title: Icon name
+      description: 'Optional. The ID of an icon from the <a href="https://phosphoricons.com" target="_blank">Phosphor Icons</a> library. Leave empty for no icon.'
+      examples:
+        - "rocket"
+    icon_layout:
+      type: string
+      title: Icon layout
+      enum:
+        - inline
+        - stacked
+      meta:enum:
+        inline: Inline (beside heading)
+        stacked: Stacked (above heading)
+      default: inline
+      examples:
+        - inline
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - extra-small
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        extra-small: Extra small
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      default: medium
+      examples:
+        - medium

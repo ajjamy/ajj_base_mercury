@@ -3,6 +3,15 @@
 {% set heading_text_color = text_color|default('default') %}
 {% set heading_text_size = text_size|default('heading-responsive-4xl') %}
 {% set has_url = url is not empty ? 'yes' : 'no' %}
+{% set has_icon = icon is not empty %}
+{% set heading_icon_layout = icon_layout|default('inline') %}
+{% set icon_size_map = {
+  'extra-small': 20,
+  small: 24,
+  medium: 32,
+  large: 48,
+  'extra-large': 64
+} %}
 
 {% set heading_variants =
   html_cva(
@@ -51,11 +60,57 @@
   {% set additional_classes = additional_classes|join(' ') %}
 {% endif %}
 
-{% set heading_content %}
-  {% if has_url == 'yes' %}
-    <a href="{{ url }}">{{ heading_text }}</a>
+{# inline-flex keeps the parent's text-align working for both layouts #}
+{% set icon_wrapper_variants =
+  html_cva(
+    base: 'inline-flex gap-3',
+    variants: {
+      layout: {
+        inline: 'flex-row items-center',
+        stacked: 'flex-col'
+      },
+      align: {
+        left: '',
+        center: '',
+        right: ''
+      }
+    },
+    compound_variants: [
+      { layout: 'stacked', align: 'left', class: 'items-start' },
+      { layout: 'stacked', align: 'center', class: 'items-center' },
+      { layout: 'stacked', align: 'right', class: 'items-end' }
+    ]
+  )
+%}
+
+{% set heading_inner %}
+  {% if has_icon %}
+    <span class="{{ icon_wrapper_variants.apply({ layout: heading_icon_layout, align: heading_align }) }}">
+      <span class="shrink-0" aria-hidden="true">
+        {{
+          icon(
+            'phosphor',
+            icon,
+            {
+              size: icon_size_map[icon_size]|default(icon_size_map['medium']),
+              color: 'currentColor',
+              alt: ''
+            }
+          )
+        }}
+      </span>
+      <span>{{ heading_text }}</span>
+    </span>
   {% else %}
     {{ heading_text }}
+  {% endif %}
+{% endset %}
+
+{% set heading_content %}
+  {% if has_url == 'yes' %}
+    <a href="{{ url }}">{{ heading_inner }}</a>
+  {% else %}
+    {{ heading_inner }}
   {% endif %}
 {% endset %}
 

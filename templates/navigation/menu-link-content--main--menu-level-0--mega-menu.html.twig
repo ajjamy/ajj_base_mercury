@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Mega menu panel for a top-level main menu link in the "Mega menu" view mode.
+ *
+ * Rendered into the mega-menu-content "featured" slot from
+ * menu--extras--main.html.twig.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - content: The menu link fields, rendered by the view mode's display.
+ * - menu_link_content: The menu_link_content entity.
+ *
+ * content.children is intentionally not printed: child links are already
+ * rendered as columns by the mega-menu component.
+ */
+#}
+<div {{ attributes.addClass('mega-menu-featured') }}>
+  {{ content.field_mega_media }}
+  {{ content.field_mega_featured }}
+</div>

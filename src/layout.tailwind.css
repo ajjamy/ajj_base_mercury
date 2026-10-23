@@ -1,0 +1,29 @@
+@layer components {
+  .layout-content {
+    @apply mx-auto w-full max-w-5xl px-4 lg:grid lg:gap-8;
+  }
+
+  .layout-content:has(.layout-sidebar-first) {
+    @apply lg:grid-cols-[16rem_1fr];
+  }
+
+  .layout-content:has(.layout-sidebar-second) {
+    @apply lg:grid-cols-[1fr_16rem];
+  }
+
+  .layout-content:has(.layout-sidebar-first):has(.layout-sidebar-second) {
+    @apply lg:grid-cols-[16rem_1fr_16rem];
+  }
+
+  .layout-main {
+    @apply min-w-0 max-w-5xl;
+  }
+
+  .footer {
+
+    .site-footer {
+        
+    }
+
+  }
+}

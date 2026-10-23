@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override for the footer region.
+ *
+ * The outer contentinfo element is provided by page.html.twig.
+ */
+#}
+{% set classes = ['region', 'region-' ~ (region|clean_class)] %}
+<div {{ attributes.addClass(classes) }}>
+  {% embed 'ajj_base_mercury:footer' %}
+    {% block footer_first %}
+      {% if site_logo %}
+        <a href="{{ path('<front>') }}" class="inline-block" rel="home">
+          <div class="branding">
+            <img class="h-full w-auto" src="{{ site_logo }}" alt="{{ site_name }}" />
+          </div>
+        </a>
+      {% endif %}
+    {% endblock %}
+    {% block footer_utility_first %}
+      {% if elements.ajj_base_mercury_footer_menu %}
+        {{ elements.ajj_base_mercury_footer_menu }}
+      {% endif %}
+    {% endblock %}
+    {% block footer_utility_last %}
+      <p>Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).</p>
+      {% if elements.ajj_base_mercury_footercopyrightlegal %}
+        {{ elements.ajj_base_mercury_footercopyrightlegal }}
+      {% endif %}
+    {% endblock %}
+  {% endembed %}
+</div>

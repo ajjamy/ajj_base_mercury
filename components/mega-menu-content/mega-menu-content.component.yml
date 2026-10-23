@@ -1,0 +1,43 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Mega menu content
+description: Responsive grid of link groups for a mega menu dropdown.
+group: Navigation
+props:
+  type: object
+  required:
+    - id
+    - columns
+  properties:
+    id:
+      type: string
+      title: Content ID
+      pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+    columns:
+      type: array
+      title: Link groups
+      items:
+        type: object
+        properties:
+          heading:
+            type: string
+            title: Group heading
+          links:
+            type: array
+            title: Links
+            items:
+              type: object
+              required:
+                - label
+                - href
+              properties:
+                label:
+                  type: string
+                  title: Link label
+                href:
+                  type: string
+                  title: Link URL
+                  format: uri-reference
+
+slots:
+  featured:
+    title: Featured content

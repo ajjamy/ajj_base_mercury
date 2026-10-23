@@ -30,6 +30,8 @@
   --font-serif: "DM Serif Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
   --font-body: "DM Sans", Arial, Helvetica, sans-serif;
+    
+  --font-weight-xbold: 900;
 
   --radius: 0.5rem;
   --shadow-x: 0;
@@ -93,4 +95,15 @@
   --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
   --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 12px 14px -1px hsl(0 0% 0% / 0.1);
+}
+
+/* admin */
+#block-ajj-base-mercury-primary-local-tasks ul li { 
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 15px;
+    background-color: var(--input);
+    &:hover {
+        text-decoration: underline;
+    }
 }
