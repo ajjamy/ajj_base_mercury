@@ -31,7 +31,7 @@
         @apply self-center nav:self-start lg:self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
         width: 4rem;
 
-        @media screen and (min-width: 992px) { margin-top: 1rem; }
+        @media screen and (min-width: 62rem) { margin-top: 1rem; }
     }
 
     .navbar--menu {
@@ -61,7 +61,7 @@
     @apply h-8 nav:h-10;
     height: 50px;
 
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 62rem) {
         padding-bottom: 1rem;
 
     }
@@ -76,12 +76,23 @@
 .navbar--dropdown-menu-wrapper {
     @apply relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] nav:p-0 nav:after:content-none;
     max-width: unset;
+
+    @media screen and (min-width: 62rem) {
+        height: 100%;
+    }
     
     .navbar--dropdown-menu {
         width: 100%;
         justify-content: flex-end;
 
+        @media screen and (min-width: 62rem) {
+            height: 100%;
+
+            nav { height: 100%; }
+        }
+
     }
+
 }
 
 
@@ -120,7 +131,10 @@
 /* Main menu styles */
 .main-menu-container {
     @apply  flex;
-
     width: 100%;
     justify-content: flex-end;
+
+    @media screen and (min-width: 62rem) {
+        height: 100%;
+    }
 }

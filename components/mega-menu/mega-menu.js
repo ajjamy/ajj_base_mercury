@@ -64,6 +64,12 @@ class MegaMenu extends ComponentInstance {
       }
     };
     this.onBreakpointChange = () => this.closeItems();
+    this.onResize = () => {
+      cancelAnimationFrame(this.resizeFrame);
+      this.resizeFrame = requestAnimationFrame(() => {
+        this.el.querySelectorAll("[data-mega-menu-dropdown].is-open").forEach((dropdown) => this.positionDropdown(dropdown));
+      });
+    };
 
     this.el.addEventListener("click", this.onClick);
     this.el.addEventListener("keydown", this.onKeydown);
@@ -71,6 +77,7 @@ class MegaMenu extends ComponentInstance {
     this.el.addEventListener("focusin", this.onFocusIn);
     this.el.addEventListener("focusout", this.onFocusOut);
     this.desktop.addEventListener("change", this.onBreakpointChange);
+    window.addEventListener("resize", this.onResize);
     this.menuItems.forEach((item) => {
       item.addEventListener("pointerenter", this.onPointerEnter);
       item.addEventListener("pointerleave", this.onPointerLeave);
@@ -85,6 +92,49 @@ class MegaMenu extends ComponentInstance {
 
     toggle.setAttribute("aria-expanded", String(isOpen));
     dropdown.classList.toggle("is-open", isOpen);
+    if (isOpen) {
+      this.positionDropdown(dropdown);
+    } else {
+      this.resetDropdown(dropdown);
+    }
+  }
+
+  // Desktop dropdowns open directly below their menu item (no hover gap) and
+  // are capped to the window width. Mega panels are centered in the window;
+  // simple dropdowns line up under their parent item.
+  positionDropdown(dropdown) {
+    this.resetDropdown(dropdown);
+    if (!this.desktop.matches) return;
+
+    const gutter = 16;
+    const viewportWidth = document.documentElement.clientWidth;
+    dropdown.style.maxWidth = `${viewportWidth - gutter * 2}px`;
+
+    const item = dropdown.closest("[data-mega-menu-item]");
+    const parent = dropdown.offsetParent;
+    if (item && parent) {
+      const parentTop = parent.getBoundingClientRect().top + parent.clientTop;
+      dropdown.style.top = `${item.getBoundingClientRect().bottom - parentTop}px`;
+    }
+
+    const rect = dropdown.getBoundingClientRect();
+    let shift;
+    if (item && dropdown.classList.contains("mega-menu-item__dropdown--simple")) {
+      // Line up under the parent item, nudged back in if it would overflow.
+      let targetLeft = item.getBoundingClientRect().left;
+      targetLeft = Math.min(targetLeft, viewportWidth - gutter - rect.width);
+      targetLeft = Math.max(targetLeft, gutter);
+      shift = targetLeft - rect.left;
+    } else {
+      shift = (viewportWidth - rect.width) / 2 - rect.left;
+    }
+    dropdown.style.left = `${dropdown.offsetLeft + shift}px`;
+  }
+
+  resetDropdown(dropdown) {
+    dropdown.style.removeProperty("top");
+    dropdown.style.removeProperty("left");
+    dropdown.style.removeProperty("max-width");
   }
 
   closeItems(except = null) {
@@ -100,6 +150,8 @@ class MegaMenu extends ComponentInstance {
     this.el.removeEventListener("focusin", this.onFocusIn);
     this.el.removeEventListener("focusout", this.onFocusOut);
     this.desktop.removeEventListener("change", this.onBreakpointChange);
+    window.removeEventListener("resize", this.onResize);
+    cancelAnimationFrame(this.resizeFrame);
     this.menuItems.forEach((item) => {
       item.removeEventListener("pointerenter", this.onPointerEnter);
       item.removeEventListener("pointerleave", this.onPointerLeave);
