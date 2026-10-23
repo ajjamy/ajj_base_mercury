@@ -75,6 +75,8 @@ props:
         - "128"
       examples:
         - "48"
+      default:
+        - "0"
     margin_block_end:
       type: string
       title: Margin bottom
@@ -89,6 +91,8 @@ props:
         - "128"
       examples:
         - "48"
+      default:
+        - "0"
     padding_block_start:
       type: string
       title: Padding top
