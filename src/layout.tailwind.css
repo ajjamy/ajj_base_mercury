@@ -1,29 +1,42 @@
 @layer components {
-  .layout-content {
-    @apply mx-auto w-full max-w-5xl px-4 lg:grid lg:gap-8;
-  }
-
-  .layout-content:has(.layout-sidebar-first) {
-    @apply lg:grid-cols-[16rem_1fr];
-  }
-
-  .layout-content:has(.layout-sidebar-second) {
-    @apply lg:grid-cols-[1fr_16rem];
-  }
-
-  .layout-content:has(.layout-sidebar-first):has(.layout-sidebar-second) {
-    @apply lg:grid-cols-[16rem_1fr_16rem];
-  }
-
-  .layout-main {
-    @apply min-w-0 max-w-5xl;
-  }
-
-  .footer {
-
-    .site-footer {
-        
+    .layout-content {
+        @apply mx-auto w-full max-w-5xl px-4 lg:grid lg:gap-8;
     }
 
-  }
+    .layout-content:has(.layout-sidebar-first) {
+        @apply lg:grid-cols-[16rem_1fr];
+    }
+
+    .layout-content:has(.layout-sidebar-second) {
+        @apply lg:grid-cols-[1fr_16rem];
+    }
+
+    .layout-content:has(.layout-sidebar-first):has(.layout-sidebar-second) {
+        @apply lg:grid-cols-[16rem_1fr_16rem];
+    }
+
+    .layout-main {
+        @apply min-w-0 max-w-5xl;
+    }
+
+    .footer {
+
+        .site-footer {
+            
+        }
+    }
+
+    .canvas-page {
+        /* same regular page branding size */
+        #page-marketing+section,
+        section:last-of-type { padding: 1rem 0 0 0; }
+        
+        .branding { @apply h-8; }
+
+        section:last-of-type .font-body  { 
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }  
+    }
 }
