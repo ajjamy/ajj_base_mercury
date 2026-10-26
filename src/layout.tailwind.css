@@ -27,7 +27,7 @@
     }
 
     .canvas-page {
-        /* same regular page branding size */
+        /* Marketing page "header" and "footer" styles */
         #page-marketing+section,
         section:last-of-type { padding: 1rem 0 0 0; }
         

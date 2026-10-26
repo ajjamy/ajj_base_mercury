@@ -194,4 +194,18 @@ final class ThemeHooks {
     }
   }
 
+  /**
+   * Implements hook_theme_suggestions_views_view_unformatted_alter().
+   *
+   * Renders a view as a carousel when "views-carousel" is in the display's
+   * CSS class setting.
+   */
+  #[Hook('theme_suggestions_views_view_unformatted_alter')]
+  public function themeSuggestionsViewsViewUnformattedAlter(array &$suggestions, array $variables): void {
+    $css_class = $variables['view']->display_handler->getOption('css_class') ?? '';
+    if (in_array('views-carousel', explode(' ', $css_class), TRUE)) {
+      $suggestions[] = 'views_view_unformatted__carousel';
+    }
+  }
+
 }

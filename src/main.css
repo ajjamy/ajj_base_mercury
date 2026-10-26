@@ -8,8 +8,8 @@
 @import "../components/mega-menu-wrapper/mega-menu-wrapper.tailwind.css";
 @import "../components/mega-menu/mega-menu.tailwind.css";
 @import "../components/section/section.tailwind.css";
+@import "../components/carousel/carousel.tailwind.css";
 @import "./layout.tailwind.css";
-
 
 @theme inline {
   --color-background: var(--background);
@@ -124,23 +124,28 @@
     @apply font-sans text-5xl leading-none font-semibold md:text-6xl lg:text-7xl 2xl:text-8xl;
   }
 
-  h2, .h2 {
+  h2,
+  .h2 {
     @apply font-sans text-3xl font-semibold md:text-4xl lg:text-5xl 2xl:text-6xl;
   }
 
-  h3, .h3 {
+  h3,
+  .h3 {
     @apply font-sans text-2xl font-semibold xl:text-3xl;
   }
 
-  h4, .h4 {
+  h4,
+  .h4 {
     @apply font-sans text-xl font-semibold md:text-2xl;
   }
 
-  h5, .h5 {
+  h5,
+  .h5 {
     @apply font-sans text-lg font-semibold md:text-xl;
   }
 
-  h6, .h6 {
+  h6,
+  .h6 {
     @apply font-sans text-base font-semibold md:text-lg;
   }
 
@@ -190,7 +195,6 @@
 }
 
 @layer components {
-
   .webform-submission-form {
     .visually-hidden {
       @apply sr-only;
