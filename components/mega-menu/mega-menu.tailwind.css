@@ -31,7 +31,7 @@
             @apply block w-full p-5 text-foreground absolute 
             top-full left-0 z-50 hidden 
             max-w-[calc(100vw-2rem)] shadow-lg;
-            background-color: var(--secondary);
+            background-color: var(--muted);
         }
     }
 
@@ -126,7 +126,10 @@
     }
 
     /* Mega Menu with Extra content */
-    .mega-menu-content { @apply grid gap-6; }
+    .mega-menu-content { 
+        @apply grid gap-6; 
+    
+    }
 
     .mega-menu-content__columns {
         @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-4;

@@ -4,10 +4,12 @@
     transition: border-bottom-color ;
 
         .image--wrapper {
-            border-bottom: 5px solid transparent;
+            
             transition-duration: .3s;
         
-            &:hover { border-bottom-color: var(--primary); }
+            &:hover { 
+                box-shadow: var(--shadow-button-hover);
+            }
 
         }
     }
