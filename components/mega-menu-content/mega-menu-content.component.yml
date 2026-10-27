@@ -12,6 +12,13 @@ props:
       type: string
       title: Content ID
       pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+    featured_position:
+      type: string
+      title: Featured content position
+      enum:
+        - left
+        - right
+      default: right
     columns:
       type: array
       title: Link groups

@@ -31,6 +31,13 @@ props:
               - mega
               - simple
             default: mega
+          featured_position:
+            type: string
+            title: Featured content position
+            enum:
+              - left
+              - right
+            default: right
           columns:
             type: array
             title: Dropdown columns

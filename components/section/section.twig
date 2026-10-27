@@ -115,7 +115,13 @@
   })
 %}
 
-<section class="section {{ section_classes }} cq-full">
+{% set section_attributes = create_attribute() %}
+{# clean_class (not clean_id) so the ID stays exactly as typed, without a uniqueness suffix. #}
+{% if section_id is not empty %}
+  {% set section_attributes = section_attributes.setAttribute('id', section_id|clean_class) %}
+{% endif %}
+
+<section {{ section_attributes }} class="section {{ section_classes }} cq-full">
   {# if there is background media #}
   {% if background_media is not empty and background_media.src is not empty %}
     {% block background_media_block %}

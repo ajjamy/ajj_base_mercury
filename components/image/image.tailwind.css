@@ -1,20 +1,16 @@
 @layer components {
+  figure.image {
+    transition: border-bottom-color;
 
-   figure.image {
-    transition: border-bottom-color ;
+    .image--wrapper {
+      transition-duration: 0.3s;
 
-        .image--wrapper {
-            
-            transition-duration: .3s;
-        
-            &:hover { 
-                box-shadow: var(--shadow-button-hover);
-            }
-
-        }
+      &:hover {
+        box-shadow: var(--shadow-button-hover);
+      }
     }
+  }
 
-    figcaption {
-
-    }
+  figcaption {
+  }
 }

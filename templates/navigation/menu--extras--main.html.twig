@@ -22,7 +22,8 @@
  *
  * Top-level items using the "Mega menu" view mode pass their rendered content
  * to the mega-menu-content "featured" slot. See
- * menu-link-content--main--menu-level-0--mega-menu.html.twig.
+ * menu-link-content--main--menu-level-0--mega-menu.html.twig. The item's
+ * field_orientation (left or right) sets which side the featured content is on.
  */
 #}
 
@@ -105,7 +106,12 @@
     {% endfor %}
   {% endif %}
 
-  {% set has_featured = is_mega and (not item.entity.field_mega_media.isEmpty() or not item.entity.field_mega_featured.isEmpty()) %}
+  {% set has_featured_content = not item.entity.field_mega_media.isEmpty()
+    or not item.entity.field_mega_featured.isEmpty()
+    or not item.entity.field_mega_featured_block.isEmpty()
+  %}
+  {% set has_featured = is_mega and has_featured_content %}
+  {% set featured_position = is_mega and item.entity.field_orientation.value == 'left' ? 'left' : 'right' %}
 
   {% set mega_items =
     mega_items|merge(
@@ -116,6 +122,7 @@
           href: item_href|trim,
           columns: columns,
           featured: has_featured ? item.content : null,
+          featured_position: featured_position,
           variant: is_mega ? 'mega' : 'simple'
         }
       ]

@@ -1,4 +1,23 @@
-<div class="mega-menu-content" id="{{ id }}">
+{% set content_variants =
+  html_cva(
+    base: 'mega-menu-content',
+    variants: {
+      featuredPosition: {
+        left: 'mega-menu-content--featured-left',
+        right: ''
+      }
+    }
+  )
+%}
+
+<div
+  class="{{
+  content_variants.apply({
+    featuredPosition: featured_position|default('right')
+  })
+  }}"
+  id="{{ id }}"
+>
   <div class="mega-menu-content__columns">
     {% for column in columns %}
       <section class="mega-menu-content__column">

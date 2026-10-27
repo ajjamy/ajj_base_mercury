@@ -9,6 +9,10 @@ props:
     - mobile_columns
     - width
   properties:
+    section_id:
+      type: string
+      title: ID
+      description: "Optional. A unique ID for styling or anchor links, e.g. featured-services. Converted to lowercase, with spaces and underscores changed to hyphens."
     width:
       type: string
       title: Section width
