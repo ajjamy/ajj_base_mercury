@@ -73,20 +73,21 @@
       </div>
     {% endif %}
 
-        {{ title }}
-        {{ page.content }}
-      
+    {{ title }}
+    {{ page.content }}
   </main>
 
   {% if site_branding %}
     <footer role="contentinfo">
-      <div class="container *:mx-auto flex my-2 w-full md:my-3 2xl:my-4px-4 py-8">
+      <div class="2xl:my-4px-4 container my-2 flex w-full py-8 *:mx-auto md:my-3">
         <div class="navbar--logo">
           {{ site_branding }}
         </div>
 
         <div>
-          <p>Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).</p>
+          <p>
+            Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).
+          </p>
           {{ page.footer.ajj_base_mercury_footercopyrightlegal }}
         </div>
       </div>

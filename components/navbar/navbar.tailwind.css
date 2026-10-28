@@ -2,7 +2,6 @@
   .layout-container > header[role="banner"] {
     box-shadow: var(--shadow-lg);
   }
-
 }
 
 /* Modal state - prevents body scroll when mobile menu is open */
@@ -15,86 +14,91 @@
 
 /* External region styling */
 .region-header {
+  padding: 0 1rem;
   .navbar--modal-top {
-    @apply px-4;
+    padding: 0 2rem;
   }
 }
 
 .navbar {
-    @apply relative z-[500] mx-auto flex justify-between p-2 px-4 nav:flex-col nav:py-4 lg:flex-row;
+  @apply relative z-[500] mx-auto flex justify-between p-2 px-4 nav:flex-col nav:py-4 lg:flex-row;
+
+  @media screen and (min-width: 62rem) {
+    padding: 0;
+  }
+
+  .navbar--logo {
+    a {
+      min-width: 200px;
+      align-items: center;
+    }
 
     @media screen and (min-width: 62rem) {
-        padding: 0;
+      margin-top: 1rem;
+    }
+  }
+
+  .navbar--logo,
+  .navbar--modal-logo {
+    .branding {
+      @apply h-8 nav:h-10;
+      height: 50px;
+      margin-right: 0.25rem;
+
+      @media screen and (min-width: 62rem) {
+        padding-bottom: 0.75rem;
+      }
+
+      svg,
+      img[src$=".svg"] {
+        @apply h-auto! max-h-full;
+      }
     }
 
-    .navbar--logo {
-        @apply self-center nav:self-start lg:self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
-        width: 4rem;
-
-        @media screen and (min-width: 62rem) { margin-top: 1rem; }
+    .site-name {
+      font-size: 14px;
     }
+  }
 
-    .navbar--menu {
-        @apply fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 nav:static nav:flex nav:h-auto nav:w-full lg:w-auto nav:flex-row nav:items-center nav:bg-transparent nav:pb-0;
-    }
+  .navbar--menu {
+    @apply fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 nav:static nav:flex nav:h-auto nav:w-full nav:flex-row nav:items-center nav:bg-transparent nav:pb-0 lg:w-auto;
+  }
 
-    .navbar--modal-top {
-        @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 px-4  nav:hidden;
+  .navbar--modal-top {
+    @apply relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 px-8 nav:hidden;
+  }
 
+  .navbar--modal-logo {
+    @apply flex min-h-[44px] flex-1 flex-col items-start justify-center nav:hidden [&>div]:flex [&>div]:flex-row [&>div]:justify-center;
+  }
 
-    }
-
-    .navbar--modal-logo {
-        @apply flex min-h-[44px] flex-1 flex-col items-start justify-center nav:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center;
-    }
-
-    button.navbar--hide-menu {
-        @apply  flex w-[44px] flex-0 cursor-pointer items-center justify-center p-2 nav:hidden;
-        height: 100%;
-    }
-
-}
-
-.navbar--logo,
-.navbar--modal-logo {
-  .branding {
-    @apply h-8 nav:h-10;
-    height: 50px;
-
-    @media screen and (min-width: 62rem) {
-        padding-bottom: 1rem;
-
-    }
-
-    svg,
-    img[src$=".svg"] {
-      @apply h-auto! max-h-full;
-    }
+  button.navbar--hide-menu {
+    @apply flex w-[44px] flex-0 cursor-pointer items-center justify-center p-2 nav:hidden;
+    height: 100%;
   }
 }
 
 .navbar--dropdown-menu-wrapper {
-    @apply relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] nav:p-0 nav:after:content-none;
-    max-width: unset;
+  @apply relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] nav:p-0 nav:after:content-none;
+  max-width: unset;
+
+  @media screen and (min-width: 62rem) {
+    height: 100%;
+  }
+
+  .navbar--dropdown-menu {
+    width: 100%;
+    justify-content: flex-end;
 
     @media screen and (min-width: 62rem) {
+      height: 100%;
+
+      nav {
         height: 100%;
+      }
     }
-    
-    .navbar--dropdown-menu {
-        width: 100%;
-        justify-content: flex-end;
-
-        @media screen and (min-width: 62rem) {
-            height: 100%;
-
-            nav { height: 100%; }
-        }
-
-    }
-
+  }
 }
-
 
 /* Menu visibility toggle (controlled by JS) */
 .navbar--menu:not(.navbar--menu--open) {
@@ -103,38 +107,36 @@
 
 /* Child component styling that can't be moved to Twig */
 .navbar--links {
+  @apply col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 nav:w-auto nav:flex-row;
 
-    @apply col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 nav:w-auto nav:flex-row;
-
-    .button.button {
-      @apply mx-8 w-[calc(100%-var(--spacing)*16)] nav:m-auto nav:w-auto;
-    }
+  .button.button {
+    @apply mx-8 w-[calc(100%-var(--spacing)*16)] nav:m-auto nav:w-auto;
+  }
 }
 
 .navbar--dropdown-menu {
-    @apply not-first:flex flex-col items-stretch justify-start gap-2 nav:flex-row max-h-full overflow-auto nav:overflow-visible;
+  @apply max-h-full flex-col items-stretch justify-start gap-2 overflow-auto not-first:flex nav:flex-row nav:overflow-visible;
 
-    .dropdown-menu {
-      @apply w-full nav:w-auto;
-    }
+  .dropdown-menu {
+    @apply w-full nav:w-auto;
+  }
 }
 
 .navbar--hamburger-container {
-    @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center nav:hidden;
+  @apply flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center nav:hidden;
 }
 
 .navbar--dropdown-menu-wrapper > :last-child {
   @apply pb-24 nav:pb-0;
 }
 
-
 /* Main menu styles */
 .main-menu-container {
-    @apply  flex;
-    width: 100%;
-    justify-content: flex-end;
+  @apply flex;
+  width: 100%;
+  justify-content: flex-end;
 
-    @media screen and (min-width: 62rem) {
-        height: 100%;
-    }
+  @media screen and (min-width: 62rem) {
+    height: 100%;
+  }
 }

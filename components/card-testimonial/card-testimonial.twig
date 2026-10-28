@@ -78,18 +78,20 @@
     </p>
 
     <footer class="{{ footer_classes }}">
-      <div class="aspect-square w-[60px] overflow-hidden rounded-full">
-        {% block media %}
-          {% include 'canvas:image' ignore missing with {
-            src: media.src,
-            alt: media.alt,
-            class: 'object-cover w-full h-full',
-            width: media.width,
-            height: media.height,
-            sizes: '60px'
-          } only %}
-        {% endblock %}
-      </div>
+      {% if media.src is not empty %}
+        <div class="aspect-square w-[60px] shrink-0 overflow-hidden rounded-full">
+          {% block media %}
+            {% include 'canvas:image' ignore missing with {
+              src: media.src,
+              alt: media.alt,
+              class: 'object-cover w-full h-full',
+              width: media.width,
+              height: media.height,
+              sizes: '60px'
+            } only %}
+          {% endblock %}
+        </div>
+      {% endif %}
       <div>
         {% set citation = cite_name %}
         {{ citation }}
