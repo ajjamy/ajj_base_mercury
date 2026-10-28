@@ -10,6 +10,7 @@
         href: item.url|default(item.href|default('')),
         has_dropdown: has_dropdown,
         variant: item.variant|default('mega'),
+        mobile_only: item.mobile_only|default(false),
         item_data: item
       } only
     %}
@@ -21,6 +22,7 @@
               {
                 columns: item_data.columns|default([]),
                 featured: item_data.featured,
+                featured_position: item_data.featured_position|default('right'),
                 id: id ~ '-content'
               },
               with_context: false

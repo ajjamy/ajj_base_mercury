@@ -86,8 +86,6 @@ props:
       type: string
       title: Icon name
       description: 'Optional. The ID of an icon from the <a href="https://phosphoricons.com" target="_blank">Phosphor Icons</a> library. Leave empty for no icon.'
-      examples:
-        - "rocket"
     icon_layout:
       type: string
       title: Icon layout

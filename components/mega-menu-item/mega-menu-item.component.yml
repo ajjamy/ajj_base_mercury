@@ -30,6 +30,10 @@ props:
         - mega
         - simple
       default: mega
+    mobile_only:
+      type: boolean
+      title: Only show below the nav breakpoint
+      default: false
 
 slots:
   dropdown:

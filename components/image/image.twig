@@ -33,15 +33,15 @@
   })
 %}
 
-<figure>
-  <div class="{{ container_classes }}">
+<figure class="image">
+  <div class="{{ container_classes }} image--wrapper">
     {% block media %}
       {% if url is not empty %}
         <a href="{{ url }}" class="group">
           {% include 'canvas:image' ignore missing with {
             src: media.src,
             alt: media.alt,
-            class: 'object-cover w-full h-full group-hover:scale-105 duration-300',
+            class: 'object-cover w-full h-full duration-200',
             width: media.width,
             height: media.height,
             loading: 'eager'

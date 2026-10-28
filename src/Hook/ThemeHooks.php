@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\ajj_base_mercury\Hook;
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Breadcrumb\ChainBreadcrumbBuilderInterface;
 use Drupal\Core\Controller\TitleResolverInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -191,6 +192,64 @@ final class ThemeHooks {
     $node = $this->routeMatch->getParameter('node');
     if ($node instanceof NodeInterface) {
       $suggestions[] = 'page__node__' . $node->bundle();
+    }
+  }
+
+  /**
+   * Implements template_preprocess_menu_link_content().
+   *
+   * Provides the mega menu's featured block fields individually, so
+   * menu-link-content--main--menu-level-0--mega-menu.html.twig can lay them
+   * out.
+   */
+  #[Hook('preprocess_menu_link_content')]
+  public function preprocessMenuLinkContent(array &$variables): void {
+    $link = $variables['menu_link_content'] ?? NULL;
+    if (!$link || !$link->hasField('field_mega_featured_block')) {
+      return;
+    }
+
+    $block = $link->get('field_mega_featured_block')->entity;
+    if (!$block) {
+      return;
+    }
+
+    // Rebuild the menu when the block is edited.
+    $cacheability = CacheableMetadata::createFromObject($block);
+    $access = $block->access('view', NULL, TRUE);
+    $cacheability->addCacheableDependency($access);
+    $cacheability->applyTo($variables);
+
+    if (!$access->isAllowed()) {
+      return;
+    }
+
+    $hidden_label = ['label' => 'hidden'];
+    $link_item = $block->get('field_block_link')->first();
+
+    $variables['featured_block'] = [
+      'media' => $block->get('field_block_media')->view($hidden_label + [
+        'type' => 'entity_reference_entity_view',
+        'settings' => ['view_mode' => 'default'],
+      ]),
+      'heading' => $block->get('field_heading')->value,
+      'body' => $block->get('body')->view($hidden_label),
+      'link_url' => $link_item && !$link_item->isEmpty() ? $link_item->getUrl()->toString() : NULL,
+      'link_title' => $link_item?->title,
+    ];
+  }
+
+  /**
+   * Implements hook_theme_suggestions_views_view_unformatted_alter().
+   *
+   * Renders a view as a carousel when "views-carousel" is in the display's
+   * CSS class setting.
+   */
+  #[Hook('theme_suggestions_views_view_unformatted_alter')]
+  public function themeSuggestionsViewsViewUnformattedAlter(array &$suggestions, array $variables): void {
+    $css_class = $variables['view']->display_handler->getOption('css_class') ?? '';
+    if (in_array('views-carousel', explode(' ', $css_class), TRUE)) {
+      $suggestions[] = 'views_view_unformatted__carousel';
     }
   }
 

@@ -31,6 +31,17 @@ props:
               - mega
               - simple
             default: mega
+          featured_position:
+            type: string
+            title: Featured content position
+            enum:
+              - left
+              - right
+            default: right
+          mobile_only:
+            type: boolean
+            title: Only show below the nav breakpoint
+            default: false
           columns:
             type: array
             title: Dropdown columns
@@ -40,6 +51,10 @@ props:
                 heading:
                   type: string
                   title: Column heading
+                  mobile_only:
+                    type: boolean
+                    title: Only show below the nav breakpoint
+                    default: false
                 links:
                   type: array
                   title: Column links
@@ -56,6 +71,10 @@ props:
                         type: string
                         title: Link URL
                         format: uri-reference
+                      mobile_only:
+                        type: boolean
+                        title: Only show below the nav breakpoint
+                        default: false
 
 slots:
   menu_content:

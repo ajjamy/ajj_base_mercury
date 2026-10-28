@@ -1,0 +1,48 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Carousel
+description: Shows one slide at a time with a fade transition. Add image cards, testimonial cards, or a view to the slides slot.
+group: Layout
+props:
+  type: object
+  required:
+    - label
+  properties:
+    label:
+      type: string
+      title: Accessible label
+      description: Describes the carousel for screen reader users, e.g. "Customer testimonials".
+      examples:
+        - "Featured stories"
+    autoplay:
+      type: boolean
+      title: Rotate automatically
+      description: Adds a pause button. Rotation never starts for visitors who prefer reduced motion.
+      default: false
+      examples:
+        - false
+    interval:
+      type: integer
+      title: Seconds per slide
+      description: Only used when rotating automatically.
+      minimum: 3
+      maximum: 20
+      default: 7
+      examples:
+        - 7
+    show_indicators:
+      type: boolean
+      title: Show slide indicators
+      default: true
+      examples:
+        - true
+slots:
+  slides:
+    title: Slides
+    description: Each item added here, or each row of a view placed here, becomes one slide.
+
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  js:
+    carousel.js: { attributes: { type: module } }

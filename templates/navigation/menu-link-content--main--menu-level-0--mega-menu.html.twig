@@ -10,12 +10,51 @@
  * - attributes: HTML attributes for the wrapper.
  * - content: The menu link fields, rendered by the view mode's display.
  * - menu_link_content: The menu_link_content entity.
+ * - featured_block: The fields of the block selected in
+ *   field_mega_featured_block: media, heading, body, link_url and link_title.
  *
  * content.children is intentionally not printed: child links are already
  * rendered as columns by the mega-menu component.
+ *
+ * @see \Drupal\ajj_base_mercury\Hook\ThemeHooks::preprocessMenuLinkContent()
  */
 #}
+{% set link_text = featured_block.link_title|default('Learn more'|t) %}
+
 <div {{ attributes.addClass('mega-menu-featured') }}>
   {{ content.field_mega_media }}
   {{ content.field_mega_featured }}
+
+  {% if featured_block %}
+    {% set featured_block_content %}
+      {% if featured_block.heading %}
+        <p class="mb-0 text-lg font-semibold">
+          {{ featured_block.heading }}
+        </p>
+      {% endif %}
+
+      {% if featured_block.media|render|trim %}
+        <div class="block__image overflow-hidden rounded-sm [&_img]:h-auto [&_img]:w-full">
+          {{ featured_block.media }}
+        </div>
+      {% endif %}
+
+      {% if featured_block.body|render|trim %}
+        <div class="text-sm [&_p:last-child]:mb-0">
+          {{ featured_block.body }}
+        </div>
+      {% endif %}
+    {% endset %}
+
+    {% if featured_block.link_url %}
+      <a href="{{ featured_block.link_url }}" class="mega-menu-featured-block group flex flex-col gap-3 no-underline">
+        {{ featured_block_content }}
+        <span class="font-normal underline underline-offset-2 group-hover:opacity-80">{{ link_text }}</span>
+      </a>
+    {% else %}
+      <div class="mega-menu-featured-block flex flex-col gap-3">
+        {{ featured_block_content }}
+      </div>
+    {% endif %}
+  {% endif %}
 </div>

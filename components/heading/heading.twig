@@ -76,16 +76,35 @@
       }
     },
     compound_variants: [
-      { layout: 'stacked', align: 'left', class: 'items-start' },
-      { layout: 'stacked', align: 'center', class: 'items-center' },
-      { layout: 'stacked', align: 'right', class: 'items-end' }
+      {
+        layout: 'stacked',
+        align: 'left',
+        class: 'items-start'
+      },
+      {
+        layout: 'stacked',
+        align: 'center',
+        class: 'items-center'
+      },
+      {
+        layout: 'stacked',
+        align: 'right',
+        class: 'items-end'
+      }
     ]
   )
 %}
 
 {% set heading_inner %}
   {% if has_icon %}
-    <span class="{{ icon_wrapper_variants.apply({ layout: heading_icon_layout, align: heading_align }) }}">
+    <span
+      class="{{
+      icon_wrapper_variants.apply({
+        layout: heading_icon_layout,
+        align: heading_align
+      })
+      }}"
+    >
       <span class="shrink-0" aria-hidden="true">
         {{
           icon(

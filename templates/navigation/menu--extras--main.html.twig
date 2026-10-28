@@ -22,7 +22,10 @@
  *
  * Top-level items using the "Mega menu" view mode pass their rendered content
  * to the mega-menu-content "featured" slot. See
- * menu-link-content--main--menu-level-0--mega-menu.html.twig.
+ * menu-link-content--main--menu-level-0--mega-menu.html.twig. The item's
+ * field_orientation (left or right) sets which side the featured content is on.
+ * Links with field_mobile_only set to "yes_only_for_mobile" are hidden from
+ * the nav breakpoint (62rem) up.
  */
 #}
 
@@ -47,7 +50,10 @@
           [
             {
               label: child.title,
-              href: child_href|trim
+              href: child_href|trim,
+              mobile_only: child.entity
+                and child.entity.hasField('field_mobile_only')
+                and child.entity.field_mobile_only.value == 'yes_only_for_mobile'
             }
           ]
         )
@@ -71,7 +77,8 @@
         {% set column_links = [
           {
             label: child.title,
-            href: child_href|trim
+            href: child_href|trim,
+            mobile_only: child.entity and child.entity.hasField('field_mobile_only') and child.entity.field_mobile_only.value == 'yes_only_for_mobile'
           }
         ] %}
       {% endif %}
@@ -85,7 +92,10 @@
             [
               {
                 label: grandchild.title,
-                href: grandchild_href|trim
+                href: grandchild_href|trim,
+                mobile_only: grandchild.entity
+                  and grandchild.entity.hasField('field_mobile_only')
+                  and grandchild.entity.field_mobile_only.value == 'yes_only_for_mobile'
               }
             ]
           )
@@ -97,7 +107,10 @@
           [
             {
               heading: child.title,
-              links: column_links
+              links: column_links,
+              mobile_only: child.entity
+                and child.entity.hasField('field_mobile_only')
+                and child.entity.field_mobile_only.value == 'yes_only_for_mobile'
             }
           ]
         )
@@ -105,7 +118,12 @@
     {% endfor %}
   {% endif %}
 
-  {% set has_featured = is_mega and (not item.entity.field_mega_media.isEmpty() or not item.entity.field_mega_featured.isEmpty()) %}
+  {% set has_featured_content = not item.entity.field_mega_media.isEmpty()
+    or not item.entity.field_mega_featured.isEmpty()
+    or not item.entity.field_mega_featured_block.isEmpty()
+  %}
+  {% set has_featured = is_mega and has_featured_content %}
+  {% set featured_position = is_mega and item.entity.field_orientation.value == 'left' ? 'left' : 'right' %}
 
   {% set mega_items =
     mega_items|merge(
@@ -116,7 +134,9 @@
           href: item_href|trim,
           columns: columns,
           featured: has_featured ? item.content : null,
-          variant: is_mega ? 'mega' : 'simple'
+          featured_position: featured_position,
+          variant: is_mega ? 'mega' : 'simple',
+          mobile_only: item.entity and item.entity.hasField('field_mobile_only') and item.entity.field_mobile_only.value == 'yes_only_for_mobile'
         }
       ]
     )
