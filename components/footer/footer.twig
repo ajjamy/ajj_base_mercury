@@ -7,21 +7,19 @@
 {% set footer_variants = html_cva(base: ['flex', 'flex-col']) %}
 
 {% set footer_top_variants =
-  html_cva(base: ['flex w-full flex-col justify-between gap-6 py-8 md:grid md:grid-cols-2 md:gap-6 [&_li]:text-lg', 'border-t border-border'])
+  html_cva(base: ['flex w-full flex-col justify-between gap-6 py-8'])
 %}
 
-{% set footer_first_col_variants = html_cva(base: ['flex', 'flex-col', 'gap-6', '[&_.branding]:h-8']) %}
+{% set footer_first_col_variants = html_cva(base: ['flex', 'flex-col', 'gap-6']) %}
 
 {% set footer_last_col_variants =
-  html_cva(base: ['flex flex-col gap-2 md:mx-0 md:ms-auto md:w-xs lg:w-md', '[&_form]:flex [&_form]:flex-row [&_form]:gap-2 md:[&_form]:items-end'])
+  html_cva(base: ['flex flex-col gap-2'])
 %}
 
 {% set footer_bottom_variants =
   html_cva(
     base: [
-      'flex w-full flex-col gap-2 py-3 [&_li]:text-xs [&_li]:md:text-sm [&_li]:xl:text-md',
-      'md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4',
-      'border-t border-border'
+      'footer__top flex w-full flex-col gap-2 py-3'
     ]
   )
 %}
@@ -32,7 +30,7 @@
     variants: {
       align: {
         left: '',
-        right: ['md:flex md:justify-end']
+        right: ['']
       }
     }
   )
