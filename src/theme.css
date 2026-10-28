@@ -9,22 +9,23 @@
  */
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.13 0.043 265.132);
-  --card: oklch(0.967 0.003 264.542);
-  --card-foreground: oklch(0.21 0.032 264.665);
-  --primary: #023654;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.9219 0 0);
-  --secondary-foreground: oklch(0.28 0.041 260.329);
-  --muted: oklch(0.967 0.003 264.542);
-  --muted-foreground: oklch(0.13 0.043 265.132);
-  --accent: oklch(0.932 0.032 255.585);
+  --background: #FAF9F7;
+  --foreground: #0E1E32; /* black */
+  --card: #F4F1EC; 
+  --card-foreground: #142B49;
+  --primary: #142B49; /* brand blue */
+  --primary-foreground: #FAF9F7;
+  --secondary: #D9D4BF; /* neutral- medium */
+  --secondary-foreground: #0E1E32;
+  --muted: #F4F1EC;
+  --muted-foreground: #0E1E32;
+  --accent: #BAD8FF;
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.872 0.009 258.338);
-  --input: oklch(0.872 0.009 258.338);
+  /* --border: oklch(0.872 0.009 258.338); */
+  --border: var(--primary);
+  --input: #FAF9F7;
 
   --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   --font-serif: "DM Serif Display", Georgia, Cambria, "Times New Roman", Times, serif;
