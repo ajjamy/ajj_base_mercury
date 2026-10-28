@@ -28,6 +28,10 @@ props:
           heading:
             type: string
             title: Group heading
+          mobile_only:
+            type: boolean
+            title: Only show below the nav breakpoint
+            default: false
           links:
             type: array
             title: Links
@@ -44,6 +48,10 @@ props:
                   type: string
                   title: Link URL
                   format: uri-reference
+                mobile_only:
+                  type: boolean
+                  title: Only show below the nav breakpoint
+                  default: false
 
 slots:
   featured:

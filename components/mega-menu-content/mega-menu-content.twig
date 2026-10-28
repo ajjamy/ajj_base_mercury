@@ -1,3 +1,8 @@
+{# Headed columns set the column count, up to four (featured content is separate).
+   Without any headings (e.g. simple dropdowns) the columns render as given. #}
+{% set headed_columns = columns|default([])|filter(column => column.heading is not empty) %}
+{% set visible_columns = headed_columns is not empty ? headed_columns|slice(0, 4) : columns|default([]) %}
+
 {% set content_variants =
   html_cva(
     base: 'mega-menu-content',
@@ -15,19 +20,19 @@
   content_variants.apply({
     featuredPosition: featured_position|default('right')
   })
-  }}"
+  }} mega-menu-content--cols-{{ max(visible_columns|length, 1) }}"
   id="{{ id }}"
 >
   <div class="mega-menu-content__columns">
-    {% for column in columns %}
-      <section class="mega-menu-content__column">
-        {% if column.heading %}
-          <h2 class="mega-menu-content__heading">{{ column.heading }}</h2>
-        {% endif %}
+    {% for column in visible_columns %}
+      <section class="mega-menu-content__column{{ column.mobile_only ? ' nav:hidden' }}">
+        <h2 class="h6 mega-menu-content__heading">{{ column.heading }}</h2>
         {% if column.links %}
           <ul class="mega-menu-content__links" role="list">
             {% for link_item in column.links %}
-              <li><a class="mega-menu-content__link" href="{{ link_item.href }}">{{ link_item.label }}</a></li>
+              <li class="{{ link_item.mobile_only ? 'nav:hidden' }}">
+                <a class="mega-menu-content__link" href="{{ link_item.href }}">{{ link_item.label }}</a>
+              </li>
             {% endfor %}
           </ul>
         {% endif %}

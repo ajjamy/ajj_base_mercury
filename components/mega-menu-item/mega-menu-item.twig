@@ -5,6 +5,10 @@
       variant: {
         mega: '',
         simple: 'mega-menu-item--simple'
+      },
+      mobileOnly: {
+        yes: 'nav:hidden',
+        no: ''
       }
     }
   )
@@ -25,7 +29,8 @@
 <li
   class="{{
   item_variants.apply({
-    variant: variant|default('mega')
+    variant: variant|default('mega'),
+    mobileOnly: mobile_only ? 'yes' : 'no'
   })
   }}"
   data-mega-menu-item
