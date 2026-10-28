@@ -12,6 +12,13 @@ props:
       type: string
       title: Content ID
       pattern: "^[A-Za-z][A-Za-z0-9_-]*$"
+    featured_position:
+      type: string
+      title: Featured content position
+      enum:
+        - left
+        - right
+      default: right
     columns:
       type: array
       title: Link groups
@@ -21,6 +28,10 @@ props:
           heading:
             type: string
             title: Group heading
+          mobile_only:
+            type: boolean
+            title: Only show below the nav breakpoint
+            default: false
           links:
             type: array
             title: Links
@@ -37,6 +48,10 @@ props:
                   type: string
                   title: Link URL
                   format: uri-reference
+                mobile_only:
+                  type: boolean
+                  title: Only show below the nav breakpoint
+                  default: false
 
 slots:
   featured:

@@ -1,0 +1,57 @@
+@layer components {
+  /* Without JS, slides simply stack. */
+  .carousel--track {
+    @apply flex flex-col gap-6;
+  }
+
+  /* With JS, every slide occupies the same grid cell so the carousel is as tall
+     as its tallest slide and never shifts layout between slides. */
+  .carousel--js .carousel--slides {
+    @apply grid gap-0;
+  }
+
+  .carousel--js .carousel--slide {
+    @apply invisible opacity-0;
+    grid-area: 1 / 1;
+  }
+
+  .carousel--js .carousel--slide-active {
+    @apply visible opacity-100;
+  }
+
+  /* Visibility switches after the fade out, so hidden slides drop out of the
+     accessibility tree only once they can no longer be seen. */
+  .carousel--animate .carousel--slide {
+    transition:
+      opacity 600ms ease,
+      visibility 0s linear 600ms;
+  }
+
+  .carousel--animate .carousel--slide-active {
+    transition:
+      opacity 600ms ease,
+      visibility 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel--animate .carousel--slide,
+    .carousel--animate .carousel--slide-active {
+      transition: none;
+    }
+  }
+
+  /* 24px hit area meets WCAG 2.5.8 Target Size (Minimum). */
+  .carousel--dot {
+    @apply flex size-6 cursor-pointer items-center justify-center rounded-full;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current;
+
+    &::after {
+      @apply size-2.5 rounded-full border-2 border-current transition-colors;
+      content: "";
+    }
+
+    &[aria-current="true"]::after {
+      @apply bg-current;
+    }
+  }
+}

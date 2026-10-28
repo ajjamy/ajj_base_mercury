@@ -8,11 +8,11 @@ props:
     - columns
     - mobile_columns
     - width
-    - margin_block_start
-    - margin_block_end
-    - padding_block_start
-    - padding_block_end
   properties:
+    section_id:
+      type: string
+      title: ID
+      description: "Optional. A unique ID for styling or anchor links, e.g. featured-services. Converted to lowercase, with spaces and underscores changed to hyphens."
     width:
       type: string
       title: Section width
@@ -22,9 +22,9 @@ props:
         - "80%"
         - "75%"
         - "50%"
-      default: "100%"
+      default: "80%"
       examples:
-        - "100%"
+        - "80%"
     columns:
       type: string
       title: Grid layout
@@ -61,54 +61,6 @@ props:
         - "3"
       examples:
         - "1"
-    margin_block_start:
-      type: string
-      title: Margin top
-      enum:
-        - "0"
-        - "8"
-        - "20"
-        - "32"
-        - "48"
-        - "64"
-        - "96"
-        - "128"
-      examples:
-        - "48"
-    margin_block_end:
-      type: string
-      title: Margin bottom
-      enum:
-        - "0"
-        - "8"
-        - "20"
-        - "32"
-        - "48"
-        - "64"
-        - "96"
-        - "128"
-      examples:
-        - "48"
-    padding_block_start:
-      type: string
-      title: Padding top
-      enum:
-        - "0"
-        - "16"
-        - "32"
-        - "64"
-      examples:
-        - "0"
-    padding_block_end:
-      type: string
-      title: Padding bottom
-      enum:
-        - "0"
-        - "16"
-        - "32"
-        - "64"
-      examples:
-        - "0"
     background_color:
       type: string
       title: Background color

@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Theme override to display a view's rows as a carousel.
+ *
+ * Used when "views-carousel" is added to the display's CSS class setting
+ * (Advanced > Other > CSS class), or for a view whose machine name is
+ * "carousel".
+ *
+ * Available variables:
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see \Drupal\ajj_base_mercury\Hook\ThemeHooks::themeSuggestionsViewsViewUnformattedAlter()
+ */
+#}
+{% embed 'ajj_base_mercury:carousel'
+  with {
+    label: view.getTitle()|default(view.storage.label()),
+    rows: rows,
+    default_row_class: default_row_class
+  } only
+%}
+  {% block slides %}
+    {% for row in rows %}
+      {% set row_classes = [default_row_class ? 'views-row'] %}
+      <div {{ row.attributes.addClass(row_classes) }}>
+        {{- row.content -}}
+      </div>
+    {% endfor %}
+  {% endblock %}
+{% endembed %}

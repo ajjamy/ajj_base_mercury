@@ -1,0 +1,91 @@
+{#
+  Carousel showing one slide at a time with a fade transition.
+
+  Each direct child of the slides slot becomes a slide. If a view is placed in
+  the slot, each of its rows becomes a slide instead. Without JavaScript (and in
+  the Canvas editor) all slides are shown stacked.
+#}
+{% set has_autoplay = autoplay ?? false %}
+{% set has_indicators = show_indicators ?? true %}
+
+{% set control_button =
+  [
+    'flex size-11 shrink-0 cursor-pointer items-center justify-center',
+    'rounded-full border border-current transition-colors',
+    'hover:bg-current/10',
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current'
+  ]|join(' ')
+%}
+
+<section class="carousel" aria-roledescription="carousel" aria-label="{{ label }}" data-interval="{{ interval|default(7) }}">
+  <div class="carousel--track">
+    {% block slides %}
+      <div class="rounded-md bg-muted p-12 text-center text-muted-foreground">
+        Slide 1
+      </div>
+      <div class="rounded-md bg-muted p-12 text-center text-muted-foreground">
+        Slide 2
+      </div>
+      <div class="rounded-md bg-muted p-12 text-center text-muted-foreground">
+        Slide 3
+      </div>
+    {% endblock %}
+  </div>
+
+  <div class="carousel--controls mt-6 flex items-center justify-center gap-4" hidden>
+    {% if has_autoplay %}
+      <button type="button" class="carousel--rotation {{ control_button }}" aria-label="{{ 'Stop automatic slide show'|t }}">
+        <span class="carousel--icon-pause">
+          {{
+            icon(
+              'phosphor',
+              'pause',
+              {
+                size: 20
+              }
+            )
+          }}
+        </span>
+        <span class="carousel--icon-play" hidden>
+          {{
+            icon(
+              'phosphor',
+              'play',
+              {
+                size: 20
+              }
+            )
+          }}
+        </span>
+      </button>
+    {% endif %}
+
+    <button type="button" class="carousel--prev {{ control_button }}" aria-label="{{ 'Previous slide'|t }}">
+      {{
+        icon(
+          'phosphor',
+          'caret-left',
+          {
+            size: 20
+          }
+        )
+      }}
+    </button>
+
+    {% if has_indicators %}
+      <div class="carousel--dots flex flex-wrap items-center justify-center gap-1"></div>
+    {% endif %}
+
+    <button type="button" class="carousel--next {{ control_button }}" aria-label="{{ 'Next slide'|t }}">
+      {{
+        icon(
+          'phosphor',
+          'caret-right',
+          {
+            size: 20
+          }
+        )
+      }}
+    </button>
+  </div>
+</section>

@@ -31,7 +31,7 @@ If you want to customize the Tailwind-generated CSS, install the development too
 
 If you modify CSS files or classes in a Twig template, run `npm run build` to rebuild the CSS. For development, you can use `npm run dev` to watch for changes and automatically rebuild the CSS.
 
-From theme root: 
+From theme root:
 `npm run s:tailwindcss -- --watch`
 
 ## Code Formatting
