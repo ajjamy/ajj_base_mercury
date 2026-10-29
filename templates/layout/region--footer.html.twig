@@ -8,28 +8,41 @@
 #}
 {% set classes = ['region', 'region-' ~ (region|clean_class)] %}
 <div {{ attributes.addClass(classes) }}>
-  {% embed 'ajj_base_mercury:footer' %}
-    {% block footer_first %}
-      {% if site_logo %}
-        <a href="{{ path('<front>') }}" class="inline-block" rel="home">
-          <div class="branding">
-            <img class="h-full w-auto" src="{{ site_logo }}" alt="{{ site_name }}" />
-          </div>
-        </a>
-      {% endif %}
-    {% endblock %}
-    {% block footer_utility_first %}
-      {% if elements.ajj_base_mercury_footer_menu %}
-        {{ elements.ajj_base_mercury_footer_menu }}
-      {% endif %}
-    {% endblock %}
-    {% block footer_utility_last %}
-      <p>
-        Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).
-      </p>
-      {% if elements.ajj_base_mercury_footercopyrightlegal %}
-        {{ elements.ajj_base_mercury_footercopyrightlegal }}
-      {% endif %}
-    {% endblock %}
-  {% endembed %}
+    {% embed 'ajj_base_mercury:footer' %}
+        {% block footer_first %}
+        {% if site_logo %}
+            <a href="{{ path('<front>') }}" class="inline-block" rel="home">
+            <div class="branding">
+                <img class="h-full w-auto" src="{{ site_logo }}" alt="{{ site_name }}" />
+            </div>
+            </a>
+        {% endif %}
+
+        {% if elements.ajj_base_mercury_footersocial %}
+            <div class="footer__social">
+                {{ elements.ajj_base_mercury_footersocial }}
+            </div>
+        {% endif %} 
+
+        {% if elements.ajj_base_mercury_footer_menu %}
+            <div class="footer__menu">
+                {{ elements.ajj_base_mercury_footer_menu }}
+            </div>
+        {% endif %}
+
+        {% endblock %}
+
+        {% block footer_utility_first %}
+            <div class="footer__accreditation">
+                <p>space for ACMi Accredited logo</p>
+            </div>
+        {% endblock %}
+
+        {% block footer_utility_last %}
+            <div class="footer__legal text-center">
+                <p>Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).<br>
+                No materials, including graphics, may be reused, modified, or reproduced without written permission.</p>
+            </div>
+        {% endblock %}
+    {% endembed %}
 </div>

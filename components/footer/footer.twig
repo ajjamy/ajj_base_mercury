@@ -7,7 +7,7 @@
 {% set footer_variants = html_cva(base: ['flex', 'flex-col']) %}
 
 {% set footer_top_variants =
-  html_cva(base: ['flex w-full flex-col justify-between gap-6 py-8'])
+  html_cva(base: ['footer__top flex w-full flex-col justify-between gap-6 py-8'])
 %}
 
 {% set footer_first_col_variants = html_cva(base: ['flex', 'flex-col', 'gap-6']) %}
@@ -19,7 +19,7 @@
 {% set footer_bottom_variants =
   html_cva(
     base: [
-      'footer__top flex w-full flex-col gap-2 py-3'
+      'footer__bottom flex w-full flex-col gap-2 py-3'
     ]
   )
 %}
@@ -39,6 +39,7 @@
 <section class="mx-auto px-4">
   <div class="{{ footer_variants.apply({}, additional_classes) }}">
     <div class="{{ footer_top_variants.apply({}) }}">
+    
       {% if block('footer_first') is defined %}
         <div class="{{ footer_first_col_variants.apply({}) }}">
           {% block footer_first %}
@@ -87,3 +88,14 @@
     </div>
   </div>
 </section>
+{# <ul>
+    <li>
+        <a href="https://www.facebook.com/AJJInc">facebook</a>
+    </li>
+    <li>
+        <a href="https://twitter.com/AJJInc">twitter</a>
+    </li>
+    <li>
+        <a href="https://www.linkedin.com/company/anthony-j.-jannetti-inc.">linkedin</a>
+    </li>
+</ul> #}
