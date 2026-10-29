@@ -20,6 +20,18 @@ props:
       enum: [1, 2, 3, 4, 5, 6]
       examples:
         - 2
+    heading_color:
+      type: string
+      title: Heading background color
+      enum:
+        - default
+        - accentWarm
+      meta:enum:
+        default: Default
+        accentWarm: Accent Orange
+      default: default
+      examples:
+        - default
     text:
       type: string
       title: Text

@@ -9,6 +9,7 @@
 @import "../components/mega-menu/mega-menu.tailwind.css";
 @import "../components/section/section.tailwind.css";
 @import "../components/carousel/carousel.tailwind.css";
+@import "../components/cta/cta.tailwind.css";
 @import "./layout.tailwind.css";
 
 @theme inline {
@@ -23,6 +24,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-warm: var(--accent-warm);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -193,16 +195,20 @@
     -ms-overflow-style: none; /* IE and Edge */
   }
 
-    .show-tablet {
-        display: none;
-        @media screen and (min-width: 62rem) { display: block; }
+  .show-tablet {
+    display: none;
+    @media screen and (min-width: 62rem) {
+      display: block;
     }
+  }
 
-    .hide-tablet {
-        display: block;
-        
-        @media screen and (min-width: 62rem) { display: none; }
+  .hide-tablet {
+    display: block;
+
+    @media screen and (min-width: 62rem) {
+      display: none;
     }
+  }
 }
 
 @layer components {
@@ -345,6 +351,18 @@
   /* Set the container query context for full-width elements. */
   .layout-content {
     container-type: inline-size;
+  }
+
+  .bg-gradient-light {
+    background-image: var(--gradient-light-transparent-mobile);
+
+    @media screen and (min-width: 62rem) {
+        background-image: var(--gradient-light-transparent);
+    }
+  }
+
+  .bg-accent-warm {
+    background: var(--accent-warm);
   }
 
   /* Set a fixed width on the main content container. */

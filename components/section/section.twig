@@ -19,6 +19,7 @@
         secondary: 'text-secondary-foreground',
         accent: 'text-accent-foreground',
         muted: 'text-muted-foreground',
+        'gradient-light': 'text-foreground',
         noColor: 'text-foreground'
       }
     }
@@ -46,10 +47,11 @@
         secondary: 'bg-secondary',
         accent: 'bg-accent',
         muted: 'bg-muted',
-        noColor: 'bg-none'
+        noColor: 'bg-none',
+        'gradient-light': 'bg-gradient-light'
       },
       backgroundImage: {
-        yes: 'opacity-50',
+        yes: 'opacity-100',
         no: ''
       }
     }
@@ -125,7 +127,7 @@
   {# if there is background media #}
   {% if background_media is not empty and background_media.src is not empty %}
     {% block background_media_block %}
-      <div class="absolute inset-0 z-[-1]">
+      <div class="has-bg-img absolute inset-0 z-[-1]">
         {% include 'canvas:image' ignore missing with {
           src: background_media.src,
           alt: background_media.alt,

@@ -18,6 +18,7 @@
   --secondary: oklch(0.9219 0 0);
   --secondary-foreground: oklch(0.28 0.041 260.329);
   --muted: oklch(0.967 0.003 264.542);
+  /* --muted: #D9D4BF; */
   --muted-foreground: oklch(0.13 0.043 265.132);
   --accent: oklch(0.932 0.032 255.585);
   --accent-foreground: var(--foreground);
@@ -25,6 +26,24 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.872 0.009 258.338);
   --input: oklch(0.872 0.009 258.338);
+
+  --gradient-light-transparent: linear-gradient(
+    45deg,
+    rgba(245, 237, 224, 1) 0%,
+    rgba(245, 237, 224, 0.9) 27%,
+    rgba(245, 237, 224, 0.4) 60%,
+    rgba(245, 237, 224, 0.1) 100%
+  );
+
+  --gradient-light-transparent-mobile: linear-gradient(
+    45deg,
+    rgba(245, 237, 224, 1) 0%,
+    rgba(245, 237, 224, 0.9) 40%,
+    rgba(245, 237, 224, 0.4) 65%,
+    rgba(245, 237, 224, 0) 100%
+  );
+
+  --accent-warm: #ff7949;
 
   --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   --font-serif: "DM Serif Display", Georgia, Cambria, "Times New Roman", Times, serif;

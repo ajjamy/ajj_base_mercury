@@ -1,6 +1,7 @@
 {% set cta_text_align = text_align|default('center') %}
 {% set background_color = background_color|default('noColor') %}
 {% set cta_overlay_opacity = overlay_opacity|default('20%') %}
+{% set cta_heading_color = heading_color|default('default') %}
 
 {% set cta_variants =
   html_cva(
@@ -13,6 +14,19 @@
         muted: 'bg-muted text-muted-foreground',
         inverted: 'bg-foreground text-background',
         noColor: 'bg-none text-foreground'
+      }
+    }
+  )
+%}
+
+{# Important modifier overrides the heading component's text-inherit. #}
+{% set cta_heading_variants =
+  html_cva(
+    base: ['max-w-3xl'],
+    variants: {
+      headingColor: {
+        default: '',
+        accentWarm: 'bg-accent-warm px-4 py-4 text-foreground!'
       }
     }
   )
@@ -35,7 +49,7 @@
 
 {% set cta_content_variants =
   html_cva(
-    base: ['relative', 'flex flex-col justify-center', 'min-h-80', 'gap-6 lg:gap-8', 'py-[90px] lg:py-[115px] xl:py-[140px]'],
+    base: ['cta__wrapper relative', 'flex flex-col justify-center', 'min-h-80'],
     variants: {
       textAlign: {
         left: ['text-left'],
@@ -106,13 +120,15 @@
           align: cta_text_align,
           text_color: 'default',
           url: '',
-          heading_classes: 'max-w-3xl',
+          heading_classes: cta_heading_variants.apply({
+            headingColor: cta_heading_color
+          }),
           text_size: 'heading-responsive-7xl'
         },
         with_context: false
       )
     }}
-    <p class="max-w-2xl text-xl font-normal">
+    <p class="cta__text">
       {{ text }}
     </p>
     {% if block('actions') is defined %}

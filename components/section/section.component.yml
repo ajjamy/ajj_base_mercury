@@ -69,11 +69,13 @@ props:
         - secondary
         - accent
         - muted
+        - gradient-light
       meta:enum:
         primary: Primary
         secondary: Secondary
         accent: Accent
         muted: Muted
+        gradient-light: Gradient Light
     background_media:
       $ref: json-schema-definitions://canvas.module/image
       title: Background image
