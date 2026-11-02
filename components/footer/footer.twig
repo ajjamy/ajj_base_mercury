@@ -6,14 +6,17 @@
 
 {% set footer_variants = html_cva(base: ['flex', 'flex-col']) %}
 
+{% set footer_header_variants = html_cva(base: ['footer__header flex w-full flex-col pt-8']) %}
+
 {% set footer_top_variants =
-  html_cva(base: ['footer__top flex w-full flex-col justify-between gap-6 py-8'])
+  html_cva(base: ['footer__top flex w-full flex-col justify-between gap-6 py-8 md:grid md:grid-cols-2 md:gap-6'])
 %}
 
-{% set footer_first_col_variants = html_cva(base: ['flex', 'flex-col', 'gap-6']) %}
+
+{% set footer_first_col_variants = html_cva(base: ['col-first flex', 'flex-col', 'gap-6']) %}
 
 {% set footer_last_col_variants =
-  html_cva(base: ['flex flex-col gap-2'])
+  html_cva(base: ['col-last flex flex-col gap-2'])
 %}
 
 {% set footer_bottom_variants =
@@ -36,8 +39,16 @@
   )
 %}
 
-<section class="mx-auto px-4">
+<section class="container mx-auto px-4">
   <div class="{{ footer_variants.apply({}, additional_classes) }}">
+    {% if block('footer_header') is defined %}
+      <div class="{{ footer_header_variants.apply({}) }}">
+        {% block footer_header %}
+          {# Slot for components. #}
+        {% endblock %}
+      </div>
+    {% endif %}
+
     <div class="{{ footer_top_variants.apply({}) }}">
     
       {% if block('footer_first') is defined %}
@@ -88,14 +99,3 @@
     </div>
   </div>
 </section>
-{# <ul>
-    <li>
-        <a href="https://www.facebook.com/AJJInc">facebook</a>
-    </li>
-    <li>
-        <a href="https://twitter.com/AJJInc">twitter</a>
-    </li>
-    <li>
-        <a href="https://www.linkedin.com/company/anthony-j.-jannetti-inc.">linkedin</a>
-    </li>
-</ul> #}
