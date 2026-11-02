@@ -61,7 +61,7 @@
                             aria-label="{{ 'Follow us on @platform'|t({'@platform': link.label}) }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="social-menu--icon align-center flex aspect-square text-3xl opacity-60 hover:opacity-100"
+                            class="social-menu--icon flex aspect-square text-3xl opacity-60 hover:opacity-100"
                         >
                             {% if link.logo_url %}
                                 <img src="{{ link.logo_url }}" alt="" width="32" height="32" />
@@ -76,9 +76,10 @@
             {% endif %}
          {% endblock %}
 
+        
         {# bottom rows #}
         {% block footer_utility_first %}
-            <div class="footer__legal text-center">
+            <div class="footer__legal pb-5 text-center">
                 <p>Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).<br>
                 No materials, including graphics, may be reused, modified, or reproduced without written permission.</p>
             </div>

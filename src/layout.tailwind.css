@@ -20,11 +20,11 @@
   }
 
     footer.site-footer {
+        background-color: var(--color-secondary);
 
         .footer__container {
             @apply @container mx-auto lg:max-w-8/10;
         }
-
 
         .footer__header {
             @apply  mx-auto lg:max-w-8/10;
@@ -50,45 +50,62 @@
             }
         }
 
+        .footer__top {
+            @apply md:grid md:grid-cols-2 md:gap-6 mx-auto lg:max-w-8/10;
+        }
+
         .footer__utility,
         .footer__menu,
         .footer__social {
             display: inline-flex;
-            justify-content: flex-end;
-        }
+            justify-content: center;
 
-        .footer__top {
-            @apply md:grid md:grid-cols-2 md:gap-6 mx-auto lg:max-w-8/10;
+            @media screen and (min-width: 768px) { justify-content: flex-end; }
+
+            .social-menu--icon {
+                padding: 10px;
+                border: 1px solid transparent;
+
+                &:hover { border-color: var(--primary); }
+            }
         }
+        .footer__phone a:hover,
+        .footer__email a:hover { text-decoration: underline; }
 
         .footer__mailing-address { margin-bottom: 1rem; }
 
         .footer__bottom {
             @apply md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4;
         }
+        .site-footer--bottom-col:has(.footer__accreditation) { background-color: var( --background); }
 
         .footer__accreditation {
-            max-width: 45%; /* fits 2 current logos */
+            width: 80%;
             margin: auto;
 
-            .footer-extras--item div {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-                max-height: 100px;
-                width: auto;
-                filter: grayscale(100%);
-                transition:all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-
-                &:hover { filter: grayscale(0%); }
-
-                img { 
-                    height: 100%;
-                    width: auto;
-                }
+            @media screen and (min-width: 768px) {
+                max-width: 45%; /* fits 2 current logos */
             }
-           
+        }
+
+        .footer-extras--item div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            max-height: 80px;
+            width: auto;
+            filter: grayscale(100%);
+            transition:all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+            &:hover { filter: grayscale(0%); }
+            
+            @media screen and (min-width: 768px) { padding: 1rem; }
+
+            img { 
+                height: 100%;
+                width: auto;
+            }
         }
     }
 }

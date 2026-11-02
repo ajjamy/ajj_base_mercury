@@ -22,7 +22,7 @@
 {% set footer_bottom_variants =
   html_cva(
     base: [
-      'footer__bottom flex w-full flex-col gap-2 py-3'
+      'footer__bottom flex w-full flex-col gap-2 pt-3 pb-0'
     ]
   )
 %}
@@ -67,7 +67,8 @@
         </div>
       {% endif %}
     </div>
-
+</section>
+<section>
     <div class="{{ footer_bottom_variants.apply({}) }}">
       {% if block('footer_utility_first') is defined %}
         <div
