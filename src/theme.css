@@ -20,6 +20,7 @@
   --muted: #F4F1EC;
   --muted-foreground: #0E1E32;
   --accent: #BAD8FF;
+  --accent-warm: #FF7949;
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1 0 0);
