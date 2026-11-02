@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme override for footer_extras custom blocks.
+ *
+ * Displays up to four images (field_block_media) in a single row.
+ *
+ * Available variables:
+ * - images: The original, unstyled images from field_block_media.
+ *   @see \Drupal\ajj_base_mercury\Hook\ThemeHooks::preprocessBlock()
+ * - label: The block label, if displayed.
+ * - attributes: HTML attributes for the wrapper.
+ */
+#}
+{% set cols = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4'
+} %}
+
+<div{{ attributes.addClass('block-footer-extras') }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('sr-only') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if images %}
+    <ul class="footer-extras grid {{ cols[images|length]|default('grid-cols-4') }} list-none items-center gap-2 p-0">
+      {% for image in images %}
+        <li class="footer-extras--item flex justify-center">
+          {{ image }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
