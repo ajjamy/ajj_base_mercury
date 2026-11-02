@@ -357,7 +357,7 @@
     background-image: var(--gradient-light-transparent-mobile);
 
     @media screen and (min-width: 62rem) {
-        background-image: var(--gradient-light-transparent);
+      background-image: var(--gradient-light-transparent);
     }
   }
 

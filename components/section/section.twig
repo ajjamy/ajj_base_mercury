@@ -51,10 +51,17 @@
         'gradient-light': 'bg-gradient-light'
       },
       backgroundImage: {
-        yes: 'opacity-100',
+        yes: 'opacity-50',
         no: ''
       }
-    }
+    },
+    compound_variants: [
+      {
+        backgroundColor: ['gradient-light'],
+        backgroundImage: ['yes'],
+        class: 'opacity-100'
+      }
+    ]
   )
 %}
 
