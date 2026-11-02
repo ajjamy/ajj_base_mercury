@@ -11,6 +11,7 @@
 @import "../components/carousel/carousel.tailwind.css";
 @import "../components/cta/cta.tailwind.css";
 @import "./layout.tailwind.css";
+@import "./client-testimonials.css";
 
 @theme inline {
   --color-background: var(--background);

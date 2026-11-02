@@ -9,24 +9,24 @@
  */
 
 :root {
-  --background: #FAF9F7;
-  --foreground: #0E1E32; /* black */
-  --card: #F4F1EC; 
-  --card-foreground: #142B49;
-  --primary: #142B49; /* brand blue */
-  --primary-foreground: #FAF9F7;
-  --secondary: #D9D4BF; /* neutral- medium */
-  --secondary-foreground: #0E1E32;
-  --muted: #F4F1EC;
-  --muted-foreground: #0E1E32;
-  --accent: #BAD8FF;
-  --accent-warm: #FF7949;
+  --background: #faf9f7;
+  --foreground: #0e1e32; /* black */
+  --card: #f4f1ec;
+  --card-foreground: #142b49;
+  --primary: #142b49; /* brand blue */
+  --primary-foreground: #faf9f7;
+  --secondary: #d9d4bf; /* neutral- medium */
+  --secondary-foreground: #0e1e32;
+  --muted: #f4f1ec;
+  --muted-foreground: #0e1e32;
+  --accent: #bad8ff;
+  --accent-warm: #ff7949;
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1 0 0);
   /* --border: oklch(0.872 0.009 258.338); */
   --border: var(--primary);
-  --input: #FAF9F7;
+  --input: #faf9f7;
 
   --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   --font-serif: "DM Serif Display", Georgia, Cambria, "Times New Roman", Times, serif;
