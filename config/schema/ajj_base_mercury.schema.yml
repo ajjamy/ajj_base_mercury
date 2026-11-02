@@ -12,3 +12,67 @@ ajj_base_mercury.settings:
           - vanilla-dark
           - byte-light
           - byte-dark
+    contact:
+      type: mapping
+      label: Contact information
+      mapping:
+        email:
+          type: email
+          label: Email
+        phone:
+          type: string
+          label: Phone
+        mailing_address:
+          type: text
+          label: Mailing address
+        street_address:
+          type: text
+          label: Street address
+    social_links:
+      type: mapping
+      label: Social media links
+      mapping:
+        facebook:
+          type: ajj_base_mercury.social_link
+          label: Facebook
+        instagram:
+          type: ajj_base_mercury.social_link
+          label: Instagram
+        linkedin:
+          type: ajj_base_mercury.social_link
+          label: LinkedIn
+        x:
+          type: ajj_base_mercury.social_link
+          label: X
+        youtube:
+          type: ajj_base_mercury.social_link
+          label: YouTube
+        tiktok:
+          type: ajj_base_mercury.social_link
+          label: TikTok
+        threads:
+          type: ajj_base_mercury.social_link
+          label: Threads
+        pinterest:
+          type: ajj_base_mercury.social_link
+          label: Pinterest
+        bluesky:
+          type: ajj_base_mercury.social_link
+          label: Bluesky
+        mastodon:
+          type: ajj_base_mercury.social_link
+          label: Mastodon
+
+ajj_base_mercury.social_link:
+  type: mapping
+  label: Social media link
+  mapping:
+    url:
+      type: string
+      label: URL
+    logo:
+      type: sequence
+      label: Logo file IDs
+      sequence:
+        type: integer
+        label: File ID

@@ -8,28 +8,95 @@
 #}
 {% set classes = ['region', 'region-' ~ (region|clean_class)] %}
 <div {{ attributes.addClass(classes) }}>
-  {% embed 'ajj_base_mercury:footer' %}
-    {% block footer_first %}
-      {% if site_logo %}
-        <a href="{{ path('<front>') }}" class="inline-block" rel="home">
-          <div class="branding">
-            <img class="h-full w-auto" src="{{ site_logo }}" alt="{{ site_name }}" />
-          </div>
-        </a>
-      {% endif %}
-    {% endblock %}
-    {% block footer_utility_first %}
-      {% if elements.ajj_base_mercury_footer_menu %}
-        {{ elements.ajj_base_mercury_footer_menu }}
-      {% endif %}
-    {% endblock %}
-    {% block footer_utility_last %}
-      <p>
-        Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).
-      </p>
-      {% if elements.ajj_base_mercury_footercopyrightlegal %}
-        {{ elements.ajj_base_mercury_footercopyrightlegal }}
-      {% endif %}
-    {% endblock %}
-  {% endembed %}
+    {% embed 'ajj_base_mercury:footer' %}
+        {% block footer_header %}
+            {% if elements.ajj_base_mercury_sitebranding %}
+                {{ elements.ajj_base_mercury_sitebranding }}
+            {% endif %}
+        {% endblock %}
+
+        {% block footer_first %}
+            {% if contact %}
+                <div class="footer__contact">
+                    {% if contact.email %}
+                        <p class="footer__email"><a href="mailto:{{ contact.email }}" class="inline-flex items-center gap-2">{{ icon('phosphor', 'envelope-simple', {size: 20}) }}{{ contact.email }}</a></p>
+                    {% endif %}
+                    {% if contact.phone %}
+                        <p class="footer__phone"><a href="{{ contact.phone_uri }}" class="inline-flex items-center gap-2">{{ icon('phosphor', 'phone', {size: 20}) }}{{ contact.phone }}</a></p>
+                    {% endif %}
+                    {% if contact.mailing_address and contact.street_address %}
+                    <div class="footer__addresses">
+                    {% endif %}
+                        {% if contact.mailing_address %}
+                            <address class="footer__mailing-address mb-6 me-6 not-italic">
+                                <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'mailbox', {size: 20}) }}{{ 'Mailing address'|t }}</span><br>
+                                {{ contact.mailing_address|nl2br }}
+                            </address>
+                        {% endif %}
+                        {% if contact.street_address %}
+                            <address class="footer__street-address not-italic">
+                                <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'map-pin', {size: 20}) }}{{ 'Street address'|t }}</span><br>
+                                {{ contact.street_address|nl2br }}
+                            </address>
+                        {% endif %}
+                    {% if contact.mailing_address and contact.street_address %}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        {% block footer_last %}
+            {% if elements.ajj_base_mercury_footer_menu %}
+                <div class="footer__menu">
+                    {{ elements.ajj_base_mercury_footer_menu }}
+                </div>
+            {% endif %}
+            {% if elements.ajj_base_mercury_footerutility %}
+                <div class="footer__utility">
+                    {{ elements.ajj_base_mercury_footerutility }}
+                </div>
+            {% endif %}
+            {% if social_links %}
+                <div class="footer__social">
+                    <ul class="social-menu flex flex-row gap-4 list-none p-0">
+                    {% for link in social_links %}
+                        <li class="social-menu--item">
+                        <a
+                            href="{{ link.url }}"
+                            aria-label="{{ 'Follow us on @platform'|t({'@platform': link.label}) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="social-menu--icon flex aspect-square text-3xl opacity-60 hover:opacity-100"
+                        >
+                            {% if link.logo_url %}
+                                <img src="{{ link.logo_url }}" alt="" width="32" height="32" />
+                            {% else %}
+                                {{ link.label }}
+                            {% endif %}
+                        </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+         {% endblock %}
+
+        
+        {# bottom rows #}
+        {% block footer_utility_first %}
+            <div class="footer__legal pb-5 text-center">
+                <p>Copyright &copy; {{ 'now'|date('Y') }} Anthony J. Jannetti, Inc. (AJJ).<br>
+                No materials, including graphics, may be reused, modified, or reproduced without written permission.</p>
+            </div>
+        {% endblock %}
+
+        {% block footer_utility_last %}
+        {% if elements.ajj_base_mercury_accreditationlogos %}
+            <div class="footer__accreditation">
+                {{ elements.ajj_base_mercury_accreditationlogos }}
+            </div>
+        {% endif %}
+        {% endblock %}
+    {% endembed %}
 </div>

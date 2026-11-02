@@ -12,6 +12,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeSettingsProvider;
+use Drupal\Core\File\FileUrlGeneratorInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -30,6 +32,24 @@ final class ThemeHooks {
   use StringTranslationTrait;
 
   /**
+   * Social platforms configurable in theme settings, keyed by machine name.
+   *
+   * Each value is the platform's label.
+   */
+  private const SOCIAL_PLATFORMS = [
+    'facebook' => 'Facebook',
+    'instagram' => 'Instagram',
+    'linkedin' => 'LinkedIn',
+    'x' => 'X',
+    'youtube' => 'YouTube',
+    'tiktok' => 'TikTok',
+    'threads' => 'Threads',
+    'pinterest' => 'Pinterest',
+    'bluesky' => 'Bluesky',
+    'mastodon' => 'Mastodon',
+  ];
+
+  /**
    * The Drupal root.
    */
   private static ?string $appRoot = NULL;
@@ -43,6 +63,7 @@ final class ThemeHooks {
     private readonly TitleResolverInterface $titleResolver,
     private readonly ChainBreadcrumbBuilderInterface $breadcrumb,
     private readonly ModuleHandlerInterface $moduleHandler,
+    private readonly FileUrlGeneratorInterface $fileUrlGenerator,
     #[Autowire(param: 'app.root')] string $appRoot,
   ) {
     self::$appRoot ??= $appRoot;
@@ -92,10 +113,91 @@ final class ThemeHooks {
         'dark' => t('Dark'),
       ],
     ];
+    $form['contact'] = [
+      '#type' => 'details',
+      '#title' => t('Contact information'),
+      '#description' => t('Company contact details to display in the footer. All fields are optional.'),
+      '#open' => TRUE,
+      '#tree' => TRUE,
+    ];
+    $contact = $this->themeSettings->getSetting('contact') ?? [];
+    $form['contact']['email'] = [
+      '#type' => 'email',
+      '#title' => t('Email'),
+      '#default_value' => $contact['email'] ?? '',
+    ];
+    $form['contact']['phone'] = [
+      '#type' => 'tel',
+      '#title' => t('Phone'),
+      '#default_value' => $contact['phone'] ?? '',
+    ];
+    $form['contact']['mailing_address'] = [
+      '#type' => 'textarea',
+      '#title' => t('Mailing address'),
+      '#rows' => 3,
+      '#default_value' => $contact['mailing_address'] ?? '',
+    ];
+    $form['contact']['street_address'] = [
+      '#type' => 'textarea',
+      '#title' => t('Street address'),
+      '#rows' => 3,
+      '#default_value' => $contact['street_address'] ?? '',
+    ];
+
+    $form['social_links'] = [
+      '#type' => 'details',
+      '#title' => t('Social media'),
+      '#description' => t('Links to display in the footer. Leave the URL empty to hide that platform.'),
+      '#open' => TRUE,
+      '#tree' => TRUE,
+    ];
+    $social_links = $this->themeSettings->getSetting('social_links') ?? [];
+    foreach (self::SOCIAL_PLATFORMS as $platform => $label) {
+      $form['social_links'][$platform] = [
+        '#type' => 'fieldset',
+        '#title' => $label,
+        'url' => [
+          '#type' => 'url',
+          '#title' => t('URL'),
+          '#default_value' => $social_links[$platform]['url'] ?? '',
+        ],
+        'logo' => [
+          '#type' => 'managed_file',
+          '#title' => t('Logo'),
+          '#description' => t('An SVG or PNG file. Without one, the platform name is shown instead.'),
+          '#upload_location' => 'public://social-logos',
+          '#upload_validators' => [
+            'FileExtension' => ['extensions' => 'svg png'],
+          ],
+          '#default_value' => $social_links[$platform]['logo'] ?? [],
+        ],
+      ];
+    }
+    $form['#submit'][] = [self::class, 'submitSocialLogos'];
     $message = $this->t("See <code>@path</code> to learn how to customize Mercury's fonts, colors, and components.", [
       '@path' => $this->themeList->getPath('ajj_base_mercury') . '/CUSTOMIZING.md',
     ]);
     $this->messenger()->addMessage($message, 'info');
+  }
+
+  /**
+   * Form submission handler: makes uploaded social logos permanent.
+   */
+  public static function submitSocialLogos(array &$form, FormStateInterface $form_state): void {
+    $file_storage = \Drupal::entityTypeManager()->getStorage('file');
+    $file_usage = \Drupal::service('file.usage');
+    foreach ($form_state->getValue('social_links') ?? [] as $platform => $values) {
+      $fids = $values['logo'] ?? [];
+      foreach ($file_storage->loadMultiple($fids) as $file) {
+        if ($file->isTemporary()) {
+          $file->setPermanent();
+          $file->save();
+        }
+        if (empty($file_usage->listUsage($file)['ajj_base_mercury'])) {
+          $file_usage->add($file, 'ajj_base_mercury', 'theme', 'ajj_base_mercury');
+        }
+      }
+    }
   }
 
   /**
@@ -168,15 +270,45 @@ final class ThemeHooks {
   /**
    * Implements template_preprocess_region().
    *
-   * Provides the site logo to the footer, matching the header branding.
+   * Provides contact details and social links to the footer.
    */
   #[Hook('preprocess_region')]
   public function preprocessRegion(array &$variables): void {
     if ($variables['region'] !== 'footer') {
       return;
     }
-    $variables['site_logo'] = theme_get_setting('logo.url', 'ajj_base_mercury');
-    $variables['site_name'] = \Drupal::config('system.site')->get('name');
+    // Re-render the footer when the theme settings or logo files change.
+    $cacheability = CacheableMetadata::createFromRenderArray($variables)
+      ->addCacheTags(['config:ajj_base_mercury.settings']);
+
+    $contact = array_filter($this->themeSettings->getSetting('contact') ?? []);
+    if (isset($contact['phone'])) {
+      // Digits and a leading plus only, for the tel: link.
+      $contact['phone_uri'] = 'tel:' . preg_replace('/(?!^\+)[^\d]/', '', $contact['phone']);
+    }
+    $variables['contact'] = $contact;
+
+    $social_links = $this->themeSettings->getSetting('social_links') ?? [];
+    $file_storage = $this->entityTypeManager->getStorage('file');
+    $variables['social_links'] = [];
+    foreach (self::SOCIAL_PLATFORMS as $platform => $label) {
+      $url = $social_links[$platform]['url'] ?? '';
+      if ($url === '') {
+        continue;
+      }
+      $logo_url = NULL;
+      $fid = $social_links[$platform]['logo'][0] ?? NULL;
+      if ($fid && $file = $file_storage->load($fid)) {
+        $cacheability->addCacheableDependency($file);
+        $logo_url = $this->fileUrlGenerator->generateString($file->getFileUri());
+      }
+      $variables['social_links'][] = [
+        'label' => $label,
+        'url' => $url,
+        'logo_url' => $logo_url,
+      ];
+    }
+    $cacheability->applyTo($variables);
   }
 
   /**
@@ -193,6 +325,40 @@ final class ThemeHooks {
     if ($node instanceof NodeInterface) {
       $suggestions[] = 'page__node__' . $node->bundle();
     }
+  }
+
+  /**
+   * Implements template_preprocess_block().
+   *
+   * Provides footer_extras blocks with their images in the scale_only image
+   * style, which keeps their proportions instead of the media display's crop.
+   */
+  #[Hook('preprocess_block')]
+  public function preprocessBlock(array &$variables): void {
+    $block = $variables['content']['#block_content'] ?? NULL;
+    if (!$block || $block->bundle() !== 'footer_extras') {
+      return;
+    }
+
+    // Re-render the block when a referenced media item changes.
+    $cacheability = CacheableMetadata::createFromRenderArray($variables);
+    $variables['images'] = [];
+    foreach ($block->get('field_block_media')->referencedEntities() as $media) {
+      $access = $media->access('view', NULL, TRUE);
+      $cacheability->addCacheableDependency($media)->addCacheableDependency($access);
+      if (!$access->isAllowed() || !$media->hasField('field_media_image')) {
+        continue;
+      }
+      $variables['images'][] = $media->get('field_media_image')->view([
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => [
+          'image_style' => 'scale_only',
+          'image_loading' => ['attribute' => 'lazy'],
+        ],
+      ]);
+    }
+    $cacheability->applyTo($variables);
   }
 
   /**

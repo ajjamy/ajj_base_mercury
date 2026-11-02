@@ -367,7 +367,7 @@
 
   /* Set a fixed width on the main content container. */
   .region-content {
-    @apply container mx-auto px-4 pb-8;
+    @apply container mx-auto px-4 pb-0;
   }
 
   /* Add a utility class for full-width elements. */

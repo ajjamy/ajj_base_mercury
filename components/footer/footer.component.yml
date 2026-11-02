@@ -10,11 +10,13 @@ props:
       examples:
         - true
 slots:
+  footer_header:
+    title: Logo & site name
   footer_first:
-    title: Branding & Social
+    title: Contact Info
   footer_last:
-    title: Call to action
+    title: Menu & Utility Links
   footer_utility_first:
-    title: Utility links
+    title: Footer Extras
   footer_utility_last:
-    title: Copyright text
+    title: Copyright Text
