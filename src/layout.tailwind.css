@@ -19,103 +19,113 @@
     @apply max-w-5xl min-w-0;
   }
 
-    footer.site-footer {
-        background-color: var(--color-secondary);
+  footer.site-footer {
+    background-color: var(--color-secondary);
 
-        .footer__container {
-            @apply @container mx-auto lg:max-w-8/10;
-        }
-
-        .footer__header {
-            @apply  mx-auto lg:max-w-8/10;
-            
-            a {
-                align-items: center;
-                min-width: 200px;
-            }
-        }
-
-        .branding { 
-            @apply h-8 nav:h-10;
-            height: 50px;
-            margin-right: 0.25rem;
-
-            @media screen and (min-width: 62rem) {
-                padding-bottom: 0.75rem;
-            }
-
-            svg,
-            img[src$=".svg"] {
-                @apply h-auto! max-h-full;
-            }
-        }
-
-        .footer__top {
-            @apply md:grid md:grid-cols-2 md:gap-6 mx-auto lg:max-w-8/10;
-        }
-
-        .footer__utility,
-        .footer__menu,
-        .footer__social {
-            display: inline-flex;
-            justify-content: center;
-
-            @media screen and (min-width: 768px) { justify-content: flex-end; }
-
-            .social-menu--icon {
-                padding: 10px;
-                border: 1px solid transparent;
-
-                &:hover { border-color: var(--primary); }
-            }
-        }
-
-        .footer__addresses {
-            display: flex;
-            flex-flow: row wrap;
-        }
-
-        .footer__phone a:hover,
-        .footer__email a:hover { text-decoration: underline; }
-
-        .footer__bottom {
-            @apply md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4;
-        }
-
-        .site-footer--bottom-col:has(.footer__accreditation) { background-color: var( --background); }
-
-        .footer__accreditation {
-            width: 80%;
-            margin: auto;
-
-            @media screen and (min-width: 768px) {
-                max-width: 45%; /* fits 2 current logos */
-            }
-        }
-
-        .footer-extras--item div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0.5rem;
-            max-height: 80px;
-            width: auto;
-            filter: grayscale(100%);
-            transition:all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-
-            &:hover { filter: grayscale(0%); }
-            
-            @media screen and (min-width: 768px) { padding: 1rem; }
-
-            img { 
-                height: 100%;
-                width: auto;
-            }
-        }
+    .footer__container {
+      @apply @container mx-auto lg:max-w-8/10;
     }
+
+    .footer__header {
+      @apply mx-auto lg:max-w-8/10;
+
+      a {
+        align-items: center;
+        min-width: 200px;
+      }
+    }
+
+    .branding {
+      @apply h-8 nav:h-10;
+      height: 50px;
+      margin-right: 0.25rem;
+
+      @media screen and (min-width: 62rem) {
+        padding-bottom: 0.75rem;
+      }
+
+      svg,
+      img[src$=".svg"] {
+        @apply h-auto! max-h-full;
+      }
+    }
+
+    .footer__top {
+      @apply mx-auto md:grid md:grid-cols-2 md:gap-6 lg:max-w-8/10;
+    }
+
+    .footer__utility,
+    .footer__menu,
+    .footer__social {
+      display: inline-flex;
+      justify-content: center;
+
+      @media screen and (min-width: 768px) {
+        justify-content: flex-end;
+      }
+
+      .social-menu--icon {
+        padding: 10px;
+        border: 1px solid transparent;
+
+        &:hover {
+          border-color: var(--primary);
+        }
+      }
+    }
+
+    .footer__addresses {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .footer__phone a:hover,
+    .footer__email a:hover {
+      text-decoration: underline;
+    }
+
+    .footer__bottom {
+      @apply md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4;
+    }
+
+    .site-footer--bottom-col:has(.footer__accreditation) {
+      background-color: var(--background);
+    }
+
+    .footer__accreditation {
+      width: 80%;
+      margin: auto;
+
+      @media screen and (min-width: 768px) {
+        max-width: 45%; /* fits 2 current logos */
+      }
+    }
+
+    .footer-extras--item div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
+      max-height: 80px;
+      width: auto;
+      filter: grayscale(100%);
+      transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+      &:hover {
+        filter: grayscale(0%);
+      }
+
+      @media screen and (min-width: 768px) {
+        padding: 1rem;
+      }
+
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
 }
 
 .canvas-page {
-
 }
-
