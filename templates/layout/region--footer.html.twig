@@ -24,17 +24,23 @@
                     {% if contact.phone %}
                         <p class="footer__phone"><a href="{{ contact.phone_uri }}" class="inline-flex items-center gap-2">{{ icon('phosphor', 'phone', {size: 20}) }}{{ contact.phone }}</a></p>
                     {% endif %}
-                    {% if contact.mailing_address %}
-                        <address class="footer__mailing-address not-italic">
-                            <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'mailbox', {size: 20}) }}{{ 'Mailing address'|t }}</span><br>
-                            {{ contact.mailing_address|nl2br }}
-                        </address>
+                    {% if contact.mailing_address and contact.street_address %}
+                    <div class="footer__addresses">
                     {% endif %}
-                    {% if contact.street_address %}
-                        <address class="footer__street-address not-italic">
-                            <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'map-pin', {size: 20}) }}{{ 'Street address'|t }}</span><br>
-                            {{ contact.street_address|nl2br }}
-                        </address>
+                        {% if contact.mailing_address %}
+                            <address class="footer__mailing-address mb-6 me-6 not-italic">
+                                <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'mailbox', {size: 20}) }}{{ 'Mailing address'|t }}</span><br>
+                                {{ contact.mailing_address|nl2br }}
+                            </address>
+                        {% endif %}
+                        {% if contact.street_address %}
+                            <address class="footer__street-address not-italic">
+                                <span class="inline-flex items-center gap-2 font-semibold">{{ icon('phosphor', 'map-pin', {size: 20}) }}{{ 'Street address'|t }}</span><br>
+                                {{ contact.street_address|nl2br }}
+                            </address>
+                        {% endif %}
+                    {% if contact.mailing_address and contact.street_address %}
+                    </div>
                     {% endif %}
                 </div>
             {% endif %}

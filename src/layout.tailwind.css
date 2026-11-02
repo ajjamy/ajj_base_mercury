@@ -69,14 +69,19 @@
                 &:hover { border-color: var(--primary); }
             }
         }
+
+        .footer__addresses {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
         .footer__phone a:hover,
         .footer__email a:hover { text-decoration: underline; }
-
-        .footer__mailing-address { margin-bottom: 1rem; }
 
         .footer__bottom {
             @apply md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4;
         }
+
         .site-footer--bottom-col:has(.footer__accreditation) { background-color: var( --background); }
 
         .footer__accreditation {
