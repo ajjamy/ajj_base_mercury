@@ -1,6 +1,13 @@
 @layer components {
   .mega-menu {
-    @apply m-0 flex list-none flex-col p-0 nav:flex-row nav:items-center nav:gap-4;
+    @apply m-0
+      flex
+      list-none
+      flex-col
+      p-0
+      nav:flex-row
+      nav:items-center
+      nav:gap-4;
     min-width: 85%;
 
     @media screen and (min-width: 62rem) {
@@ -31,7 +38,17 @@
     }
 
     .mega-menu-item__dropdown {
-      @apply absolute top-full left-0 z-50 block hidden w-full max-w-[calc(100vw-2rem)] p-5 text-foreground shadow-lg;
+      @apply absolute
+        top-full
+        left-0
+        z-50
+        block
+        hidden
+        w-full
+        max-w-[calc(100vw-2rem)]
+        p-5
+        text-foreground
+        shadow-lg;
       background-color: var(--muted);
 
       @media screen and (min-width: 62rem) {
@@ -42,7 +59,12 @@
 
   /* top level links */
   .mega-menu-item__heading {
-    @apply flex min-h-11 items-center justify-between px-3 py-2;
+    @apply flex
+      min-h-11
+      items-center
+      justify-between
+      px-3
+      py-2;
     width: 100%;
     background-color: transparent;
     border-bottom: 1px solid var(--border);
@@ -78,7 +100,16 @@
   }
 
   .mega-menu-item__link {
-    @apply flex min-h-11 flex-1 items-center font-medium text-foreground no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    @apply flex
+      min-h-11
+      flex-1
+      items-center
+      font-medium
+      text-foreground
+      no-underline
+      focus-visible:outline-2
+      focus-visible:outline-offset-2
+      focus-visible:outline-primary;
 
     @media screen and (min-width: 62rem) {
       min-height: 35px;
@@ -87,7 +118,14 @@
   }
 
   .mega-menu-item__toggle {
-    @apply flex size-11 shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    @apply flex
+      size-11
+      shrink-0
+      items-center
+      justify-center
+      focus-visible:outline-2
+      focus-visible:outline-offset-2
+      focus-visible:outline-primary;
 
     @media screen and (min-width: 62rem) {
       width: 20px;
@@ -95,7 +133,13 @@
   }
 
   .mega-menu-item__icon {
-    @apply inline-block size-5 text-center text-xl leading-none text-current transition-transform;
+    @apply inline-block
+      size-5
+      text-center
+      text-xl
+      leading-none
+      text-current
+      transition-transform;
 
     @media screen and (min-width: 62rem) {
       width: 25px;
@@ -125,22 +169,36 @@
 
   /* default (non-mega) items: size to the link list */
   .mega-menu.is-enhanced .mega-menu-item__dropdown--simple {
-    @apply w-max min-w-48;
+    @apply w-max
+      min-w-48;
     padding: 0;
 
+    .mega-menu-content {
+      display: block;
+    }
+
     .mega-menu-content__columns {
-      @apply grid-cols-1;
+      width: 100%;
+    }
+
+    h2.mega-menu-content__heading {
+      border-bottom: 0;
     }
 
     li {
       padding-left: 1rem;
+
+      @media screen and (min-width: 62rem) {
+        padding-left: 0;
+      }
     }
   }
 
   /* Mega Menu with Extra content */
   /* column count (1-4) comes from headed columns; the column group is centered */
   .mega-menu-content {
-    @apply grid gap-6;
+    @apply grid
+      gap-6;
 
     @media screen and (min-width: 62rem) {
       @apply md:justify-center;
@@ -148,7 +206,9 @@
   }
 
   .mega-menu-content__columns {
-    @apply grid justify-center gap-3;
+    @apply grid
+      justify-center
+      gap-3;
     --mega-menu-column-width: 16rem;
     grid-template-columns: minmax(0, 1fr);
   }
@@ -186,7 +246,8 @@
   }
 
   .mega-menu-content__featured {
-    @apply hidden nav:block;
+    @apply hidden
+      nav:block;
 
     .mega-menu-featured-block {
       .block__image {
@@ -194,7 +255,9 @@
       }
 
       p {
-        @apply mb-3 font-semibold text-foreground;
+        @apply mb-3
+          font-semibold
+          text-foreground;
         font-size: var(--text-lg);
         line-height: 1;
 
@@ -206,7 +269,8 @@
   }
 
   .mega-menu-featured {
-    @apply grid gap-4;
+    @apply grid
+      gap-4;
   }
 
   .mega-menu-content__column {
@@ -214,17 +278,23 @@
   }
 
   h2.mega-menu-content__heading {
-    @apply mb-3 font-semibold text-foreground;
-    /* font-size: var(--text-lg); */
+    @apply mb-3
+      font-semibold
+      text-foreground;
 
     @media screen and (min-width: 62rem) {
-      margin-left: 1rem;
+      margin-left: 0.5rem;
       border-bottom: 1px solid var(--border);
     }
   }
 
   .mega-menu-content__links {
-    @apply m-0 flex list-none flex-col gap-1 p-0;
+    @apply m-0
+      flex
+      list-none
+      flex-col
+      gap-1
+      p-0;
 
     li {
       @media screen and (max-width: 61.999rem) {
@@ -239,23 +309,37 @@
     }
 
     .mega-menu-content__link {
-      @apply flex min-h-10 items-center py-2 pr-3 pl-0 text-muted-foreground no-underline hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+      @apply flex
+        min-h-10
+        items-center
+        px-2
+        py-2
+        text-muted-foreground
+        no-underline
+        hover:text-foreground
+        focus-visible:outline-2
+        focus-visible:outline-offset-2
+        focus-visible:outline-primary;
       font-size: var(--text-lg);
 
       &:hover {
-        background-color: var(--border);
+        background-color: var(--secondary);
         text-decoration: underline;
       }
 
-      @media screen and (min-width: 62rem) {
+      /* @media screen and (min-width: 62rem) {
         padding-left: 1rem;
-      }
+      } */
     }
   }
 
   @media (max-width: 61.999rem) {
     .mega-menu.is-enhanced .mega-menu-item__dropdown {
-      @apply static mt-1 w-full max-w-none shadow-none;
+      @apply static
+        mt-1
+        w-full
+        max-w-none
+        shadow-none;
       padding-bottom: 0;
     }
   }
