@@ -1,0 +1,67 @@
+@layer components {
+  .accordion {
+    @apply overflow-hidden
+      border-b
+      border-border
+      bg-background
+      bg-clip-padding;
+  }
+
+  .accordion--title {
+    @apply flex
+      w-full
+      cursor-pointer
+      items-center
+      justify-between
+      bg-card
+      p-4
+      text-left
+      text-2xl
+      text-card-foreground
+      hover:bg-muted;
+  }
+
+  .accordion--content {
+    @apply h-0
+      overflow-hidden
+      px-4
+      py-0
+      text-base
+      text-foreground
+      transition-[height,padding]
+      duration-0;
+
+    & > :first-child {
+      @apply mt-0;
+    }
+
+    & > :last-child {
+      @apply mb-0;
+    }
+  }
+
+  /* state classes are toggled on .accordion by accordion.js */
+  .accordion--animate .accordion--content {
+    @apply duration-500;
+  }
+
+  .accordion--open .accordion--content {
+    @apply overflow-visible
+      py-5;
+  }
+
+  /* no JS: open to natural height */
+  .accordion--open:not(.accordion--js) .accordion--content {
+    @apply h-auto;
+  }
+
+  /* JS: animate to the height measured by accordion.js */
+  .accordion--js.accordion--open .accordion--content {
+    @apply h-(--natural-height);
+  }
+
+  /* skip the fixed height while accordion.js re-measures; must follow the rule above */
+  .accordion--resizing.accordion--open .accordion--content {
+    @apply h-auto;
+  }
+}

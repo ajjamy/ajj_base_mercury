@@ -17,7 +17,15 @@
   ]|join(' ')
 %}
 
-<section class="carousel" aria-roledescription="carousel" aria-label="{{ label }}" data-interval="{{ interval|default(7) }}">
+{# Merges in any #attributes passed by the caller, e.g. an extra class. #}
+{% set carousel_attributes =
+  attributes.addClass('carousel').setAttribute('aria-roledescription', 'carousel').setAttribute('aria-label', label).setAttribute(
+    'data-interval',
+    interval|default(7)
+  )
+%}
+
+<section {{ carousel_attributes }}>
   <div class="carousel--track">
     {% block slides %}
       <div class="rounded-md bg-muted p-12 text-center text-muted-foreground">

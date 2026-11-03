@@ -19,19 +19,17 @@
   4: 'grid-cols-4'
 } %}
 
-<div{{ attributes.addClass('block-footer-extras') }}>
+<div {{ attributes.addClass('block-footer-extras') }}>
   {{ title_prefix }}
   {% if label %}
-    <h2{{ title_attributes.addClass('sr-only') }}>{{ label }}</h2>
+    <h2 {{ title_attributes.addClass('sr-only') }}>{{ label }}</h2>
   {% endif %}
   {{ title_suffix }}
 
   {% if images %}
     <ul class="footer-extras grid {{ cols[images|length]|default('grid-cols-4') }} list-none items-center gap-2 p-0">
       {% for image in images %}
-        <li class="footer-extras--item flex justify-center">
-          {{ image }}
-        </li>
+        <li class="footer-extras--item flex justify-center">{{ image }}</li>
       {% endfor %}
     </ul>
   {% endif %}

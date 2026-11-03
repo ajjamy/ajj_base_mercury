@@ -1,6 +1,11 @@
 @layer components {
   .layout-content {
-    @apply mx-auto w-full max-w-5xl px-4 lg:grid lg:gap-8;
+    @apply mx-auto
+      w-full
+      max-w-5xl
+      px-4
+      lg:grid
+      lg:gap-8;
   }
 
   .layout-content:has(.layout-sidebar-first) {
@@ -16,18 +21,22 @@
   }
 
   .layout-main {
-    @apply max-w-5xl min-w-0;
+    @apply max-w-5xl
+      min-w-0;
   }
 
   footer.site-footer {
     background-color: var(--color-secondary);
 
     .footer__container {
-      @apply @container mx-auto lg:max-w-8/10;
+      @apply @container
+        mx-auto
+        lg:max-w-8/10;
     }
 
     .footer__header {
-      @apply mx-auto lg:max-w-8/10;
+      @apply mx-auto
+        lg:max-w-8/10;
 
       a {
         align-items: center;
@@ -36,7 +45,8 @@
     }
 
     .branding {
-      @apply h-8 nav:h-10;
+      @apply h-8
+        nav:h-10;
       height: 50px;
       margin-right: 0.25rem;
 
@@ -46,12 +56,17 @@
 
       svg,
       img[src$=".svg"] {
-        @apply h-auto! max-h-full;
+        @apply h-auto!
+          max-h-full;
       }
     }
 
     .footer__top {
-      @apply mx-auto md:grid md:grid-cols-2 md:gap-6 lg:max-w-8/10;
+      @apply mx-auto
+        md:grid
+        md:grid-cols-2
+        md:gap-6
+        lg:max-w-8/10;
     }
 
     .footer__utility,
@@ -85,7 +100,10 @@
     }
 
     .footer__bottom {
-      @apply md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4;
+      @apply md:grid
+        md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]
+        md:gap-6
+        md:py-4;
     }
 
     .site-footer--bottom-col:has(.footer__accreditation) {

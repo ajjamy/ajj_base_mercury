@@ -8,24 +8,13 @@
 
 {% set footer_header_variants = html_cva(base: ['footer__header flex w-full flex-col pt-8']) %}
 
-{% set footer_top_variants =
-  html_cva(base: ['footer__top flex w-full flex-col justify-between gap-6 py-8 md:grid md:grid-cols-2 md:gap-6'])
-%}
-
+{% set footer_top_variants = html_cva(base: ['footer__top flex w-full flex-col justify-between gap-6 py-8 md:grid md:grid-cols-2 md:gap-6']) %}
 
 {% set footer_first_col_variants = html_cva(base: ['col-first flex', 'flex-col', 'gap-6']) %}
 
-{% set footer_last_col_variants =
-  html_cva(base: ['col-last flex flex-col gap-2'])
-%}
+{% set footer_last_col_variants = html_cva(base: ['col-last flex flex-col gap-2']) %}
 
-{% set footer_bottom_variants =
-  html_cva(
-    base: [
-      'footer__bottom flex w-full flex-col gap-2 pt-3 pb-0'
-    ]
-  )
-%}
+{% set footer_bottom_variants = html_cva(base: ['footer__bottom flex w-full flex-col gap-2 pt-3 pb-0']) %}
 
 {% set footer_bottom_col_variants =
   html_cva(
@@ -50,7 +39,6 @@
     {% endif %}
 
     <div class="{{ footer_top_variants.apply({}) }}">
-    
       {% if block('footer_first') is defined %}
         <div class="{{ footer_first_col_variants.apply({}) }}">
           {% block footer_first %}
@@ -67,36 +55,36 @@
         </div>
       {% endif %}
     </div>
+  </div>
 </section>
 <section>
-    <div class="{{ footer_bottom_variants.apply({}) }}">
-      {% if block('footer_utility_first') is defined %}
-        <div
-          class="{{
-          footer_bottom_col_variants.apply({
-            align: 'left'
-          })
-          }}"
-        >
-          {% block footer_utility_first %}
-            {# Slot for components. #}
-          {% endblock %}
-        </div>
-      {% endif %}
+  <div class="{{ footer_bottom_variants.apply({}) }}">
+    {% if block('footer_utility_first') is defined %}
+      <div
+        class="{{
+        footer_bottom_col_variants.apply({
+          align: 'left'
+        })
+        }}"
+      >
+        {% block footer_utility_first %}
+          {# Slot for components. #}
+        {% endblock %}
+      </div>
+    {% endif %}
 
-      {% if block('footer_utility_last') is defined %}
-        <div
-          class="{{
-          footer_bottom_col_variants.apply({
-            align: 'right'
-          })
-          }}"
-        >
-          {% block footer_utility_last %}
-            {# Slot for components. #}
-          {% endblock %}
-        </div>
-      {% endif %}
-    </div>
+    {% if block('footer_utility_last') is defined %}
+      <div
+        class="{{
+        footer_bottom_col_variants.apply({
+          align: 'right'
+        })
+        }}"
+      >
+        {% block footer_utility_last %}
+          {# Slot for components. #}
+        {% endblock %}
+      </div>
+    {% endif %}
   </div>
 </section>

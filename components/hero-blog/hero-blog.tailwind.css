@@ -9,7 +9,8 @@
     }
 
     img {
-      @apply overflow-hidden rounded-md;
+      @apply overflow-hidden
+        rounded-md;
     }
   }
 

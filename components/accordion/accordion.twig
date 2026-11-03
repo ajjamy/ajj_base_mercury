@@ -2,31 +2,16 @@
 {% set content_id = 'accordion--content'|clean_unique_id %}
 {% set heading_level = heading_level|default('3') %}
 
-{% set section = html_cva(base: ['accordion', 'overflow-hidden', 'border-b border-border', 'bg-clip-padding', 'bg-background']) %}
+{# Styles live in accordion.tailwind.css. #}
+{% set section = html_cva(base: ['accordion']) %}
 
 {% set section_classes = section.apply({}) %}
 
-{% set title_button =
-  html_cva(base: ['accordion--title', 'flex w-full cursor-pointer items-center justify-between', 'bg-card hover:bg-muted', 'p-4 text-left text-2xl'])
-%}
+{% set title_button = html_cva(base: ['accordion--title']) %}
 
 {% set title_button_classes = title_button.apply({}) %}
 
-{% set content =
-  html_cva(
-    base: [
-      'accordion--content',
-      'h-0 overflow-hidden px-4 py-0',
-      'text-base text-foreground',
-      'transition-[height,padding] duration-0 in-[.accordion--animate]:duration-500',
-      '[&>:first-child]:mt-0 [&>:last-child]:mb-0',
-      'in-[.accordion--open]:overflow-visible in-[.accordion--open]:py-5',
-      'in-[.accordion--open:not(.accordion--js)]:h-auto',
-      'in-[.accordion--js.accordion--open]:h-(--natural-height)',
-      'in-[.accordion--resizing.accordion--open]:h-auto'
-    ]
-  )
-%}
+{% set content = html_cva(base: ['accordion--content']) %}
 
 {% set content_classes = content.apply({}) %}
 
