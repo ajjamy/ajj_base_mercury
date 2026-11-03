@@ -23,9 +23,13 @@ props:
       enum:
         - primary
         - secondary
+        - accent
+        - accent-warm
       meta:enum:
         primary: Primary
         secondary: Secondary
+        accent: Accent
+        accent-warm: Accent Warm
       examples:
         - primary
     icon:

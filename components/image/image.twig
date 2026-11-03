@@ -1,10 +1,33 @@
 {% set has_radius = radius is not empty ? 'yes' : 'no' %}
 {% set has_url = url is not empty ? 'yes' : 'no' %}
 
+{% set image_width = width|default('full') %}
+
+{% set image_figure =
+  html_cva(
+    base: 'image',
+    variants: {
+      width: {
+        full: 'image--width-full',
+        sm: 'image--width-sm',
+        md: 'image--width-md',
+        lg: 'image--width-lg'
+      }
+    }
+  )
+%}
+
+{# Only full-width images break out to the container width. #}
 {% set image_container =
   html_cva(
-    base: 'cq-full w-full',
+    base: 'w-full',
     variants: {
+      width: {
+        full: 'cq-full',
+        sm: '',
+        md: '',
+        lg: ''
+      },
       size: {
         '2:1': 'aspect-2/1',
         '16:9': 'aspect-16/9',
@@ -27,13 +50,20 @@
 
 {% set container_classes =
   image_container.apply({
+    width: image_width,
     size: size,
     hasRadius: has_radius,
     radius: radius
   })
 %}
 
-<figure class="image">
+<figure
+  class="{{
+  image_figure.apply({
+    width: image_width
+  })
+  }}"
+>
   <div class="{{ container_classes }} image--wrapper">
     {% block media %}
       {% if url is not empty %}

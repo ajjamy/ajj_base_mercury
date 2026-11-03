@@ -31,6 +31,23 @@ props:
       default: "4:3"
       examples:
         - "4:3"
+    width:
+      type: string
+      title: Width
+      description: The largest width the image can display at. It shrinks on smaller screens.
+      enum:
+        - full
+        - sm
+        - md
+        - lg
+      meta:enum:
+        full: Full width
+        sm: Small (200px)
+        md: Medium (480px)
+        lg: Large (640px)
+      default: full
+      examples:
+        - full
     radius:
       type: string
       title: Corner radius

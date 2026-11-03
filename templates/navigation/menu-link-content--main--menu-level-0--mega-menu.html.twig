@@ -10,6 +10,7 @@
  * - attributes: HTML attributes for the wrapper.
  * - content: The menu link fields, rendered by the view mode's display.
  * - menu_link_content: The menu_link_content entity.
+ * - featured_page_url: The URL of the page selected in field_mega_featured.
  * - featured_block: The fields of the block selected in
  *   field_mega_featured_block: media, heading, body, link_url and link_title.
  *
@@ -23,7 +24,15 @@
 
 <div {{ attributes.addClass('mega-menu-featured') }}>
   {{ content.field_mega_media }}
-  {{ content.field_mega_featured }}
+  {# The Canvas teaser template has no wrapper of its own, so add a hook for styling. #}
+  {% set has_featured_teaser = content.field_mega_featured|render|trim is not empty %}
+  {% if has_featured_teaser and featured_page_url %}
+    <a href="{{ featured_page_url }}" class="mega-menu-featured__teaser">{{ content.field_mega_featured }}</a>
+  {% elseif has_featured_teaser %}
+    <div class="mega-menu-featured__teaser">
+      {{ content.field_mega_featured }}
+    </div>
+  {% endif %}
 
   {% if featured_block %}
     {% set featured_block_content %}

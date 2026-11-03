@@ -266,12 +266,42 @@
         }
       }
     }
+
+    /*
+     * Must stay a column: in a row the teaser shrinks to its content, and the
+     * lazy-loaded image has no width until it loads, so it first renders small.
+     */
+    .mega-menu-featured__teaser {
+      @apply flex
+        flex-col;
+
+      /* field wrapper around the teaser's heading and image */
+      & > div {
+        @apply flex
+          flex-col
+          gap-3;
+      }
+
+      h2 {
+        @apply mb-3
+          font-semibold
+          text-foreground;
+        font-size: var(--text-lg);
+        line-height: 1;
+
+        @media screen and (min-width: 62rem) {
+          border-bottom: 1px solid var(--border);
+        }
+      }
+    }
   }
 
   .mega-menu-featured {
     @apply grid
       gap-4;
   }
+
+  /* basic page teaser from field_mega_featured (Canvas template node.basic_page.teaser) */
 
   .mega-menu-content__column {
     @apply min-w-0;
@@ -326,10 +356,6 @@
         background-color: var(--secondary);
         text-decoration: underline;
       }
-
-      /* @media screen and (min-width: 62rem) {
-        padding-left: 1rem;
-      } */
     }
   }
 
@@ -342,5 +368,20 @@
         shadow-none;
       padding-bottom: 0;
     }
+  }
+}
+
+/*
+ * The teaser's components bring their own utility classes (e.g. .cq-full and the heading's text sizes), so these overrides stay in the utilities layer.
+ */
+@layer utilities {
+  .mega-menu-featured__teaser .cq-full {
+    @apply mx-0
+      w-full;
+  }
+
+  .mega-menu-featured__teaser :is(h1, h2, h3, h4, h5, h6) {
+    @apply text-lg
+      font-semibold;
   }
 }

@@ -364,14 +364,34 @@ final class ThemeHooks {
   /**
    * Implements template_preprocess_menu_link_content().
    *
-   * Provides the mega menu's featured block fields individually, so
-   * menu-link-content--main--menu-level-0--mega-menu.html.twig can lay them
-   * out.
+   * Provides the mega menu's featured page URL and featured block fields
+   * individually, so menu-link-content--main--menu-level-0--mega-menu.html.twig
+   * can lay them out.
    */
   #[Hook('preprocess_menu_link_content')]
   public function preprocessMenuLinkContent(array &$variables): void {
     $link = $variables['menu_link_content'] ?? NULL;
-    if (!$link || !$link->hasField('field_mega_featured_block')) {
+    if (!$link) {
+      return;
+    }
+
+    // The Canvas teaser template can't link to its own page, so the mega menu
+    // template wraps the teaser in a link to it.
+    $page = $link->hasField('field_mega_featured') ? $link->get('field_mega_featured')->entity : NULL;
+    if ($page) {
+      $access = $page->access('view', NULL, TRUE);
+      $cacheability = CacheableMetadata::createFromRenderArray($variables)
+        ->addCacheableDependency($page)
+        ->addCacheableDependency($access);
+      if ($access->isAllowed()) {
+        $url = $page->toUrl()->toString(TRUE);
+        $cacheability->addCacheableDependency($url);
+        $variables['featured_page_url'] = $url->getGeneratedUrl();
+      }
+      $cacheability->applyTo($variables);
+    }
+
+    if (!$link->hasField('field_mega_featured_block')) {
       return;
     }
 
@@ -381,7 +401,7 @@ final class ThemeHooks {
     }
 
     // Rebuild the menu when the block is edited.
-    $cacheability = CacheableMetadata::createFromObject($block);
+    $cacheability = CacheableMetadata::createFromRenderArray($variables)->addCacheableDependency($block);
     $access = $block->access('view', NULL, TRUE);
     $cacheability->addCacheableDependency($access);
     $cacheability->applyTo($variables);

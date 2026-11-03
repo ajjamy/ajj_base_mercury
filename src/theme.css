@@ -63,7 +63,7 @@
     --navbar-height: calc(var(--spacing) * 18);
   }
 
-    --gradient-light-transparent: linear-gradient(
+  --gradient-light-transparent: linear-gradient(
     48deg,
     rgba(245, 237, 224, 1) 0%,
     rgba(245, 237, 224, 0.7) 25%,

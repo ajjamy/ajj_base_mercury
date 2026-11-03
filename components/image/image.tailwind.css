@@ -1,6 +1,11 @@
 @layer components {
+  /*
+   * The figure sets its own width so it still displays properly inside a
+   * flex parent (e.g. Group) that would otherwise shrink it to its content.
+   */
   figure.image {
-    transition: border-bottom-color;
+    @apply w-full;
+    /* transition: border-bottom-color; */
 
     .image--wrapper {
       transition-duration: 0.3s;
@@ -13,4 +18,19 @@
 
   figcaption {
   }
+}
+
+/*
+ * Canvas's own image.css sets `.image { max-width: 100% }` outside any cascade layer, and unlayered CSS beats every layer. These must stay unlayered too.
+ */
+figure.image.image--width-sm {
+  max-width: 200px;
+}
+
+figure.image.image--width-md {
+  max-width: 480px;
+}
+
+figure.image.image--width-lg {
+  max-width: 640px;
 }
