@@ -128,9 +128,10 @@
         with_context: false
       )
     }}
-    <p class="cta__text">
+    {# Rich text arrives wrapped in its own <p> tags, so this can't be a <p>. #}
+    <div class="cta__text">
       {{ text }}
-    </p>
+    </div>
     {% if block('actions') is defined %}
       <div
         class="{{

@@ -35,8 +35,10 @@ props:
     text:
       type: string
       title: Text
+      contentMediaType: text/html
+      x-formatting-context: block
       examples:
-        - Lorem ipsum dolor sit amet.
+        - <p>Lorem ipsum dolor sit amet.</p>
     text_align:
       type: string
       title: Text alignment

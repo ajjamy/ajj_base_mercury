@@ -12,5 +12,9 @@
     padding: 1rem;
     margin-bottom: 1rem;
     background-color: #d9d4bf;
+
+    & > :last-child {
+      @apply mb-0;
+    }
   }
 }
