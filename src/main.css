@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "../components/heading/heading.tailwind.css";
+@import "../components/text/text.tailwind.css";
 @import "../components/hero-blog/hero-blog.tailwind.css";
 @import "../components/image/image.tailwind.css";
 @import "../components/navbar/navbar.tailwind.css";
@@ -11,6 +12,7 @@
 @import "../components/carousel/carousel.tailwind.css";
 @import "../components/cta/cta.tailwind.css";
 @import "../components/accordion/accordion.tailwind.css";
+@import "../components/button/button.tailwind.css";
 @import "./layout.tailwind.css";
 @import "./client-testimonials.css";
 
@@ -415,20 +417,21 @@
   z-index: 1;
 }
 
+/* Defined with @utility (not in @layer utilities) so it can be used with @apply. */
+@utility bg-gradient-light {
+  background-image: var(--gradient-light-transparent-mobile);
+
+  @media screen and (min-width: 62rem) {
+    background-image: var(--gradient-light-transparent);
+  }
+}
+
 @layer utilities {
   /* For custom utility classes with highest precedence. */
 
   /* Set the container query context for full-width elements. */
   .layout-content {
     container-type: inline-size;
-  }
-
-  .bg-gradient-light {
-    background-image: var(--gradient-light-transparent-mobile);
-
-    @media screen and (min-width: 62rem) {
-      background-image: var(--gradient-light-transparent);
-    }
   }
 
   .bg-accent-warm {

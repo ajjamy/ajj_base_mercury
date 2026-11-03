@@ -1,5 +1,7 @@
 @layer components {
   .section {
+    @apply @container
+      mx-auto;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,5 +15,228 @@
     @media screen and (min-width: 64rem) {
       padding-block: 4rem;
     }
+  }
+
+  /* background_color variants: text color */
+  .section--primary {
+    @apply text-primary-foreground;
+  }
+
+  .section--secondary {
+    @apply text-secondary-foreground;
+  }
+
+  .section--accent {
+    @apply text-accent-foreground;
+  }
+
+  .section--muted {
+    @apply text-muted-foreground;
+  }
+
+  .section--gradient-light,
+  .section--no-color {
+    @apply text-foreground;
+  }
+
+  .section__media {
+    @apply absolute
+      inset-0
+      z-[-1];
+  }
+
+  .section__media-image {
+    @apply h-full
+      w-full
+      object-cover;
+  }
+
+  /* background_color variants: background layer */
+  .section__background {
+    @apply absolute
+      inset-0
+      z-[-1];
+  }
+
+  .section__background--primary {
+    @apply bg-primary;
+  }
+
+  .section__background--secondary {
+    @apply bg-secondary;
+  }
+
+  .section__background--accent {
+    @apply bg-accent;
+  }
+
+  .section__background--muted {
+    @apply bg-muted;
+  }
+
+  .section__background--no-color {
+    @apply bg-none;
+  }
+
+  .section__background--gradient-light {
+    @apply bg-gradient-light;
+  }
+
+  /* let a background image show through the color */
+  .section__background--has-image {
+    @apply opacity-50;
+  }
+
+  .section__background--gradient-light.section__background--has-image {
+    @apply opacity-100;
+  }
+
+  .section__container {
+    @apply container
+      mx-auto
+      px-4;
+  }
+
+  /* width variants */
+  .section__content {
+    @apply @container
+      mx-auto;
+  }
+
+  .section__content--width-100 {
+    @apply lg:max-w-full;
+  }
+
+  .section__content--width-90 {
+    @apply lg:max-w-9/10;
+  }
+
+  .section__content--width-80 {
+    @apply lg:max-w-8/10;
+  }
+
+  .section__content--width-75 {
+    @apply lg:max-w-3/4;
+  }
+
+  .section__content--width-50 {
+    @apply lg:max-w-1/2;
+  }
+
+  .section__header {
+    @apply mb-6
+      md:mb-8
+      xl:mb-10;
+  }
+
+  .section__footer {
+    @apply mt-6
+      md:mt-8
+      xl:mt-10;
+  }
+
+  .section__grid {
+    @apply grid
+      w-full
+      min-w-0
+      gap-4
+      @sm:gap-6
+      @3xl:gap-8;
+
+    & .view-content {
+      @apply grid
+        w-full
+        min-w-0
+        gap-4
+        md:gap-6
+        xl:gap-8;
+    }
+  }
+
+  /*
+   * Grid columns. Order matters: the 100 layout, then mobile_columns, then the
+   * responsive layouts, so later rules win just as the old utility classes did.
+   */
+  .section__grid--cols-100 {
+    @apply grid-cols-1;
+  }
+
+  .section__grid--mobile-2 {
+    @apply grid-cols-2;
+  }
+
+  .section__grid--mobile-3 {
+    @apply grid-cols-3;
+  }
+
+  .section__grid--cols-50-50 {
+    @apply md:grid-cols-2;
+  }
+
+  .section__grid--cols-33-33-33 {
+    @apply md:grid-cols-3;
+  }
+
+  .section__grid--cols-75-25 {
+    @apply md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)];
+  }
+
+  .section__grid--cols-25-75 {
+    @apply md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)];
+  }
+
+  .section__grid--cols-67-33 {
+    @apply md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)];
+  }
+
+  .section__grid--cols-33-67 {
+    @apply md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)];
+  }
+
+  .section__grid--cols-50-25-25 {
+    @apply md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)];
+  }
+
+  .section__grid--cols-25-25-50 {
+    @apply md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)];
+  }
+
+  .section__grid--cols-25-25-25-25 {
+    @apply sm:grid-cols-2
+      lg:grid-cols-4;
+  }
+
+  .section__grid--cols-25-25-25-25.section__grid--mobile-2 {
+    @apply sm:grid-cols-4;
+  }
+
+  /* views_columns variants */
+  .section__grid--views-50-50 .view-content {
+    @apply md:grid-cols-2;
+  }
+
+  .section__grid--views-33-33-33 .view-content {
+    @apply md:grid-cols-3;
+  }
+
+  .section__grid--views-25-25-25-25 .view-content {
+    @apply sm:grid-cols-2
+      lg:grid-cols-4;
+  }
+}
+
+/*
+ * These override classes on child components (e.g. .cq-full in main.css), so
+ * they stay in the utilities layer; a components-layer rule would lose to them.
+ */
+@layer utilities {
+  .section__container .cq-full {
+    @apply mx-0
+      w-full;
+  }
+
+  .section__grid > * {
+    @apply w-full
+      min-w-0;
   }
 }

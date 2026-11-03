@@ -1,0 +1,102 @@
+@layer components {
+  .btn {
+    @apply flex
+      cursor-pointer
+      items-center
+      justify-center
+      rounded-sm
+      leading-tight
+      font-medium
+      no-underline
+      transition
+      duration-300
+      ease-in-out
+      outline-none
+      hover:no-underline
+      focus-visible:ring-[3px]
+      disabled:pointer-events-none
+      disabled:opacity-50;
+  }
+
+  /* size variants */
+  .btn--size-small {
+    @apply gap-1
+      px-4
+      py-2
+      text-sm
+      xl:py-2.5
+      xl:text-md;
+  }
+
+  .btn--size-medium {
+    @apply gap-2
+      px-5
+      py-2
+      text-md
+      xl:py-3
+      xl:text-lg;
+  }
+
+  .btn--size-large {
+    @apply gap-3
+      px-6
+      py-3
+      text-lg
+      xl:py-3.5
+      xl:text-xl;
+  }
+
+  /* variant variants */
+  .btn--primary {
+    @apply bg-primary
+      text-primary-foreground
+      hover:bg-primary/85;
+  }
+
+  .btn--secondary {
+    @apply bg-accent
+      text-accent-foreground
+      hover:bg-accent/80;
+  }
+
+  .btn--primary-inverted {
+    @apply bg-primary-foreground
+      text-primary
+      hover:text-primary/80;
+  }
+
+  .btn--secondary-inverted {
+    @apply border
+      border-accent
+      bg-accent-foreground
+      text-accent
+      hover:bg-accent-foreground/80;
+  }
+
+  /* mobile_width variants */
+  .btn--width-full {
+    @apply w-full
+      sm:w-fit;
+  }
+
+  .btn--width-fit {
+    @apply w-fit;
+  }
+
+  /* the icon comes before the label in the markup, so this moves it after */
+  .btn--icon-last {
+    @apply flex-row-reverse;
+  }
+
+  .btn__icon {
+    @apply transition
+      duration-300
+      ease-in-out;
+  }
+
+  @media (hover: hover) {
+    .btn:hover .btn__icon {
+      @apply translate-x-1;
+    }
+  }
+}
