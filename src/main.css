@@ -10,6 +10,7 @@
 @import "../components/section/section.tailwind.css";
 @import "../components/carousel/carousel.tailwind.css";
 @import "../components/cta/cta.tailwind.css";
+@import "../components/accordion/accordion.tailwind.css";
 @import "./layout.tailwind.css";
 @import "./client-testimonials.css";
 
