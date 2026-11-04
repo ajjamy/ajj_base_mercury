@@ -100,6 +100,12 @@
         '50-50': 'section__grid--views-50-50',
         '33-33-33': 'section__grid--views-33-33-33',
         '25-25-25-25': 'section__grid--views-25-25-25-25'
+      },
+      align: {
+        stretch: '',
+        start: 'section__grid--align-start',
+        center: 'section__grid--align-center',
+        end: 'section__grid--align-end'
       }
     }
   )
@@ -109,7 +115,8 @@
   grid.apply({
     columns: columns|default('100'),
     mobileColumns: mobile_columns|default('1'),
-    viewsColumns: views_columns|default('100')
+    viewsColumns: views_columns|default('100'),
+    align: grid_align|default('stretch')
   })
 %}
 

@@ -7,6 +7,32 @@ props:
     - text_align
     - icon_align
   properties:
+    text:
+      type: string
+      title: Heading
+      examples:
+        - Your heading here
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>This is placeholder text.</p>"
+    text_align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center
     tile_size:
       type: string
       title: Aspect ratio
@@ -46,7 +72,7 @@ props:
         large: Large
       default: medium
       examples:
-        - medium
+        - small
     icon:
       type: string
       title: Icon name
@@ -98,29 +124,3 @@ props:
       type: string
       title: Link
       format: uri-reference
-    text:
-      type: string
-      title: Heading
-      examples:
-        - Your heading here
-    description:
-      type: string
-      title: Description
-      contentMediaType: text/html
-      x-formatting-context: block
-      examples:
-        - "<p>This is placeholder text.</p>"
-    text_align:
-      type: string
-      title: Text alignment
-      enum:
-        - left
-        - center
-        - right
-      meta:enum:
-        left: Left
-        center: Center
-        right: Right
-      default: center
-      examples:
-        - center

@@ -19,19 +19,6 @@
   )
 %}
 
-{# Important modifier overrides the heading component's text-inherit. #}
-{% set cta_heading_variants =
-  html_cva(
-    base: ['max-w-3xl'],
-    variants: {
-      headingColor: {
-        default: '',
-        accentWarm: 'bg-accent-warm px-4 py-4 text-foreground!'
-      }
-    }
-  )
-%}
-
 {% set overlay_variants =
   html_cva(
     base: ['absolute inset-0'],
@@ -120,9 +107,8 @@
           align: cta_text_align,
           text_color: 'default',
           url: '',
-          heading_classes: cta_heading_variants.apply({
-            headingColor: cta_heading_color
-          }),
+          background_color: cta_heading_color,
+          heading_classes: 'max-w-3xl',
           text_size: 'heading-responsive-7xl'
         },
         with_context: false

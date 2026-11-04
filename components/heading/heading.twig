@@ -2,6 +2,7 @@
 {% set heading_align = align|default('left') %}
 {% set heading_text_color = text_color|default('default') %}
 {% set heading_text_size = text_size|default('heading-responsive-4xl') %}
+{% set heading_background_color = background_color|default('default') %}
 {% set has_url = url is not empty ? 'yes' : 'no' %}
 {% set has_icon = icon is not empty %}
 {% set heading_icon_layout = icon_layout|default('inline') %}
@@ -13,6 +14,12 @@
   'extra-large': 64
 } %}
 
+{#
+  backgroundColor: the box wraps the text, and em padding scales with the text
+  size at every breakpoint. The important modifier keeps the text readable over
+  the background, whatever the text color. A w-fit box ignores text-align, so
+  the compound variants position it with auto margins instead.
+#}
 {% set heading_variants =
   html_cva(
     variants: {
@@ -40,6 +47,10 @@
         'heading-responsive-xl': 'text-lg lg:text-xl',
         'heading-responsive-lg': 'text-md lg:text-lg'
       },
+      backgroundColor: {
+        default: '',
+        accentWarm: 'w-fit bg-accent-warm px-[0.4em] py-[0.2em] text-foreground!'
+      },
       hasUrl: {
         yes: 'duration-300 hover:scale-105 hover:opacity-90',
         no: ''
@@ -49,6 +60,16 @@
       {
         heading_level: ['1', '2', '3', '4', '5', '6'],
         class: 'font-semibold'
+      },
+      {
+        backgroundColor: 'accentWarm',
+        align: 'center',
+        class: 'mx-auto'
+      },
+      {
+        backgroundColor: 'accentWarm',
+        align: 'right',
+        class: 'ml-auto'
       }
     ]
   )
@@ -139,6 +160,7 @@
       align: heading_align,
       textColor: heading_text_color,
       textSize: heading_text_size,
+      backgroundColor: heading_background_color,
       hasUrl: has_url
     },
     additional_classes

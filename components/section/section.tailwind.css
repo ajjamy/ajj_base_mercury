@@ -84,7 +84,7 @@
 
   /* let a background image show through the color */
   .section__background--has-image {
-    @apply opacity-50;
+    @apply opacity-70;
   }
 
   .section__background--gradient-light.section__background--has-image {
@@ -222,6 +222,22 @@
   .section__grid--views-25-25-25-25 .view-content {
     @apply sm:grid-cols-2
       lg:grid-cols-4;
+  }
+
+  /* grid_align variants (also applied to view grids inside the section) */
+  .section__grid--align-start,
+  .section__grid--align-start .view-content {
+    @apply items-start;
+  }
+
+  .section__grid--align-center,
+  .section__grid--align-center .view-content {
+    @apply items-center;
+  }
+
+  .section__grid--align-end,
+  .section__grid--align-end .view-content {
+    @apply items-end;
   }
 }
 

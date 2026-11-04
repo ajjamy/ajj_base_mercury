@@ -65,6 +65,18 @@ props:
         accent: Accent
       examples:
         - default
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - default
+        - accentWarm
+      meta:enum:
+        default: Default
+        accentWarm: Accent Orange
+      default: default
+      examples:
+        - default
     align:
       type: string
       title: Text alignment

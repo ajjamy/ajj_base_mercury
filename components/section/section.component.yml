@@ -61,6 +61,18 @@ props:
         - "3"
       examples:
         - "1"
+    grid_align:
+      type: string
+      title: Grid content alignment
+      description: Vertically aligns items within each grid row. Leave empty to stretch items to equal height.
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Top
+        center: Center
+        end: Bottom
     margin_block_start:
       type: string
       title: Margin top
@@ -74,7 +86,7 @@ props:
         - "96"
         - "128"
       examples:
-        - "48"
+        - "0"
       default:
         - "0"
     margin_block_end:
@@ -90,7 +102,7 @@ props:
         - "96"
         - "128"
       examples:
-        - "48"
+        - "0"
       default:
         - "0"
     padding_block_start:
