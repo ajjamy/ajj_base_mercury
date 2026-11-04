@@ -135,10 +135,10 @@ props:
         - muted
         - gradient-light
       meta:enum:
-        primary: Primary
-        secondary: Secondary
-        accent: Accent
-        muted: Muted
+        primary: Primary (Dark blue)
+        secondary: Secondary (Neutral Medium)
+        accent: Accent (Light Blue)
+        muted: Muted (Neutral Light)
         gradient-light: Gradient Light
     background_media:
       $ref: json-schema-definitions://canvas.module/image

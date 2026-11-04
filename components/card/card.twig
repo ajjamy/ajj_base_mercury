@@ -6,7 +6,7 @@
 
 {% set card =
   html_cva(
-    base: ['group relative flex rounded-xl shadow-2xl transition duration-300 in-[.views-row]:h-full'],
+    base: ['group relative flex rounded-sm shadow-2xl transition duration-300 in-[.views-row]:h-full'],
     variants: {
       orientation: {
         vertical: 'flex-col',
@@ -52,8 +52,8 @@
         horizontal: 'md:aspect-auto md:flex-[0_1_50%]'
       },
       style: {
-        framed: 'rounded-lg',
-        full: 'rounded-xl'
+        framed: 'rounded-sm',
+        full: 'rounded-sm'
       }
     }
   )
