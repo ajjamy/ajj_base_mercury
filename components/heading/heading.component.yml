@@ -90,6 +90,20 @@ props:
         right: Right
       examples:
         - left
+    margin_bottom:
+      type: string
+      title: Space below
+      description: Optional. Adds space between the heading and the content after it.
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra large
     url:
       type: string
       title: Link

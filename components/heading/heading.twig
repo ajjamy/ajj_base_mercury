@@ -3,6 +3,7 @@
 {% set heading_text_color = text_color|default('default') %}
 {% set heading_text_size = text_size|default('heading-responsive-4xl') %}
 {% set heading_background_color = background_color|default('default') %}
+{% set heading_margin_bottom = margin_bottom|default('noMargin') %}
 {% set has_url = url is not empty ? 'yes' : 'no' %}
 {% set has_icon = icon is not empty %}
 {% set heading_icon_layout = icon_layout|default('inline') %}
@@ -54,6 +55,13 @@
       hasUrl: {
         yes: 'duration-300 hover:scale-105 hover:opacity-90',
         no: ''
+      },
+      marginBottom: {
+        noMargin: '',
+        sm: 'mb-2 md:mb-3',
+        md: 'mb-4 md:mb-6',
+        lg: 'mb-6 md:mb-8',
+        xl: 'mb-8 md:mb-12'
       }
     },
     compound_variants: [
@@ -161,7 +169,8 @@
       textColor: heading_text_color,
       textSize: heading_text_size,
       backgroundColor: heading_background_color,
-      hasUrl: has_url
+      hasUrl: has_url,
+      marginBottom: heading_margin_bottom
     },
     additional_classes
   )
