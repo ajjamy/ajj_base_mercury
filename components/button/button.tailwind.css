@@ -50,30 +50,70 @@
   /* variant variants */
   .btn--primary {
     @apply bg-primary
-      text-primary-foreground
-      hover:bg-primary/85;
+      text-primary-foreground;
+
+      &:hover {
+        background-color: var(--background);
+        border: 1px solid var(--primary);
+        color: var(--primary);
+      }
+  }
+
+  .btn--primary-inverted {
+    @apply text-primary;
+    background-color: var(--background);
+    border: 1px solid var(--primary);
+
+    &:hover {
+        @apply bg-primary
+        text-primary-foreground;
+    }
   }
 
   .btn--secondary {
     @apply bg-accent
-      text-accent-foreground
-      hover:bg-accent/80;
-    border: 1px solid var(--primary);
-  }
+      text-accent-foreground;
 
-  .btn--primary-inverted {
-    @apply text-primary
-      hover:text-primary/80;
-    background-color: var(--background);
-    border: 1px solid var(--primary);
+    &:hover {
+        @apply border
+        bg-accent-foreground
+        text-accent
+    }
   }
 
   .btn--secondary-inverted {
     @apply border
       border-accent
       bg-accent-foreground
-      text-accent
-      hover:bg-accent-foreground/80;
+      text-accent;
+    
+      &:hover {
+        @apply bg-accent
+        text-accent-foreground;
+      }
+  }
+
+  .btn--accent-warm {
+    background-color: var(--accent-warm);
+    color: var(--foreground);
+
+    &:hover {
+        background-color: var(--primary);
+        color: var(--accent-warm);
+        border-color: var(--accent-warm);
+    }
+  }
+
+  .btn--accent-warm-inverted {
+    @apply bg-primary;
+    color: var(--accent-warm);
+    border-color: var(--accent-warm);
+
+    &:hover {
+        background-color: var(--accent-warm);
+        color: var(--foreground);
+        border-color: var(--foreground);
+    }
   }
 
   /* mobile_width variants */

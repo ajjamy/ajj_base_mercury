@@ -13,14 +13,18 @@ props:
       title: Style
       enum:
         - primary
-        - secondary
         - primary-inverted
+        - secondary
         - secondary-inverted
+        - accent-warm
+        - accent-warm-inverted
       meta:enum:
-        primary: Primary
-        secondary: Secondary
+        primary: Primary (Dark Blue)
         primary-inverted: Primary inverted
-        secondary-inverted: Secondary inverted
+        secondary: Accent (Light Blue)
+        secondary-inverted: Accent inverted
+        accent-warm: Accent Warm (Orange)
+        accent-warm-inverted: Accent Warm (Inverted)
       examples:
         - primary
     label:

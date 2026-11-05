@@ -9,7 +9,7 @@
  */
 
 :root {
-  --background: #faf9f7;
+  --background: #faf9f7; /* white */
   --foreground: #0e1e32; /* black */
   --card: #f4f1ec;
   --card-foreground: #142b49;
