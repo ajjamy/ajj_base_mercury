@@ -114,6 +114,27 @@
     }
   }
 
+  /* text_align variants. Figures are w-fit, so they need auto margins to follow. */
+  .rich-text--align-left {
+    @apply text-start;
+  }
+
+  .rich-text--align-center {
+    @apply text-center;
+
+    & figure {
+      @apply mx-auto;
+    }
+  }
+
+  .rich-text--align-right {
+    @apply text-end;
+
+    & figure {
+      @apply ms-auto;
+    }
+  }
+
   /* text_size variants */
   .rich-text--size-xs {
     @apply text-xs

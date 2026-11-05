@@ -35,6 +35,20 @@ props:
         text-3xl: 32px
       examples:
         - normal
+    text_align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: left
+      examples:
+        - left
     text_color:
       type: string
       title: Text color

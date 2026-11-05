@@ -1,5 +1,6 @@
 {% set text_text_color = text_color|default('default') %}
 {% set text_text_size = text_size|default('normal') %}
+{% set text_text_align = text_align|default('left') %}
 
 {# Styles for the base and variant classes live in text.tailwind.css. #}
 {% set text_component =
@@ -19,6 +20,11 @@
         'text-xl': 'rich-text--size-xl',
         'text-2xl': 'rich-text--size-2xl',
         'text-3xl': 'rich-text--size-3xl'
+      },
+      textAlign: {
+        left: 'rich-text--align-left',
+        center: 'rich-text--align-center',
+        right: 'rich-text--align-right'
       }
     }
   )
@@ -27,7 +33,8 @@
 {% set text_classes =
   text_component.apply({
     textColor: text_text_color,
-    textSize: text_text_size
+    textSize: text_text_size,
+    textAlign: text_text_align
   })
 %}
 
