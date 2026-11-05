@@ -1,0 +1,34 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Badge list
+description: Shows a list of badges, one per item. In a content template, link Labels to a multi-value field such as taxonomy terms.
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - style
+  properties:
+    labels:
+      type: array
+      title: Labels
+      description: In a content template, link this to a field's "Taxonomy term → Name".
+      items:
+        type: string
+      examples:
+        - [Badge one, Badge two, Badge three]
+    style:
+      type: string
+      title: Style
+      enum:
+        - primary
+        - secondary
+        - accent
+        - accent-warm
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        accent-warm: Accent Warm
+      default: primary
+      examples:
+        - primary
