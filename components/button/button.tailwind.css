@@ -16,7 +16,7 @@
       focus-visible:ring-[3px]
       disabled:pointer-events-none
       disabled:opacity-50;
-      border: 1px solid transparent;
+    border: 1px solid transparent;
   }
 
   /* size variants */
@@ -58,14 +58,14 @@
     @apply bg-accent
       text-accent-foreground
       hover:bg-accent/80;
-      border: 1px solid var(--primary);
+    border: 1px solid var(--primary);
   }
 
   .btn--primary-inverted {
     @apply text-primary
       hover:text-primary/80;
-      background-color: var(--background);
-      border: 1px solid var(--primary);
+    background-color: var(--background);
+    border: 1px solid var(--primary);
   }
 
   .btn--secondary-inverted {
