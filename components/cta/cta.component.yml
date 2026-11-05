@@ -32,6 +32,27 @@ props:
       default: default
       examples:
         - default
+    heading_margin_bottom:
+      type: string
+      title: Space below heading
+      description: Optional. Adds space between the heading and the text below it. Does not apply when the heading background color is Accent Orange.
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra large
+    heading_inverted:
+      type: boolean
+      title: Invert heading text color
+      description: Does not apply when the heading background color is Accent Orange.
+      default: false
+      examples:
+        - false
     text:
       type: string
       title: Text

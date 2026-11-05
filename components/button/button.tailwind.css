@@ -52,11 +52,11 @@
     @apply bg-primary
       text-primary-foreground;
 
-      &:hover {
-        background-color: var(--background);
-        border: 1px solid var(--primary);
-        color: var(--primary);
-      }
+    &:hover {
+      background-color: var(--background);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
   }
 
   .btn--primary-inverted {
@@ -65,7 +65,7 @@
     border: 1px solid var(--primary);
 
     &:hover {
-        @apply bg-primary
+      @apply bg-primary
         text-primary-foreground;
     }
   }
@@ -75,9 +75,9 @@
       text-accent-foreground;
 
     &:hover {
-        @apply border
+      @apply border
         bg-accent-foreground
-        text-accent
+        text-accent;
     }
   }
 
@@ -86,11 +86,11 @@
       border-accent
       bg-accent-foreground
       text-accent;
-    
-      &:hover {
-        @apply bg-accent
+
+    &:hover {
+      @apply bg-accent
         text-accent-foreground;
-      }
+    }
   }
 
   .btn--accent-warm {
@@ -98,9 +98,9 @@
     color: var(--foreground);
 
     &:hover {
-        background-color: var(--primary);
-        color: var(--accent-warm);
-        border-color: var(--accent-warm);
+      background-color: var(--primary);
+      color: var(--accent-warm);
+      border-color: var(--accent-warm);
     }
   }
 
@@ -110,9 +110,9 @@
     border-color: var(--accent-warm);
 
     &:hover {
-        background-color: var(--accent-warm);
-        color: var(--foreground);
-        border-color: var(--foreground);
+      background-color: var(--accent-warm);
+      color: var(--foreground);
+      border-color: var(--foreground);
     }
   }
 

@@ -3,6 +3,7 @@
 @import "../components/heading/heading.tailwind.css";
 @import "../components/text/text.tailwind.css";
 @import "../components/hero-blog/hero-blog.tailwind.css";
+@import "../components/badge/badge.tailwind.css";
 @import "../components/image/image.tailwind.css";
 @import "../components/navbar/navbar.tailwind.css";
 @import "../components/anchor/anchor.tailwind.css";
@@ -417,7 +418,11 @@
   z-index: 1;
 }
 
-/* Defined with @utility (not in @layer utilities) so it can be used with @apply. */
+/*
+ * Defined as a Tailwind utility (not in the utilities layer) so it can be applied
+ * elsewhere. Avoid writing at-rule names in comments here: the Tailwind VS Code
+ * extension's validator matches them inside comments and reports a false error.
+ */
 @utility bg-gradient-light {
   background-image: var(--gradient-light-transparent-mobile);
 

@@ -2,6 +2,10 @@
 {% set background_color = background_color|default('noColor') %}
 {% set cta_overlay_opacity = overlay_opacity|default('0') %}
 {% set cta_heading_color = heading_color|default('default') %}
+{# Heading spacing and inverted text are ignored with the Accent Warm background. #}
+{% set cta_heading_is_accent_warm = cta_heading_color == 'accentWarm' %}
+{% set cta_heading_margin_bottom = cta_heading_is_accent_warm ? '' : heading_margin_bottom|default('') %}
+{% set cta_heading_text_color = heading_inverted and not cta_heading_is_accent_warm ? 'inverted' : 'default' %}
 
 {% set cta_variants =
   html_cva(
@@ -105,9 +109,10 @@
           heading_text: heading_text|default(''),
           level: level|default(2),
           align: cta_text_align,
-          text_color: 'default',
+          text_color: cta_heading_text_color,
           url: '',
           background_color: cta_heading_color,
+          margin_bottom: cta_heading_margin_bottom,
           heading_classes: 'max-w-3xl',
           text_size: 'heading-responsive-6xl'
         },
