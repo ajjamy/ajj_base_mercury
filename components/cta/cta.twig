@@ -1,6 +1,6 @@
-{% set cta_text_align = text_align|default('center') %}
+{% set cta_text_align = text_align|default('left') %}
 {% set background_color = background_color|default('noColor') %}
-{% set cta_overlay_opacity = overlay_opacity|default('20%') %}
+{% set cta_overlay_opacity = overlay_opacity|default('0') %}
 {% set cta_heading_color = heading_color|default('default') %}
 
 {% set cta_variants =
@@ -109,7 +109,7 @@
           url: '',
           background_color: cta_heading_color,
           heading_classes: 'max-w-3xl',
-          text_size: 'heading-responsive-7xl'
+          text_size: 'heading-responsive-6xl'
         },
         with_context: false
       )
