@@ -9,18 +9,13 @@
 
 {% set badge =
   html_cva(
-    base: [
-      'rounded-sm border',
-      'inline-flex items-center gap-[2px] lg:gap-1',
-      'px-[6px] py-[5px] lg:px-2 lg:py-[6px] 2xl:px-3 2xl:py-2',
-      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
-    ],
+    base: ['badge rounded-sm border'],
     variants: {
       style: {
-        primary: ['border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90'],
-        secondary: ['border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90'],
-        accent: ['border-transparent bg-accent text-accent-foreground [a&]:hover:bg-accent/90'],
-        'accent-warm': ['border-transparent bg-accent-warm text-foreground [a&]:hover:bg-accent-warm/90']
+        primary: ['badge badge--primary'],
+        secondary: ['badge badge--secondary'],
+        accent: ['badge badge--accent'],
+        'accent-warm': ['badge badge--accent-warm']
       },
       iconFirst: {
         yes: 'flex-row',
@@ -41,7 +36,7 @@
 %}
 
 {% if has_url == 'yes' %}
-  <a href="{{ url }}" aria-label="{{ label }}" class="{{ badge_classes }}">
+  <a href="{{ url }}" aria-label="{{ label }}" class="badge--link {{ badge_classes }}">
     {% if icon is not empty %}
       {{
         include(

@@ -1,0 +1,40 @@
+@layer components {
+  .badge {
+    @apply inline-flex
+      items-center
+      gap-[2px]
+      border-transparent
+      px-[6px]
+      py-[5px]
+      lg:gap-1
+      lg:px-2
+      lg:py-[6px]
+      2xl:px-3
+      2xl:py-2;
+
+    &.badge--link:hover {
+      border-color: var(--foreground);
+    }
+
+    &.badge--primary {
+      @apply border-transparent
+        bg-primary
+        text-primary-foreground;
+    }
+    &.badge--secondary {
+      @apply border-transparent
+        bg-secondary
+        text-secondary-foreground;
+    }
+    &.badge--accent {
+      @apply border-transparent
+        bg-accent
+        text-accent-foreground;
+    }
+    &.badge--accent-warm {
+      @apply border-transparent
+        bg-accent-warm
+        text-foreground;
+    }
+  }
+}
