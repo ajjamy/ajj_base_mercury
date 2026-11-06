@@ -1,7 +1,7 @@
 {% set badge_list_style = style|default('primary') %}
 
 {% if labels is not empty %}
-  <ul class="flex list-none flex-wrap gap-2 ps-0">
+  <ul class="badge--list flex list-none flex-wrap content-start gap-2 ps-0">
     {% for label in labels %}
       {% if label is not empty %}
         <li>

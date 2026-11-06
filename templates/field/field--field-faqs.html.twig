@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * FAQs field, on any content type that uses field_faqs.
+ *
+ * Wraps the FAQ paragraphs in an Accordion container, so only one FAQ is open
+ * at a time. Each paragraph renders itself as an Accordion
+ * (see paragraph--faq.html.twig).
+ *
+ * Available variables:
+ * - items: The field items, each with rendered content.
+ */
+#}
+{% embed 'ajj_base_mercury:accordion-container'
+  with {
+    items: items
+  } only
+%}
+  {% block accordion_content %}
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  {% endblock %}
+{% endembed %}

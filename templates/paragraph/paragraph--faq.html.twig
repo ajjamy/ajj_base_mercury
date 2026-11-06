@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * FAQ paragraph, rendered as one Accordion.
+ *
+ * The question becomes the accordion heading and the answer goes in the
+ * accordion's content slot. field--field-faqs.html.twig wraps all FAQs in an
+ * Accordion container.
+ *
+ * Available variables:
+ * - paragraph: The paragraph entity.
+ * - content: The paragraph's rendered fields.
+ */
+#}
+{% embed 'ajj_base_mercury:accordion'
+  with {
+    title: paragraph.field_faq_question.value,
+    heading_level: 3,
+    open_by_default: false,
+    answer: content.field_faq_content
+  } only
+%}
+  {% block accordion_content %}
+    <div class="rich-text">
+      {{ answer }}
+    </div>
+  {% endblock %}
+{% endembed %}

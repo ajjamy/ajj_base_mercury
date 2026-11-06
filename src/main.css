@@ -285,7 +285,7 @@
   .fieldgroup:focus-within {
     > label,
     .fieldset-legend {
-      @apply text-accent;
+      @apply text-base;
     }
   }
 
@@ -312,8 +312,8 @@
   textarea,
   select {
     @apply w-full
-      border-0
-      border-b
+      rounded-sm
+      border
       bg-transparent
       text-base
       outline-none;
@@ -332,13 +332,13 @@
   input[type="time"]:focus,
   textarea:focus,
   select:focus {
-    @apply border-accent
-      bg-muted/60
+    @apply border
       shadow-sm;
+    background-color: var(--background);
   }
 
   select:focus {
-    @apply text-accent;
+    @apply text-base;
   }
 
   input::placeholder,
