@@ -1,0 +1,29 @@
+{#
+  Shows a formatted date from a UNIX timestamp, e.g. a node's "Authored on".
+#}
+{% set formats = {
+  long: 'F j, Y',
+  medium: 'M j, Y',
+  numeric: 'm.d.Y'
+} %}
+
+{% set size_classes = {
+  'text-xs': 'text-xs',
+  'text-sm': 'text-sm',
+  normal: 'text-base'
+} %}
+
+{# Matches the Heading and Text components' text colors. #}
+{% set color_classes = {
+  default: 'text-inherit',
+  inverted: 'text-background'
+} %}
+
+{% if date is not empty %}
+  <p class="date {{ size_classes[text_size|default('text-sm')]|default('text-sm') }} {{ color_classes[text_color|default('default')]|default('text-inherit') }}">
+    {% if prefix is not empty %}
+      {{ prefix }}
+    {% endif %}
+   <strong><time datetime="{{ date|date('Y-m-d') }}">{{ date|date(formats[format|default('long')]|default('F j, Y')) }}</time></strong>
+  </p>
+{% endif %}

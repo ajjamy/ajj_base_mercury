@@ -39,7 +39,8 @@
       background: {
         primary: 'bg-primary',
         secondary: 'bg-secondary',
-        accent: 'bg-accent'
+        accent: 'bg-accent',
+        muted: 'bg-muted'
       },
       animation: {
         fade_up: 'opacity-0',
@@ -59,7 +60,7 @@
     flexGap: flex_gap,
     radius: radius,
     padding: padding,
-    background: background,
+    background: background_color|default(background),
     animation: animation
   })
 %}

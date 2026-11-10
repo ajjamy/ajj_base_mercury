@@ -1,0 +1,68 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Date
+description: Shows a formatted date. In a content template, link Date to "Authored on" to show when the item was published.
+group: Base
+status: stable
+props:
+  type: object
+  # "date" must stay optional: Canvas only links non-required fields such as
+  # "Authored on" to optional props.
+  required:
+    - format
+  properties:
+    date:
+      type: integer
+      title: Date
+      description: In a content template, link this to "Authored on".
+      # Canvas only links Drupal timestamp fields (e.g. "Authored on") to an
+      # integer prop declaring exactly this range.
+      minimum: -2147483648
+      maximum: 2147483648
+      examples:
+        # 2026-02-12
+        - 1770856866
+    format:
+      type: string
+      title: Format
+      enum:
+        - long
+        - medium
+        - numeric
+      meta:enum:
+        long: February 12, 2026
+        medium: Feb 12, 2026
+        numeric: 02.12.2026
+      default: long
+      examples:
+        - long
+    prefix:
+      type: string
+      title: Text before the date
+      description: Optional, e.g. "Published".
+    text_color:
+      type: string
+      title: Text color
+      description: Use inverted text on dark backgrounds.
+      enum:
+        - default
+        - inverted
+      meta:enum:
+        default: Default text
+        inverted: Inverted text
+      default: default
+      examples:
+        - default
+    text_size:
+      type: string
+      title: Text size
+      enum:
+        - text-xs
+        - text-sm
+        - normal
+      meta:enum:
+        text-xs: 12px
+        text-sm: 14px
+        normal: 16px (default)
+      default: text-sm
+      examples:
+        - text-sm

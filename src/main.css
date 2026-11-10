@@ -16,6 +16,7 @@
 @import "../components/button/button.tailwind.css";
 @import "./layout.tailwind.css";
 @import "./client-testimonials.css";
+@import "./all-news-filter.tailwind.css";
 
 @theme inline {
   --color-background: var(--background);
