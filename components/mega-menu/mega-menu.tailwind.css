@@ -49,7 +49,7 @@
         p-5
         text-foreground
         shadow-lg;
-      background-color: var(--muted);
+      background-color: var(--background);
 
       @media screen and (min-width: 62rem) {
         padding-top: 2rem;
