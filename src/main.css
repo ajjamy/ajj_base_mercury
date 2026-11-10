@@ -350,17 +350,20 @@
   .form-submit,
   input.button {
     @apply cursor-pointer
-      rounded-lg
+      rounded-sm
       bg-primary
       px-5
       py-2
       text-base
       text-primary-foreground;
+    border: 1px solid transparent;
   }
 
   .form-submit:hover,
   input.button:hover {
-    @apply bg-primary/85;
+    background-color: var(--background);
+    border: 1px solid var(--primary);
+    color: var(--primary);
   }
 
   .form-item--error input,
@@ -388,6 +391,25 @@
     @apply flex
       flex-col
       gap-2;
+  }
+
+  .form-radio,
+  .form-checkbox {
+    width: 24px;
+    height: 24px;
+  }
+
+  .webform-type-checkbox { }
+
+  .form-item-radios,
+  .form-checkboxes {
+
+    .description { width: 100%; }
+
+    .webform-element-description { 
+        margin-top: 0;
+        font-size: 14px;
+    }
   }
 
   .webform-type-checkbox.form-item,

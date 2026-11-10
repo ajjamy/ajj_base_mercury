@@ -74,11 +74,7 @@
     @apply bg-accent
       text-accent-foreground;
 
-    &:hover {
-      @apply border
-        bg-accent-foreground
-        text-accent;
-    }
+    &:hover { border: 1px solid var(--primary); }
   }
 
   .btn--secondary-inverted {
@@ -90,6 +86,7 @@
     &:hover {
       @apply bg-accent
         text-accent-foreground;
+        border: 1px solid var(--primary);
     }
   }
 
@@ -97,11 +94,7 @@
     background-color: var(--accent-warm);
     color: var(--foreground);
 
-    &:hover {
-      background-color: var(--primary);
-      color: var(--accent-warm);
-      border-color: var(--accent-warm);
-    }
+    &:hover { border-color: var(--primary); }
   }
 
   .btn--accent-warm-inverted {
@@ -110,9 +103,9 @@
     border-color: var(--accent-warm);
 
     &:hover {
-      background-color: var(--accent-warm);
-      color: var(--foreground);
-      border-color: var(--foreground);
+        background-color: var(--accent-warm);
+        color: var(--foreground);
+        border-color: var(--primary);
     }
   }
 
