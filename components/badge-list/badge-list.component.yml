@@ -32,3 +32,16 @@ props:
       default: primary
       examples:
         - primary
+    direction:
+      type: string
+      title: Layout
+      description: Show the badges side by side (wrapping onto new lines as needed) or stacked one per line.
+      enum:
+        - horizontal
+        - vertical
+      meta:enum:
+        horizontal: Horizontal
+        vertical: Vertical
+      default: horizontal
+      examples:
+        - horizontal

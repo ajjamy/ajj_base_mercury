@@ -1,0 +1,23 @@
+@layer components {
+
+    .card-image {
+        @apply relative flex rounded-sm shadow-2xl transition duration-300 in-[.views-row]:h-full;
+    }
+
+    .card-icon {
+        @apply @container relative w-full p-6 transition duration-300 md:p-8;
+    }
+
+    .card-logo {
+        @apply  max-w-full md:min-h-[80px];
+    }
+
+    .card-number {
+        @apply relative w-full p-6 transition duration-300 md:p-8;
+
+        &:has(a) {
+            @apply before:absolute before:inset-0 before:content-[''];        }
+
+    }
+
+}

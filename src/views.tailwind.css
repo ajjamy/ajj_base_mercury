@@ -1,0 +1,19 @@
+@layer components {
+    
+    .view-clients {
+        
+        .card-logo {
+            @apply  max-w-full md:min-h-[80px];
+            filter: grayscale(100%);
+
+            &:hover { filter: none; }
+        }
+    }
+}
+
+.view-clients .card-logo:hover { 
+    scale: none; 
+    opacity: 1;
+    border-color: var(--color-muted);
+    box-shadow: var(--shadow-xl);
+}

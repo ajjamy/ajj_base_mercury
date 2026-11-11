@@ -1,7 +1,25 @@
 {% set badge_list_style = style|default('primary') %}
 
+{% set badge_list =
+  html_cva(
+    base: ['badge--list', 'flex', 'list-none', 'gap-2', 'ps-0'],
+    variants: {
+      direction: {
+        horizontal: 'flex-row flex-wrap content-start',
+        vertical: 'flex-col items-start'
+      }
+    }
+  )
+%}
+
+{% set badge_list_classes =
+  badge_list.apply({
+    direction: direction|default('horizontal')
+  })
+%}
+
 {% if labels is not empty %}
-  <ul class="badge--list flex list-none flex-wrap content-start gap-2 ps-0">
+  <ul class="{{ badge_list_classes }}">
     {% for label in labels %}
       {% if label is not empty %}
         <li>

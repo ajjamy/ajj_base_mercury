@@ -15,7 +15,8 @@
 @import "../components/accordion/accordion.tailwind.css";
 @import "../components/button/button.tailwind.css";
 @import "./layout.tailwind.css";
-@import "./client-testimonials.css";
+@import "./cards.tailwind.css";
+@import "./views.tailwind.css";
 
 @theme inline {
   --color-background: var(--background);
@@ -399,8 +400,6 @@
     height: 24px;
   }
 
-  .webform-type-checkbox { }
-
   .form-item-radios,
   .form-checkboxes {
 
@@ -428,7 +427,7 @@
     @apply text-inherit!;
   }
 
-      .views-exposed-form {
+    .views-exposed-form {
         flex-direction: column;
 
         .form-item,
@@ -449,6 +448,8 @@
 
         label { padding: 0 0 0 0.35rem; } 
     }
+
+
 }
 
 /* Override the moderation form block background */

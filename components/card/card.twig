@@ -6,7 +6,7 @@
 
 {% set card =
   html_cva(
-    base: ['group relative flex rounded-sm shadow-2xl transition duration-300 in-[.views-row]:h-full'],
+    base: ['card-image group'],
     variants: {
       orientation: {
         vertical: 'flex-col',
@@ -17,7 +17,7 @@
         no: 'text-left'
       },
       clickable: {
-        yes: 'cursor-pointer hover:scale-103',
+        yes: 'cursor-pointer hover:scale-101',
         no: ''
       },
       style: {
@@ -25,19 +25,55 @@
         full: ''
       },
       backgroundColor: {
-        default: 'bg-card text-card-foreground hover:bg-card/90 hover:text-card-foreground/90',
-        background: 'bg-background text-foreground hover:bg-background/90 hover:text-foreground/90',
-        accent: 'bg-accent text-accent-foreground hover:bg-accent/80 hover:text-accent-foreground/80',
-        primary: 'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground/90',
-        inverted: 'bg-foreground text-background hover:bg-foreground/90 hover:text-background/90',
-        noColor: 'shadow-none hover:text-foreground/90'
+        default: 'bg-card text-card-foreground',
+        background: 'bg-background text-foreground',
+        accent: 'bg-accent text-accent-foreground',
+        primary: 'bg-primary text-primary-foreground',
+        inverted: 'bg-foreground text-background',
+        noColor: 'shadow-none'
       }
     },
     compound_variants: [
       {
         style: ['framed'],
         backgroundColor: ['noColor'],
-        class: 'border border-secondary hover:border-secondary/80'
+        class: 'border border-secondary'
+      },
+      {
+        clickable: ['yes'],
+        style: ['framed'],
+        backgroundColor: ['noColor'],
+        class: 'hover:border-secondary/80'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['default'],
+        class: 'hover:bg-card/90 hover:text-card-foreground/90'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['background'],
+        class: 'hover:bg-background/90 hover:text-foreground/90'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['accent'],
+        class: 'hover:bg-accent/80 hover:text-accent-foreground/80'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['primary'],
+        class: 'hover:bg-primary/90 hover:text-primary-foreground/90'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['inverted'],
+        class: 'hover:bg-foreground/90 hover:text-background/90'
+      },
+      {
+        clickable: ['yes'],
+        backgroundColor: ['noColor'],
+        class: 'hover:text-foreground/90'
       }
     ]
   )
@@ -147,8 +183,10 @@
   >
     <div class="@container flex w-full flex-col gap-1 md:gap-2">
       <h3 class="text-xl font-semibold @sm:text-2xl @2xl:text-3xl">
-        {% if is_clickable %}
+        {% if is_clickable == 'yes' %}
           <a href="{{ url }}" class="after:absolute after:inset-0 after:content-['']">{{ heading_text }}</a>
+        {% else %}
+          {{ heading_text }}
         {% endif %}
       </h3>
       {% if text is not empty %}

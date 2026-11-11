@@ -6,19 +6,19 @@
 
 {% set tile =
   html_cva(
-    base: ['@container relative w-full p-6 md:p-8'],
+    base: ['card-number @container'],
     variants: {
       hasUrl: {
-        yes: 'group cursor-pointer hover:scale-103',
+        yes: 'group cursor-pointer hover:scale-101',
         no: ''
       },
       backgroundColor: {
-        primary: 'bg-primary text-primary-foreground transition duration-300 hover:bg-primary/80',
-        background: 'border border-border bg-background text-foreground hover:bg-background/90 hover:text-foreground/90',
-        secondary: 'bg-secondary text-secondary-foreground transition duration-300 hover:bg-secondary/80',
-        accent: 'bg-accent text-accent-foreground transition duration-300 hover:bg-accent/80',
-        muted: 'bg-muted text-muted-foreground transition duration-300 hover:bg-muted/80',
-        noColor: 'border border-border bg-none text-foreground transition duration-300 hover:text-foreground/70'
+        primary: 'bg-primary text-primary-foreground',
+        background: 'border border-border bg-background text-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        accent: 'bg-accent text-accent-foreground',
+        muted: 'bg-muted text-muted-foreground',
+        noColor: 'border border-border bg-none text-foreground'
       },
       tileSize: {
         square: 'aspect-square',
@@ -32,7 +32,39 @@
         large: 'rounded-[24px] md:rounded-[32px]',
         noRadius: 'rounded-none'
       }
-    }
+    },
+    compoundVariants: [
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'primary',
+        class: 'hover:bg-primary/90'
+      },
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'background',
+        class: 'hover:bg-background/90 hover:text-foreground'
+      },
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'secondary',
+        class: 'hover:bg-secondary/70'
+      },
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'accent',
+        class: 'hover:bg-accent/70'
+      },
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'muted',
+        class: 'hover:bg-muted/70'
+      },
+      {
+        hasUrl: 'yes',
+        backgroundColor: 'noColor',
+        class: 'hover:text-foreground/90'
+      }
+    ]
   )
 %}
 
