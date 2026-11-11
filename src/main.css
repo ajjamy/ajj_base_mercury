@@ -16,7 +16,6 @@
 @import "../components/button/button.tailwind.css";
 @import "./layout.tailwind.css";
 @import "./client-testimonials.css";
-@import "./all-news-filter.tailwind.css";
 
 @theme inline {
   --color-background: var(--background);
@@ -428,6 +427,28 @@
   .progress-text {
     @apply text-inherit!;
   }
+
+      .views-exposed-form {
+        flex-direction: column;
+
+        .form-item,
+        .fieldgroup { 
+            width: 100%;
+            margin-bottom: 1rem; 
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .form-type-checkbox {
+            display: inline-flex;
+        }
+
+        label { padding: 0 0 0 0.35rem; } 
+    }
 }
 
 /* Override the moderation form block background */
@@ -490,6 +511,12 @@
   .view-header {
     @apply pb-4
       md:pb-6;
+  }
+
+  .views-view-responsive-grid__item-inner {
+    .group-wrapper {
+        min-height: 220px;
+    }
   }
 
   /* Responsive text size utility */
