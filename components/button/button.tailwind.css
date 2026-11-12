@@ -67,6 +67,7 @@
     &:hover {
       @apply bg-primary
         text-primary-foreground;
+        border: 1px solid var(--background);
     }
   }
 

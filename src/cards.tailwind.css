@@ -16,7 +16,8 @@
         @apply relative w-full p-6 transition duration-300 md:p-8;
 
         &:has(a) {
-            @apply before:absolute before:inset-0 before:content-[''];        }
+            @apply before:absolute before:inset-0 before:content-[''];        
+        }
 
     }
 
