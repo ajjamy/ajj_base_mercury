@@ -245,7 +245,6 @@
 
 section#breadcrumbs {
   padding: 0;
-  /* background-color: var(--color-muted); fallback if no section follows */
 
   &:has(+ .section--primary)        { @apply bg-primary text-primary-foreground; }
   &:has(+ .section--secondary)      { @apply bg-secondary text-secondary-foreground; }
