@@ -3,7 +3,6 @@
     @apply overflow-hidden
       border-b
       border-border
-      bg-background
       bg-clip-padding;
   }
 

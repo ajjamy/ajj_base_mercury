@@ -71,6 +71,18 @@
     }
   }
 
+  .btn--primary-underline {
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+
+    &:hover { border-bottom-color: var(--color-primary);}
+
+
+  }
+
   .btn--secondary {
     @apply bg-accent
       text-accent-foreground;

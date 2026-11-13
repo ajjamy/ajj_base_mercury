@@ -14,6 +14,7 @@ props:
       enum:
         - primary
         - primary-inverted
+        - primary-underline
         - secondary
         - secondary-inverted
         - accent-warm
@@ -21,6 +22,7 @@ props:
       meta:enum:
         primary: Primary (Dark Blue)
         primary-inverted: Primary inverted
+        primary-underline: Primary Underline
         secondary: Accent (Light Blue)
         secondary-inverted: Accent inverted
         accent-warm: Accent Warm (Orange)
@@ -33,6 +35,12 @@ props:
       default: "Button label"
       examples:
         - "Button label"
+    sr_text:
+      type: string
+      title: Additional screen reader text
+      description: "Read by screen readers after the label but not shown on screen, e.g. 'about our services'."
+      examples:
+        - "about our services"
     href:
       type: string
       title: Link

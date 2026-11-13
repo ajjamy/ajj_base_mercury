@@ -10,9 +10,9 @@
     .image--wrapper {
       transition-duration: 0.3s;
 
-      &:hover {
+      /* &:hover {
         box-shadow: var(--shadow-button-hover);
-      }
+      } */
     }
   }
 

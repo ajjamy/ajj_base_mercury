@@ -17,6 +17,7 @@
         primary: 'btn--primary',
         secondary: 'btn--secondary',
         'primary-inverted': 'btn--primary-inverted',
+        'primary-underline': 'btn--primary-underline',
         'secondary-inverted': 'btn--secondary-inverted',
         'accent-warm': 'btn--accent-warm',
         'accent-warm-inverted': 'btn--accent-warm-inverted'
@@ -86,6 +87,9 @@
       </span>
     {% endif %}
     {{ label }}
+    {% if sr_text is not empty %}
+      <span class="sr-only">&nbsp;{{ sr_text }}</span>
+    {% endif %}
   </a>
 {% else %}
   <button
@@ -118,5 +122,8 @@
       </span>
     {% endif %}
     {{ label }}
+    {% if sr_text is not empty %}
+      <span class="sr-only">{{ sr_text }}</span>
+    {% endif %}
   </button>
 {% endif %}
