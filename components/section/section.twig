@@ -8,6 +8,18 @@
   html_cva(
     base: ['section'],
     variants: {
+      paddingBlockStart: {
+        '0': 'section--pt-0',
+        '16': 'section--pt-16',
+        '32': 'section--pt-32',
+        '64': 'section--pt-64'
+      },
+      paddingBlockEnd: {
+        '0': 'section--pb-0',
+        '16': 'section--pb-16',
+        '32': 'section--pb-32',
+        '64': 'section--pb-64'
+      },
       backgroundColor: {
         primary: 'section--primary',
         secondary: 'section--secondary',
@@ -22,6 +34,8 @@
 
 {% set section_classes =
   section.apply({
+    paddingBlockStart: padding_block_start,
+    paddingBlockEnd: padding_block_end,
     backgroundColor: background_color|default('noColor')
   })
 %}

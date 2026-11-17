@@ -114,7 +114,7 @@ props:
         - "32"
         - "64"
       examples:
-        - "0"
+        - "32"
     padding_block_end:
       type: string
       title: Padding bottom
@@ -124,7 +124,7 @@ props:
         - "32"
         - "64"
       examples:
-        - "0"
+        - "64"
     background_color:
       type: string
       title: Background color

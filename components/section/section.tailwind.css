@@ -6,17 +6,49 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding-block: 2rem;
+  }
 
-    @media screen and (min-width: 62rem) {
-      padding-block: 3rem;
-    }
+  /*
+   * padding_block_start / padding_block_end variants.
+   */
+  .section--pt-0 {
+    @apply pt-0;
+  }
 
-    @media screen and (min-width: 64rem) {
-      padding-block: 4rem;
-    }
+  .section--pt-16 {
+    @apply pt-4;
+  }
 
-    
+  .section--pt-32 {
+    @apply pt-6
+      md:pt-7
+      xl:pt-8;
+  }
+
+  .section--pt-64 {
+    @apply pt-10
+      md:pt-13
+      xl:pt-16;
+  }
+
+  .section--pb-0 {
+    @apply pb-0;
+  }
+
+  .section--pb-16 {
+    @apply pb-4;
+  }
+
+  .section--pb-32 {
+    @apply pb-6
+      md:pb-7
+      xl:pb-8;
+  }
+
+  .section--pb-64 {
+    @apply pb-10
+      md:pb-13
+      xl:pb-16;
   }
 
   /* background_color variants: text color */
@@ -156,8 +188,7 @@
   }
 
   /*
-   * Grid columns. Order matters: the 100 layout, then mobile_columns, then the
-   * responsive layouts, so later rules win just as the old utility classes did.
+   * Grid columns. Order matters: the 100 layout, then mobile_columns, then the responsive layouts, so later rules win just as the old utility classes did.
    */
   .section__grid--cols-100 {
     @apply grid-cols-1;
@@ -246,17 +277,34 @@
 section#breadcrumbs {
   padding: 0;
 
-  &:has(+ .section--primary)        { @apply bg-primary text-primary-foreground; }
-  &:has(+ .section--secondary)      { @apply bg-secondary text-secondary-foreground; }
-  &:has(+ .section--accent)         { @apply bg-accent text-accent-foreground; }
-  &:has(+ .section--muted)          { @apply bg-muted text-muted-foreground; }
-  &:has(+ .section--gradient-light) { @apply bg-gradient-light text-foreground; }
-  &:has(+ .section--no-color)       { @apply bg-transparent text-foreground; }
+  &:has(+ .section--primary) {
+    @apply bg-primary
+      text-primary-foreground;
+  }
+  &:has(+ .section--secondary) {
+    @apply bg-secondary
+      text-secondary-foreground;
+  }
+  &:has(+ .section--accent) {
+    @apply bg-accent
+      text-accent-foreground;
+  }
+  &:has(+ .section--muted) {
+    @apply bg-muted
+      text-muted-foreground;
+  }
+  &:has(+ .section--gradient-light) {
+    @apply bg-gradient-light
+      text-foreground;
+  }
+  &:has(+ .section--no-color) {
+    @apply bg-transparent
+      text-foreground;
+  }
 }
 
 /*
- * These override classes on child components (e.g. .cq-full in main.css), so
- * they stay in the utilities layer; a components-layer rule would lose to them.
+ * These override classes on child components (e.g. .cq-full in main.css), so they stay in the utilities layer; a components-layer rule would lose to them.
  */
 @layer utilities {
   .section__container .cq-full {

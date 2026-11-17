@@ -1,6 +1,8 @@
 @layer components {
   .badge {
-    @apply inline-flex
+    @apply /*
+      */
+      inline-flex
       items-center
       gap-[2px]
       border-transparent
@@ -21,6 +23,20 @@
         bg-primary
         text-primary-foreground;
     }
+
+    &.badge--outline {
+      @apply border-border
+        text-secondary-foreground;
+      border-color: var(--foreground);
+      background-color: transparent;
+    }
+
+    &.badge--outline.badge--link:hover {
+      @apply text-primary-foreground;
+      border-color: transparent;
+      background-color: var(--color-primary);
+    }
+
     &.badge--secondary {
       @apply border-transparent
         bg-secondary

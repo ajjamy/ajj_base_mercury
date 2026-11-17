@@ -22,11 +22,13 @@ props:
       title: Style
       enum:
         - primary
+        - primary-outline
         - secondary
         - accent
         - accent-warm
       meta:enum:
         primary: Primary
+        primary-outline: Outline
         secondary: Secondary
         accent: Accent
         accent-warm: Accent Warm

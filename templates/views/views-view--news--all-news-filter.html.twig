@@ -9,13 +9,7 @@
  * @see views-view.html.twig for available variables.
  */
 #}
-{% set classes = [
-  'view',
-  'view-' ~ (id|clean_class),
-  'view-id-' ~ id,
-  'view-display-id-' ~ display_id,
-  dom_id ? 'js-view-dom-id-' ~ dom_id
-] %}
+{% set classes = ['view', 'view-' ~ (id|clean_class), 'view-id-' ~ id, 'view-display-id-' ~ display_id, dom_id ? 'js-view-dom-id-' ~ dom_id] %}
 
 {% set has_filters = exposed is not empty ? 'yes' : 'no' %}
 
@@ -37,8 +31,6 @@
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-
-  
 
   <div
     class="{{
@@ -62,9 +54,9 @@
 
       {% if header %}
         <div class="view-header">
-        {{ header }}
+          {{ header }}
         </div>
-    {% endif %}
+      {% endif %}
 
       {% if rows %}
         <div class="view-content">

@@ -402,12 +402,13 @@
 
   .form-item-radios,
   .form-checkboxes {
+    .description {
+      width: 100%;
+    }
 
-    .description { width: 100%; }
-
-    .webform-element-description { 
-        margin-top: 0;
-        font-size: 14px;
+    .webform-element-description {
+      margin-top: 0;
+      font-size: 14px;
     }
   }
 
@@ -427,29 +428,29 @@
     @apply text-inherit!;
   }
 
-    .views-exposed-form {
-        flex-direction: column;
+  .views-exposed-form {
+    flex-direction: column;
 
-        .form-item,
-        .fieldgroup { 
-            width: 100%;
-            margin-bottom: 1rem; 
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .form-type-checkbox {
-            display: inline-flex;
-        }
-
-        label { padding: 0 0 0 0.35rem; } 
+    .form-item,
+    .fieldgroup {
+      width: 100%;
+      margin-bottom: 1rem;
     }
 
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
 
+    .form-type-checkbox {
+      display: inline-flex;
+    }
+
+    label {
+      padding: 0 0 0 0.35rem;
+    }
+  }
 }
 
 /* Override the moderation form block background */
@@ -516,7 +517,7 @@
 
   .views-view-responsive-grid__item-inner {
     .group-wrapper {
-        min-height: 220px;
+      min-height: 220px;
     }
   }
 

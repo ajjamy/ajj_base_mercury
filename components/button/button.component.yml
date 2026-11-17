@@ -17,14 +17,18 @@ props:
         - primary-underline
         - secondary
         - secondary-inverted
+        - accent
+        - accent-inverted
         - accent-warm
         - accent-warm-inverted
       meta:enum:
         primary: Primary (Dark Blue)
         primary-inverted: Primary inverted
         primary-underline: Primary Underline
-        secondary: Accent (Light Blue)
-        secondary-inverted: Accent inverted
+        secondary: Secondary (Tan)
+        secondary-inverted: Secondary inverted
+        accent: Accent (Light Blue)
+        accent-inverted: Accent inverted
         accent-warm: Accent Warm (Orange)
         accent-warm-inverted: Accent Warm (Inverted)
       examples:
