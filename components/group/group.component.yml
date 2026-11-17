@@ -64,6 +64,13 @@ props:
       default: "center"
       examples:
         - "center"
+    full_height:
+      type: boolean
+      title: Full height
+      description: Stretch the group to fill the height of its parent.
+      default: false
+      examples:
+        - false
     radius:
       type: string
       title: Rounded corners
