@@ -46,3 +46,8 @@ props:
       type: string
       title: Link
       format: uri-reference
+    open_in_new_tab:
+      type: boolean
+      title: Open link in a new tab
+      description: Check if the link is external and should open in a new tab.
+      default: false

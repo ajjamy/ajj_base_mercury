@@ -156,7 +156,7 @@
 
 {% set heading_content %}
   {% if has_url == 'yes' %}
-    <a href="{{ url }}">{{ heading_inner }}</a>
+    <a href="{{ url }}"{% if open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ heading_inner }}</a>
   {% else %}
     {{ heading_inner }}
   {% endif %}

@@ -38,7 +38,7 @@
   <div class="flex h-[100%] items-center justify-center p-[10%]">
     {% block logo %}
       {% if url is not empty %}
-        <a href="{{ url }}">
+        <a href="{{ url }}"{% if open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>
           {% if media.src is not empty %}
             {% include 'canvas:image' ignore missing with {
               src: media.src,

@@ -98,7 +98,7 @@
         <cite class="font-normal not-italic">
           <br />
           {% if cite_url %}
-            <a href="{{ cite_url }}" target="_blank" class="underline underline-offset-2 hover:opacity-80">{{ cite_text }}</a>
+            <a href="{{ cite_url }}"{% if open_in_new_tab|default(true) %} target="_blank" rel="noopener noreferrer"{% endif %} class="underline underline-offset-2 hover:opacity-80">{{ cite_text }}</a>
           {% else %}
             <span class="text-base">{{ cite_text }}</span>
           {% endif %}

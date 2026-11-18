@@ -1,5 +1,8 @@
 @layer components {
+    .view-podcasts,
   .view-clients {
+
+    .image,
     .card-logo {
       @apply max-w-full
         md:min-h-[80px];
@@ -12,6 +15,7 @@
   }
 }
 
+.view-podcasts .image:hover,
 .view-clients .card-logo:hover {
   scale: none;
   opacity: 1;

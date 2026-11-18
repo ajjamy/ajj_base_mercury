@@ -37,7 +37,7 @@
 %}
 
 {% if has_url == 'yes' %}
-  <a href="{{ url }}" aria-label="{{ label }}" class="badge--link {{ badge_classes }}">
+  <a href="{{ url }}"{% if open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="{{ label }}" class="badge--link {{ badge_classes }}">
     {% if icon is not empty %}
       {{
         include(

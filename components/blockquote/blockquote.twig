@@ -27,7 +27,7 @@
         {% if cite_url %}
           <a
             href="{{ cite_url }}"
-            target="_blank"
+            {% if open_in_new_tab|default(true) %}target="_blank" rel="noopener noreferrer"{% endif %}
             class="text-base leading-[1.2] font-normal not-italic underline underline-offset-2 duration-300 hover:opacity-80"
           >
             {{ cite_text }}
