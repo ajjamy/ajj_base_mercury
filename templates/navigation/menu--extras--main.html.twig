@@ -71,9 +71,11 @@
       {% set child_href %}
         {{- child.url -}}
       {% endset %}
-      {# The child is the column heading; only repeat it as a link if it has a URL. #}
+      {# A <nolink> child is the column heading. A child with a URL is not a
+         heading; it renders as the column's first link instead. #}
+      {% set is_heading = child_href|trim is empty %}
       {% set column_links = [] %}
-      {% if child_href|trim is not empty %}
+      {% if not is_heading %}
         {% set column_links = [
           {
             label: child.title,
@@ -106,7 +108,7 @@
         columns|merge(
           [
             {
-              heading: child.title,
+              heading: is_heading ? child.title : '',
               links: column_links,
               mobile_only: child.entity
                 and child.entity.hasField('field_mobile_only')

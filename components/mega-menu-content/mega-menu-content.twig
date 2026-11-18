@@ -1,7 +1,17 @@
-{# Headed columns set the column count, up to four (featured content is separate).
-   Without any headings (e.g. simple dropdowns) the columns render as given. #}
-{% set headed_columns = columns|default([])|filter(column => column.heading is not empty) %}
-{% set visible_columns = headed_columns is not empty ? headed_columns|slice(0, 4) : columns|default([]) %}
+{# Columns set the column count, up to four (featured content is separate).
+   Mobile-only columns are hidden on desktop, so they don't count toward the four
+   or the column count. A column only gets a heading if it has one (menu items
+   set to <nolink>); otherwise it is just a list of links. #}
+{% set visible_columns = [] %}
+{% set desktop_column_count = 0 %}
+{% for column in columns|default([]) %}
+  {% if column.mobile_only %}
+    {% set visible_columns = visible_columns|merge([column]) %}
+  {% elseif desktop_column_count < 4 %}
+    {% set visible_columns = visible_columns|merge([column]) %}
+    {% set desktop_column_count = desktop_column_count + 1 %}
+  {% endif %}
+{% endfor %}
 
 {% set content_variants =
   html_cva(
@@ -20,13 +30,15 @@
   content_variants.apply({
     featuredPosition: featured_position|default('right')
   })
-  }} mega-menu-content--cols-{{ max(visible_columns|length, 1) }}"
+  }} mega-menu-content--cols-{{ max(desktop_column_count, 1) }}"
   id="{{ id }}"
 >
   <div class="mega-menu-content__columns">
     {% for column in visible_columns %}
       <section class="mega-menu-content__column{{ column.mobile_only ? ' nav:hidden' }}">
-        <h2 class="h6 mega-menu-content__heading">{{ column.heading }}</h2>
+        {% if column.heading is not empty %}
+          <h2 class="mega-menu-content__heading text-base">{{ column.heading }}</h2>
+        {% endif %}
         {% if column.links %}
           <ul class="mega-menu-content__links" role="list">
             {% for link_item in column.links %}

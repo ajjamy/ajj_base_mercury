@@ -219,12 +219,16 @@
     }
   }
 
+  /*
+   * .mega-menu-content is repeated so these match the specificity of the
+   * :not(--cols-1) two-column rule above; being later, they then win.
+   */
   @media screen and (min-width: 64rem) {
-    .mega-menu-content--cols-3 .mega-menu-content__columns {
+    .mega-menu-content.mega-menu-content--cols-3 .mega-menu-content__columns {
       grid-template-columns: repeat(3, minmax(0, var(--mega-menu-column-width)));
     }
 
-    .mega-menu-content--cols-4 .mega-menu-content__columns {
+    .mega-menu-content.mega-menu-content--cols-4 .mega-menu-content__columns {
       grid-template-columns: repeat(4, minmax(0, var(--mega-menu-column-width)));
     }
 
@@ -350,7 +354,7 @@
         focus-visible:outline-2
         focus-visible:outline-offset-2
         focus-visible:outline-primary;
-      font-size: var(--text-lg);
+      font-size: var(--text-sm);
 
       &:hover {
         background-color: var(--secondary);
