@@ -515,9 +515,20 @@
       md:pb-6;
   }
 
-  .views-view-responsive-grid__item-inner {
-    .group-wrapper {
-      min-height: 220px;
+  .news-clients {
+
+      .views-view-responsive-grid__item-inner {
+        >.group-wrapper {
+          min-height: 150px;
+        }
+      }
+  }
+
+  .news-ajj {
+    .views-view-responsive-grid__item-inner {
+        >.group-wrapper {
+            min-height: 200px;
+        }
     }
   }
 

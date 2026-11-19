@@ -1,8 +1,7 @@
 @layer components {
-    .view-podcasts,
+
   .view-clients {
 
-    .image,
     .card-logo {
       @apply max-w-full
         md:min-h-[80px];
@@ -11,6 +10,13 @@
       &:hover {
         filter: none;
       }
+    }
+  }
+
+  .view-podcasts {
+    .image {
+        @apply rounded-sm;
+        border: 1px solid transparent;
     }
   }
 }
