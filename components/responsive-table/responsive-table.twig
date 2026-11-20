@@ -1,0 +1,114 @@
+{#
+/**
+ * @file
+ * Responsive Table component.
+ *
+ * Two ways to supply content:
+ *
+ * 1. Headers prop + Responsive Table Row components in the `rows` slot
+ *    (Canvas, or templates):
+ * @code
+ *   {% embed 'ajj_base_mercury:responsive-table' with {
+ *     variant: 'stack',
+ *     caption: 'Plan comparison',
+ *     headers: ['Plan', 'Price', 'Seats'],
+ *   } only %}
+ *     {% block rows %}
+ *       {{ include('ajj_base_mercury:responsive-table-row', { label: 'Starter', cells: ['$10', '1'] }, with_context: false) }}
+ *       {{ include('ajj_base_mercury:responsive-table-row', { label: 'Team', cells: ['$40', '5'] }, with_context: false) }}
+ *     {% endblock %}
+ *   {% endembed %}
+ * @endcode
+ *
+ * 2. A pre-rendered <table> in the `table_content` slot (Views, WYSIWYG).
+ *    Leave `headers` empty:
+ * @code
+ *   {% embed 'ajj_base_mercury:responsive-table' with { variant: 'stack' } only %}
+ *     {% block table_content %}<table>…</table>{% endblock %}
+ *   {% endembed %}
+ * @endcode
+ *
+ * Canvas-built rows use <div>s with ARIA table roles rather than <tr>/<td>:
+ * Canvas inserts <div> placeholders into empty slots, which the HTML parser
+ * would eject from a real <tbody>.
+ */
+#}
+{% set layout = variant|default('scroll') %}
+{% set source = headers is not empty ? 'props' : 'slot' %}
+{% set caption_id = 'responsive-table-caption-' ~ random() %}
+{% set has_caption = caption is not empty ? 'yes' : 'no' %}
+
+{% set wrapper_variants =
+  html_cva(
+    base: 'responsive-table-wrapper',
+    variants: {
+      layout: {
+        scroll: 'responsive-table--scroll',
+        stack: 'responsive-table--stack'
+      }
+    }
+  )
+%}
+
+{#
+  The scroll layout is a keyboard-focusable, labelled region so keyboard users
+  can scroll it. The stack layout never overflows, so it gets neither.
+#}
+{% set wrapper_attributes =
+  attributes.addClass(
+    wrapper_variants.apply({
+      layout: layout
+    })
+  )
+%}
+{% if layout == 'scroll' %}
+  {% set wrapper_attributes = wrapper_attributes.setAttribute('role', 'region').setAttribute('tabindex', '0') %}
+  {% if source == 'props' and has_caption == 'yes' %}
+    {% set wrapper_attributes = wrapper_attributes.setAttribute('aria-labelledby', caption_id) %}
+  {% else %}
+    {# responsive-table.js swaps this for aria-labelledby if a slotted table has a caption. #}
+    {% set wrapper_attributes = wrapper_attributes.setAttribute('aria-label', caption|default('Data table')) %}
+  {% endif %}
+{% endif %}
+
+{% set table_attributes =
+  create_attribute({
+    class: 'responsive-table',
+    role: 'table'
+  })
+%}
+{% if has_caption == 'yes' %}
+  {% set table_attributes = table_attributes.setAttribute('aria-labelledby', caption_id) %}
+{% else %}
+  {% set table_attributes = table_attributes.setAttribute('aria-label', 'Data table') %}
+{% endif %}
+
+<div {{ wrapper_attributes }}>
+  {% if source == 'props' %}
+    {% if has_caption == 'yes' %}
+      <div id="{{ caption_id }}" class="responsive-table__caption">
+        {{ caption }}
+      </div>
+    {% endif %}
+    <div {{ table_attributes }}>
+      <div class="responsive-table__head" role="rowgroup">
+        <div class="responsive-table__row" role="row">
+          {% for header in headers %}
+            <div class="responsive-table__cell" role="columnheader">
+              {{ header }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="responsive-table__body" role="rowgroup">
+        {% block rows %}
+
+        {% endblock %}
+      </div>
+    </div>
+  {% else %}
+    {% block table_content %}
+
+    {% endblock %}
+  {% endif %}
+</div>

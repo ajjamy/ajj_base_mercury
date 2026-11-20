@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * A row of the Responsive Table component. Styling, stacked-card labels
+ * (data-label) and focus handling come from the parent responsive-table.
+ */
+#}
+<div class="responsive-table__row" role="row">
+  {% if label is not empty %}
+    <div class="responsive-table__cell responsive-table__cell--header" role="rowheader">
+      {{ label }}
+    </div>
+  {% endif %}
+  {% for cell in cells %}
+    <div class="responsive-table__cell" role="cell">
+      {{ cell }}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,51 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Responsive Table
+group: Base
+status: stable
+description: >-
+  A responsive table that either scrolls horizontally or collapses rows into
+  stacked label/value cards on small screens. In Canvas, set the column
+  headers and add Responsive Table Row components to the Rows slot. In
+  templates, a pre-rendered table can be passed to the table_content slot
+  instead (leave headers empty).
+props:
+  type: object
+  required:
+    - variant
+  properties:
+    variant:
+      type: string
+      title: Mobile layout
+      enum:
+        - scroll
+        - stack
+      meta:enum:
+        scroll: Horizontal scroll
+        stack: Stacked cards
+      default: scroll
+      examples:
+        - scroll
+    caption:
+      type: string
+      title: Table caption
+      description: Visible caption; also used as the table's accessible name.
+      examples:
+        - Plan comparison
+    headers:
+      type: array
+      title: Column headers
+      description: One per column. If rows use a row label, the first header labels that column.
+      items:
+        type: string
+      examples:
+        - [Plan, Price, Seats]
+slots:
+  rows:
+    title: Rows
+    description: Add Responsive Table Row components here.
+  table_content:
+    title: Table content (templates only)
+    description: A pre-rendered <table> from Views or WYSIWYG. Only used when no column headers are set; leave empty in Canvas.
+libraryOverrides:
+  js:
+    responsive-table.js: { attributes: { type: module } }

@@ -18,6 +18,10 @@
         center: 'self-center',
         end: 'self-end'
       },
+      flexWrap: {
+        yes: 'flex-wrap',
+        no: ''
+      },
       fullHeight: {
         yes: 'h-full',
         no: ''
@@ -61,6 +65,7 @@
     flexDirection: flex_direction,
     groupAlign: items_align|default('start'),
     flexAlign: flex_align|default('center'),
+    flexWrap: flex_wrap ? 'yes' : 'no',
     fullHeight: full_height ? 'yes' : 'no',
     flexGap: flex_gap,
     radius: radius,

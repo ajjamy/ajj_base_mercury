@@ -26,3 +26,11 @@ motion:
     build/motion.js: { minified: true }
   dependencies:
     - core/once
+
+external-links:
+  version: VERSION
+  js:
+    lib/external-links.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

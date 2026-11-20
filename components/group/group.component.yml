@@ -21,6 +21,13 @@ props:
       default: "column"
       examples:
         - "column"
+    flex_wrap:
+      type: boolean
+      title: Wrap items
+      description: Let items wrap onto new lines when they don't fit (most useful with horizontal direction).
+      default: false
+      examples:
+        - false
     flex_gap:
       type: string
       title: Space between items

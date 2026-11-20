@@ -1,0 +1,138 @@
+@layer components {
+  /*
+   * Two markups share these styles:
+   * - Canvas/props: <div> elements with .responsive-table__* classes and ARIA
+   *   table roles, laid out with CSS table display.
+   * - Slot: a real <table> (Views, WYSIWYG) passed to table_content.
+   */
+  .responsive-table-wrapper {
+    @apply w-full;
+
+    & :is(table, .responsive-table) {
+      @apply table
+        w-full
+        border-collapse
+        text-left;
+    }
+
+    & .responsive-table__head {
+      @apply table-header-group;
+      background-color: var(--color-primary);
+      color: var(--primary-foreground);
+    }
+
+    & .responsive-table__body {
+      @apply table-row-group;
+    }
+
+    & .responsive-table__row {
+      @apply table-row;
+    }
+
+    & .responsive-table__cell {
+      @apply table-cell;
+    }
+
+    & :is(caption, .responsive-table__caption) {
+      @apply sticky
+        left-0
+        mb-2
+        text-left
+        font-semibold;
+    }
+
+    & :is(th, td, .responsive-table__cell) {
+      @apply border-b
+        border-border
+        px-4
+        py-3
+        align-top;
+    }
+
+    /* Column dividers between cells only, none on the outer left/right edges. */
+    & :is(tr, .responsive-table__row) > :not(:last-child) {
+      @apply border-r
+        border-border;
+    }
+
+    /* Header dividers match the header text so they show on the primary background. */
+    & .responsive-table__head .responsive-table__row > :not(:last-child) {
+      border-right-color: var(--primary-foreground);
+    }
+
+    & :is(thead th, .responsive-table__head .responsive-table__cell, th[scope="row"], .responsive-table__cell--header) {
+      @apply font-semibold;
+    }
+  }
+
+  /* Horizontal scroll: headers don't wrap, so the table widens and scrolls. */
+  .responsive-table--scroll {
+    @apply overflow-x-auto
+      focus-visible:outline-2
+      focus-visible:outline-offset-2
+      focus-visible:outline-primary;
+
+    & :is(thead th, .responsive-table__head .responsive-table__cell) {
+      @apply whitespace-nowrap;
+    }
+  }
+
+  /* Stacked cards below the md breakpoint. */
+  .responsive-table--stack {
+    @variant max-md {
+      & :is(thead, .responsive-table__head) {
+        @apply sr-only;
+      }
+
+      & :is(table, .responsive-table, caption, tbody, .responsive-table__body, tr, .responsive-table__row, th, td, .responsive-table__cell) {
+        @apply block
+          w-full;
+      }
+
+      & :is(tbody tr, .responsive-table__body .responsive-table__row) {
+        @apply mb-4
+          overflow-hidden
+          rounded-md
+          border
+          border-border;
+      }
+
+      & :is(tbody th, tbody td, .responsive-table__body .responsive-table__cell) {
+        @apply flex
+          justify-between
+          gap-4
+          border-r-0
+          text-right;
+      }
+
+      & :is(tbody tr, .responsive-table__body .responsive-table__row) > :last-child {
+        @apply border-b-0;
+      }
+
+      & :is(tbody, .responsive-table__body) [data-label]::before {
+        @apply text-left
+          font-semibold;
+        content: attr(data-label);
+        /* Hide the duplicate label from screen readers; roles already convey the header. */
+        content: attr(data-label) / "";
+      }
+
+      & :is(tbody, .responsive-table__body) [data-label=""]::before {
+        @apply hidden;
+      }
+
+      /* Row headers act as the card title. */
+      & :is(tbody th[scope="row"], .responsive-table__cell--header) {
+        @apply justify-start
+          bg-muted
+          text-left
+          font-semibold
+          text-muted-foreground;
+
+        &::before {
+          @apply hidden;
+        }
+      }
+    }
+  }
+}
