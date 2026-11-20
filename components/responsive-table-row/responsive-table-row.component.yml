@@ -13,7 +13,7 @@ props:
       title: Row label
       description: Optional row header shown in the first column (and as the card title on mobile). Use it on every row or none so columns stay aligned.
       examples:
-        - Starter
+        - Add Row Header
     cells:
       type: array
       title: Cells
@@ -21,4 +21,4 @@ props:
       items:
         type: string
       examples:
-        - ["$10", "1"]
+        - ["$10", "Lorenm ipsum dolor"]

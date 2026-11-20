@@ -37,6 +37,7 @@
 {% set source = headers is not empty ? 'props' : 'slot' %}
 {% set caption_id = 'responsive-table-caption-' ~ random() %}
 {% set has_caption = caption is not empty ? 'yes' : 'no' %}
+{% set has_blank_corner = blank_corner ? 'yes' : 'no' %}
 
 {% set wrapper_variants =
   html_cva(
@@ -93,6 +94,10 @@
     <div {{ table_attributes }}>
       <div class="responsive-table__head" role="rowgroup">
         <div class="responsive-table__row" role="row">
+          {# Empty corner above the row labels: a plain cell, not a header, since it names nothing. #}
+          {% if has_blank_corner == 'yes' %}
+            <div class="responsive-table__cell" role="cell"></div>
+          {% endif %}
           {% for header in headers %}
             <div class="responsive-table__cell" role="columnheader">
               {{ header }}

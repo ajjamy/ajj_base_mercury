@@ -39,6 +39,13 @@ props:
         type: string
       examples:
         - [Plan, Price, Seats]
+    blank_corner:
+      type: boolean
+      title: No header above row labels
+      description: Leaves the top-left header cell empty. Headers then start from the second column. Use with rows that have a row label.
+      default: false
+      examples:
+        - false
 slots:
   rows:
     title: Rows
