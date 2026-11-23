@@ -236,36 +236,63 @@
   /*
    * With featured content, the featured content is one column the same width
    * as a link column, so it's the same size whatever the column count:
-   * - 992px: 3 columns. Link columns fill the other 2, wrapping as needed.
-   * - 1440px: 5 columns. Link columns sit on one row, 4 across.
+   * - 992px: tracks are a third of the dropdown. Link columns use up to 2,
+   *   wrapping as needed.
+   * - 1440px: tracks are a fifth of the dropdown. Link columns sit on one row,
+   *   up to 4 across.
+   * Tracks are sized from the dropdown (a size container) rather than with fr
+   * units, so a panel with fewer link columns shrinks and stays centered.
+   * The subtracted rem values cover the gaps and the featured-left margin.
    * These come after the column-count rules above, which they override at the
    * same specificity.
    */
+  .mega-menu-content--cols-1 {
+    --mega-menu-cols: 1;
+  }
+
+  .mega-menu-content--cols-2 {
+    --mega-menu-cols: 2;
+  }
+
+  .mega-menu-content--cols-3 {
+    --mega-menu-cols: 3;
+  }
+
+  .mega-menu-content--cols-4 {
+    --mega-menu-cols: 4;
+  }
+
   @media screen and (min-width: 62rem) {
-    .mega-menu-content:has(> .mega-menu-content__featured) {
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    .mega-menu-item__dropdown {
+      container-type: inline-size;
     }
 
-    .mega-menu-content--featured-left:has(> .mega-menu-content__featured) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    .mega-menu-content:has(> .mega-menu-content__featured) {
+      --mega-menu-track: calc((100cqi - 6rem) / 3);
+      grid-template-columns: auto auto;
+      justify-content: center;
+    }
+
+    .mega-menu-content__featured {
+      width: var(--mega-menu-track);
     }
 
     .mega-menu-content:has(> .mega-menu-content__featured) .mega-menu-content__columns {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, var(--mega-menu-track));
+    }
+
+    .mega-menu-content.mega-menu-content--cols-1:has(> .mega-menu-content__featured) .mega-menu-content__columns {
+      grid-template-columns: var(--mega-menu-track);
     }
   }
 
   @media screen and (min-width: 90rem) {
     .mega-menu-content:has(> .mega-menu-content__featured) {
-      grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
-    }
-
-    .mega-menu-content--featured-left:has(> .mega-menu-content__featured) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 4fr);
+      --mega-menu-track: calc((100cqi - 9rem) / 5);
     }
 
     .mega-menu-content:has(> .mega-menu-content__featured) .mega-menu-content__columns {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(var(--mega-menu-cols), var(--mega-menu-track));
     }
   }
 
