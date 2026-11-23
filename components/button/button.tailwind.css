@@ -61,7 +61,7 @@
 
   .btn--primary-inverted {
     @apply text-primary;
-    background-color: var(--background);
+    background-color: var(--muted);
     border: 1px solid var(--primary);
 
     &:hover {

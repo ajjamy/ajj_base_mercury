@@ -51,7 +51,8 @@
  */
 #}
 <div class="layout-container">
-  <header role="banner">
+  {# Sticky header for visitors only; admins already have the fixed toolbar. #}
+  <header role="banner"{% if not logged_in %} class="site-header"{% endif %}>
     {{ page.header }}
   </header>
 

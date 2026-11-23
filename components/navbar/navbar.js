@@ -11,6 +11,14 @@ class Navbar extends ComponentInstance {
 
     measureScrollbarAndObserve(this.el.querySelector(".navbar--dropdown-menu"));
 
+    // Expose the sticky header's height for scroll-padding-top.
+    const header = this.el.closest(".site-header");
+    if (header) {
+      new ResizeObserver(([entry]) => {
+        document.documentElement.style.setProperty("--site-header-height", `${entry.borderBoxSize[0].blockSize}px`);
+      }).observe(header);
+    }
+
     this.menuButton.addEventListener("click", () => {
       this.menu.querySelectorAll(".dropdown-menu__expand-button--has-been-opened").forEach((button) => {
         button.classList.remove("dropdown-menu__expand-button--has-been-opened");

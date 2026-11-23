@@ -2,6 +2,26 @@
   .layout-container > header[role="banner"] {
     box-shadow: var(--shadow-lg);
   }
+
+  /*
+   * Sticky (not fixed) header: it stays in normal flow, so the regions below
+   * keep their position and no spacer is needed. Only applied for anonymous
+   * visitors (see page.html.twig), so no admin toolbar offset is needed.
+   * Avoid adding transform/filter/backdrop-filter here: they would become the
+   * containing block for the fixed-position mobile menu and break it.
+   */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background-color: var(--background);
+  }
+
+  /* Keep anchor targets (and the skip link) from landing under the header.
+     --site-header-height is measured in navbar.js. */
+  html {
+    scroll-padding-top: var(--site-header-height, 0px);
+  }
 }
 
 /* Modal state - prevents body scroll when mobile menu is open */

@@ -17,8 +17,9 @@
 
     & .responsive-table__head {
       @apply table-header-group;
-      background-color: var(--color-primary);
-      color: var(--primary-foreground);
+      background-color: var(--color-muted);
+      color: var(--muted-foreground);
+      text-align: center;
     }
 
     & .responsive-table__body {

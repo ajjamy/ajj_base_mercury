@@ -99,7 +99,7 @@
   }
 
   .rich-text--color-inverted {
-    @apply text-background;
+    @apply text-muted;
 
     & a:hover {
       @apply text-background/70;

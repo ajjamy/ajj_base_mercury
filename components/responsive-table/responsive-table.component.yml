@@ -38,7 +38,7 @@ props:
       items:
         type: string
       examples:
-        - [Plan, Price, Seats]
+        - [Column Title, Column Title, Column Title ]
     blank_corner:
       type: boolean
       title: No header above row labels
