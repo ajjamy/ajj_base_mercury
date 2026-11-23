@@ -124,10 +124,12 @@
         with_context: false
       )
     }}
-    {# Rich text arrives wrapped in its own <p> tags, so this can't be a <p>. #}
-    <div class="cta__text">
-      {{ text }}
-    </div>
+    {# Strip tags before checking so empty markup is skipped. #}
+    {% if text|render|striptags|trim is not empty %}
+      <div class="cta__text">
+        {{ text }}
+      </div>
+    {% endif %}
     {% if block('actions') is defined %}
       <div
         class="{{

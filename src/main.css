@@ -518,19 +518,18 @@
   }
 
   .news-clients {
-
-      .views-view-responsive-grid__item-inner {
-        >.group-wrapper {
-          min-height: 150px;
-        }
+    .views-view-responsive-grid__item-inner {
+      > .group-wrapper {
+        min-height: 150px;
       }
+    }
   }
 
   .news-ajj {
     .views-view-responsive-grid__item-inner {
-        >.group-wrapper {
-            min-height: 200px;
-        }
+      > .group-wrapper {
+        min-height: 200px;
+      }
     }
   }
 

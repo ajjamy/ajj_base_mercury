@@ -17,8 +17,8 @@
 
     & .responsive-table__head {
       @apply table-header-group;
-      background-color: var(--color-muted);
-      color: var(--muted-foreground);
+      background-color: var(--color-primary);
+      color: var(--color-muted);
       text-align: center;
     }
 

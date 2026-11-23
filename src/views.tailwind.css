@@ -1,7 +1,5 @@
 @layer components {
-
   .view-clients {
-
     .card-logo {
       @apply max-w-full
         md:min-h-[80px];
@@ -15,8 +13,8 @@
 
   .view-podcasts {
     .image {
-        @apply rounded-sm;
-        border: 1px solid transparent;
+      @apply rounded-sm;
+      border: 1px solid transparent;
     }
   }
 }

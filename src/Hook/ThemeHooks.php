@@ -8,6 +8,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Breadcrumb\ChainBreadcrumbBuilderInterface;
 use Drupal\Core\Controller\TitleResolverInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeExtensionList;
@@ -16,6 +17,7 @@ use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Messenger\MessengerTrait;
+use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\ajj_base_mercury\RenderCallbacks;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -328,6 +330,118 @@ final class ThemeHooks {
   }
 
   /**
+   * Implements hook_theme().
+   *
+   * Canvas doesn't register a canvas_page theme hook, and the entity view
+   * builder only adds #theme when one exists. Registering it here lets
+   * canvas_page templates and suggestions apply.
+   */
+  #[Hook('theme')]
+  public function theme(): array {
+    // Hooks a theme registers default to templates/, not subfolders.
+    $path = $this->themeList->getPath('ajj_base_mercury') . '/templates/content';
+    return [
+      'canvas_page' => [
+        'render element' => 'elements',
+        'path' => $path,
+      ],
+      // The theme's templates are scanned before this hook runs, so
+      // canvas-page--VIEW-MODE templates aren't found automatically. Register
+      // each one here.
+      'canvas_page__teaser' => [
+        'base hook' => 'canvas_page',
+        'render element' => 'elements',
+        'path' => $path,
+        'template' => 'canvas-page--teaser',
+      ],
+    ];
+  }
+
+  /**
+   * Implements template_preprocess_HOOK() for canvas_page.
+   */
+  #[Hook('preprocess_canvas_page')]
+  public function preprocessCanvasPage(array &$variables): void {
+    $variables['view_mode'] = $variables['elements']['#view_mode'] ?? 'full';
+    $variables['canvas_page'] = $variables['elements']['#canvas_page'] ?? NULL;
+    $variables['content'] = [];
+    foreach (Element::children($variables['elements']) as $key) {
+      $variables['content'][$key] = $variables['elements'][$key];
+    }
+
+    $page = $variables['canvas_page'];
+    if ($variables['view_mode'] !== 'teaser' || !$page) {
+      return;
+    }
+
+    // canvas-page--teaser.html.twig renders the page's H1, image and URL as a
+    // Card, matching the node teaser Canvas templates.
+    $cacheability = CacheableMetadata::createFromRenderArray($variables);
+    $variables['teaser_heading'] = $this->canvasPageH1($page) ?? $page->label();
+    $variables['teaser_media'] = $this->canvasPageTeaserMedia($page, $cacheability);
+    $url = $page->toUrl()->toString(TRUE);
+    $cacheability->addCacheableDependency($url)->applyTo($variables);
+    $variables['teaser_url'] = $url->getGeneratedUrl();
+  }
+
+  /**
+   * Returns a Canvas page's image as the Card component's media prop.
+   *
+   * Uses the same values the node teaser templates map from field_hero_image:
+   * src (with alternate widths), alt, width and height.
+   */
+  private function canvasPageTeaserMedia(EntityInterface $page, CacheableMetadata $cacheability): ?array {
+    $media = $page->get('image')->entity;
+    if (!$media || !$media->hasField('field_media_image')) {
+      return NULL;
+    }
+    $access = $media->access('view', NULL, TRUE);
+    $cacheability->addCacheableDependency($media)->addCacheableDependency($access);
+    $image = $media->get('field_media_image')->first();
+    if (!$access->isAllowed() || !$image) {
+      return NULL;
+    }
+    $src = $image->get('src_with_alternate_widths')->getValue();
+    $cacheability->addCacheableDependency($src);
+    return [
+      'src' => $src->getGeneratedUrl(),
+      'alt' => $image->alt ?? '',
+      'width' => (int) $image->width,
+      'height' => (int) $image->height,
+    ];
+  }
+
+  /**
+   * Returns the heading text of a Canvas page's first level 1 component.
+   *
+   * Matches any component with heading_text and level props, such as Heading
+   * and CTA, so the H1 is found wherever the page puts it.
+   */
+  private function canvasPageH1(EntityInterface $page): ?string {
+    foreach ($page->get('components') as $item) {
+      $inputs = $item->getInputs() ?? [];
+      // Inputs are stored as plain values or as ['value' => ...] when linked.
+      $level = is_array($inputs['level'] ?? NULL) ? ($inputs['level']['value'] ?? NULL) : ($inputs['level'] ?? NULL);
+      $text = is_array($inputs['heading_text'] ?? NULL) ? ($inputs['heading_text']['value'] ?? '') : ($inputs['heading_text'] ?? '');
+      if ((int) $level === 1 && trim((string) $text) !== '') {
+        return trim((string) $text);
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Implements hook_theme_suggestions_canvas_page_alter().
+   *
+   * Adds canvas-page--VIEW-MODE suggestions, e.g. canvas-page--teaser.
+   */
+  #[Hook('theme_suggestions_canvas_page_alter')]
+  public function themeSuggestionsCanvasPageAlter(array &$suggestions, array $variables): void {
+    $view_mode = strtr($variables['elements']['#view_mode'] ?? 'full', '.', '_');
+    $suggestions[] = 'canvas_page__' . $view_mode;
+  }
+
+  /**
    * Implements template_preprocess_block().
    *
    * Provides footer_extras blocks with their images in the scale_only image
@@ -364,34 +478,14 @@ final class ThemeHooks {
   /**
    * Implements template_preprocess_menu_link_content().
    *
-   * Provides the mega menu's featured page URL and featured block fields
-   * individually, so menu-link-content--main--menu-level-0--mega-menu.html.twig
-   * can lay them out.
+   * Provides the mega menu's featured block fields individually, so
+   * menu-link-content--main--menu-level-0--mega-menu.html.twig can lay them
+   * out.
    */
   #[Hook('preprocess_menu_link_content')]
   public function preprocessMenuLinkContent(array &$variables): void {
     $link = $variables['menu_link_content'] ?? NULL;
-    if (!$link) {
-      return;
-    }
-
-    // The Canvas teaser template can't link to its own page, so the mega menu
-    // template wraps the teaser in a link to it.
-    $page = $link->hasField('field_mega_featured') ? $link->get('field_mega_featured')->entity : NULL;
-    if ($page) {
-      $access = $page->access('view', NULL, TRUE);
-      $cacheability = CacheableMetadata::createFromRenderArray($variables)
-        ->addCacheableDependency($page)
-        ->addCacheableDependency($access);
-      if ($access->isAllowed()) {
-        $url = $page->toUrl()->toString(TRUE);
-        $cacheability->addCacheableDependency($url);
-        $variables['featured_page_url'] = $url->getGeneratedUrl();
-      }
-      $cacheability->applyTo($variables);
-    }
-
-    if (!$link->hasField('field_mega_featured_block')) {
+    if (!$link || !$link->hasField('field_mega_featured_block')) {
       return;
     }
 

@@ -121,6 +121,7 @@
   {% endif %}
 
   {% set has_featured_content = not item.entity.field_mega_media.isEmpty()
+    or (item.entity.hasField('field_featured_page') and not item.entity.field_featured_page.isEmpty())
     or not item.entity.field_mega_featured.isEmpty()
     or not item.entity.field_mega_featured_block.isEmpty()
   %}

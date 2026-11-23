@@ -4,9 +4,7 @@
   }
 
   /*
-   * Sticky (not fixed) header: it stays in normal flow, so the regions below
-   * keep their position and no spacer is needed. Only applied for anonymous
-   * visitors (see page.html.twig), so no admin toolbar offset is needed.
+   * Sticky (not fixed) header.
    * Avoid adding transform/filter/backdrop-filter here: they would become the
    * containing block for the fixed-position mobile menu and break it.
    */
@@ -17,8 +15,6 @@
     background-color: var(--background);
   }
 
-  /* Keep anchor targets (and the skip link) from landing under the header.
-     --site-header-height is measured in navbar.js. */
   html {
     scroll-padding-top: var(--site-header-height, 0px);
   }

@@ -10,7 +10,6 @@
  * - attributes: HTML attributes for the wrapper.
  * - content: The menu link fields, rendered by the view mode's display.
  * - menu_link_content: The menu_link_content entity.
- * - featured_page_url: The URL of the page selected in field_mega_featured.
  * - featured_block: The fields of the block selected in
  *   field_mega_featured_block: media, heading, body, link_url and link_title.
  *
@@ -24,11 +23,17 @@
 
 <div {{ attributes.addClass('mega-menu-featured') }}>
   {{ content.field_mega_media }}
-  {# The Canvas teaser template has no wrapper of its own, so add a hook for styling. #}
-  {% set has_featured_teaser = content.field_mega_featured|render|trim is not empty %}
-  {% if has_featured_teaser and featured_page_url %}
-    <a href="{{ featured_page_url }}" class="mega-menu-featured__teaser">{{ content.field_mega_featured }}</a>
-  {% elseif has_featured_teaser %}
+  {#
+    Teasers from field_featured_page (Canvas page) and field_mega_featured
+    (node). Both render the Card component, which links to its page itself,
+    so the wrapper is only a styling hook, not a link.
+  #}
+  {% if content.field_featured_page|render|trim is not empty %}
+    <div class="mega-menu-featured__teaser">
+      {{ content.field_featured_page }}
+    </div>
+  {% endif %}
+  {% if content.field_mega_featured|render|trim is not empty %}
     <div class="mega-menu-featured__teaser">
       {{ content.field_mega_featured }}
     </div>
