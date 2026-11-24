@@ -18,6 +18,7 @@
 @import "./layout.tailwind.css";
 @import "./cards.tailwind.css";
 @import "./views.tailwind.css";
+@import "./home.tailwind.css";
 
 @theme inline {
   --color-background: var(--background);

@@ -234,17 +234,12 @@
   }
 
   /*
-   * With featured content, the featured content is one column the same width
-   * as a link column, so it's the same size whatever the column count:
-   * - 992px: tracks are a third of the dropdown. Link columns use up to 2,
-   *   wrapping as needed.
-   * - 1440px: tracks are a fifth of the dropdown. Link columns sit on one row,
-   *   up to 4 across.
-   * Tracks are sized from the dropdown (a size container) rather than with fr
-   * units, so a panel with fewer link columns shrinks and stays centered.
+   * With featured content, the featured content is one column the same width as a link column, so it's the same size whatever the column count:
+   * - 992px: tracks are a third of the dropdown. Link columns use up to 2, wrapping as needed.
+   * - 1440px: tracks are a fifth of the dropdown. Link columns sit on one row, up to 4 across.
+   * Tracks are sized from the dropdown (a size container) rather than with fr units, so a panel with fewer link columns shrinks and stays centered.
    * The subtracted rem values cover the gaps and the featured-left margin.
-   * These come after the column-count rules above, which they override at the
-   * same specificity.
+   * These come after the column-count rules above, which they override at the same specificity.
    */
   .mega-menu-content--cols-1 {
     --mega-menu-cols: 1;
@@ -300,13 +295,13 @@
     @apply order-first;
 
     @media screen and (min-width: 62rem) {
-      margin-right: 3rem;
+      margin-right: 2rem;
     }
   }
 
   .mega-menu-content__featured {
-    @apply hidden
-      nav:block;
+    /* @apply hidden
+      sm:block; */
 
     .mega-menu-featured-block {
       .block__image {
@@ -326,10 +321,6 @@
       }
     }
 
-    /*
-     * Must stay a column: in a row the teaser shrinks to its content, and the
-     * lazy-loaded image has no width until it loads, so it first renders small.
-     */
     .mega-menu-featured__teaser {
       @apply flex
         flex-col;
@@ -339,6 +330,12 @@
         @apply flex
           flex-col
           gap-3;
+      }
+      
+      .image-container {
+        display: none;
+
+        @media screen and (min-width: 62rem) { display: block; }
       }
 
       h2 {
@@ -375,6 +372,10 @@
       margin-left: 0.5rem;
       border-bottom: 1px solid var(--border);
       min-height: 40px;
+    }
+
+    @media screen and (min-width: 64rem) {
+        min-height: 55px;
     }
   }
 

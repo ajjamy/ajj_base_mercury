@@ -1,0 +1,51 @@
+@layer components {
+    /* This is all very custom to the current wording.  */
+    .path-frontpage #home-hero { 
+
+        .section__media {
+            background-color: var(--color-muted);
+
+            @media screen and (min-width: 640px ) { background-color: none; }
+        }
+    
+        .section__media-image {
+            display: none;
+
+            @media screen and (min-width: 640px ) { 
+                display: block;
+                object-position: 0% 14% !important;
+            }
+        }
+
+        .section__grid > .group-wrapper  {
+            padding: 0;
+
+            @media screen and (min-width: 40rem) { max-width: 340px; }
+
+            @media screen and (min-width: 62rem) { 
+                max-width: 540px;
+                @apply p-4;
+            }
+
+            @media screen and (min-width: 80rem) { max-width: 640px; }
+        }
+    }
+}
+
+
+@layer utilities {
+
+    .path-frontpage #home-hero h1 {
+        font-size: var(--text-3xl);
+
+        @media screen and (min-width: 40rem) { font-size: var(--text-2xl); }
+
+        @media screen and (min-width: 48rem) { font-size: 1.75rem; }
+
+        @media screen and (min-width: 64rem) { font-size: var(--text-5xl); }
+
+        @media screen and (min-width: 80rem) { font-size: var(--text-6xl); }
+    }
+
+    .path-frontpage .group-wrapper .group-wrapper { padding: calc(var(--spacing) * 2); }
+}
