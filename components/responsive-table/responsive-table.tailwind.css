@@ -22,9 +22,7 @@
       text-align: center;
     }
 
-    & .responsive-table__body {
-      @apply table-row-group;
-    }
+    & .responsive-table__body { @apply table-row-group; }
 
     & .responsive-table__row {
       @apply table-row;

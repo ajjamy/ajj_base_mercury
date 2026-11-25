@@ -8,7 +8,7 @@
 {#
   Inverted headings use text-muted, which is not one of the Heading's
   text_color options, so it is added as a class. The important modifier lets
-  it win over the Heading's default text-inherit.
+  it win over the Heading's default text-inherit. 
 #}
 {% set cta_heading_classes = heading_inverted and not cta_heading_is_accent_warm ? 'max-w-3xl text-muted!' : 'max-w-3xl' %}
 

@@ -5,7 +5,8 @@
   "license": "GPL-2.0-or-later",
   "type": "module",
   "scripts": {
-    "dev": "$npm_execpath run s:tailwindcss && $npm_execpath run s:motion -- --watch",
+    "dev": "$npm_execpath run s:tailwindcss -- --map && $npm_execpath run s:motion -- --watch",
+    "watch:css": "$npm_execpath run s:tailwindcss -- --map --watch",
     "build": "$npm_execpath run s:tailwindcss && $npm_execpath run s:motion",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
